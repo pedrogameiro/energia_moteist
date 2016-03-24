@@ -1,0 +1,1353 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+A0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A0  = 23;$/;"	v
+A1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A1  = 24;$/;"	v
+A10	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A10 = 128 + 10; \/\/ special. This is the internal temp sensor$/;"	v
+A11	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A11  = 128 + 11; \/\/ special. This is Vcc\/2$/;"	v
+A12	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A12  = 28; $/;"	v
+A13	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A13  = 128 + 13; $/;"	v
+A14	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A14  = 128 + 14; \/\/ Not available on BoosterPack header$/;"	v
+A15	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A15  = 128 + 15; \/\/ Not available on BoosterPack header$/;"	v
+A2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A2  = 25;$/;"	v
+A3	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A3  = 26;$/;"	v
+A4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A4  = 27;$/;"	v
+A5	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A5  = 2;$/;"	v
+A6	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A6  = 6;$/;"	v
+A7	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t A7  = 128 + 7; \/\/ Not available on BoosterPack header$/;"	v
+ADC10ENC	wiring_analog.c	/^#define ADC10ENC /;"	d	file:
+ADC10_ISR	wiring_analog.c	/^void ADC10_ISR(void)$/;"	f
+ADC12_ISR	wiring_analog.c	/^void ADC12_ISR(void)$/;"	f
+ADCxMEM0	wiring_analog.c	/^#define ADCxMEM0 /;"	d	file:
+ARCH	../../variants/launchpad_f5529/Board.mk	/^ARCH = msp430$/;"	m
+ARDUINO_MAIN	wiring_digital.c	/^#define ARDUINO_MAIN$/;"	d	file:
+AUX_UARTRXD	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t AUX_UARTRXD = 3;  \/* Receive  Data (RXD) at P4.5 *\/$/;"	v
+AUX_UARTRXD_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define AUX_UARTRXD_SET_MODE /;"	d
+AUX_UARTTXD	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t AUX_UARTTXD = 4;  \/* Transmit Data (TXD) at P4.4 *\/$/;"	v
+AUX_UARTTXD_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define AUX_UARTTXD_SET_MODE /;"	d
+AUX_UART_MODULE_OFFSET	../../variants/launchpad_f5529/pins_energia.h	/^#define AUX_UART_MODULE_OFFSET /;"	d
+AVAILABLE_TONE_PINS	Tone.cpp	/^#define AVAILABLE_TONE_PINS /;"	d	file:
+B0	binary.h	/^#define B0 /;"	d
+B00	binary.h	/^#define B00 /;"	d
+B000	binary.h	/^#define B000 /;"	d
+B0000	binary.h	/^#define B0000 /;"	d
+B00000	binary.h	/^#define B00000 /;"	d
+B000000	binary.h	/^#define B000000 /;"	d
+B0000000	binary.h	/^#define B0000000 /;"	d
+B00000000	binary.h	/^#define B00000000 /;"	d
+B00000001	binary.h	/^#define B00000001 /;"	d
+B0000001	binary.h	/^#define B0000001 /;"	d
+B00000010	binary.h	/^#define B00000010 /;"	d
+B00000011	binary.h	/^#define B00000011 /;"	d
+B000001	binary.h	/^#define B000001 /;"	d
+B0000010	binary.h	/^#define B0000010 /;"	d
+B00000100	binary.h	/^#define B00000100 /;"	d
+B00000101	binary.h	/^#define B00000101 /;"	d
+B0000011	binary.h	/^#define B0000011 /;"	d
+B00000110	binary.h	/^#define B00000110 /;"	d
+B00000111	binary.h	/^#define B00000111 /;"	d
+B00001	binary.h	/^#define B00001 /;"	d
+B000010	binary.h	/^#define B000010 /;"	d
+B0000100	binary.h	/^#define B0000100 /;"	d
+B00001000	binary.h	/^#define B00001000 /;"	d
+B00001001	binary.h	/^#define B00001001 /;"	d
+B0000101	binary.h	/^#define B0000101 /;"	d
+B00001010	binary.h	/^#define B00001010 /;"	d
+B00001011	binary.h	/^#define B00001011 /;"	d
+B000011	binary.h	/^#define B000011 /;"	d
+B0000110	binary.h	/^#define B0000110 /;"	d
+B00001100	binary.h	/^#define B00001100 /;"	d
+B00001101	binary.h	/^#define B00001101 /;"	d
+B0000111	binary.h	/^#define B0000111 /;"	d
+B00001110	binary.h	/^#define B00001110 /;"	d
+B00001111	binary.h	/^#define B00001111 /;"	d
+B0001	binary.h	/^#define B0001 /;"	d
+B00010	binary.h	/^#define B00010 /;"	d
+B000100	binary.h	/^#define B000100 /;"	d
+B0001000	binary.h	/^#define B0001000 /;"	d
+B00010000	binary.h	/^#define B00010000 /;"	d
+B00010001	binary.h	/^#define B00010001 /;"	d
+B0001001	binary.h	/^#define B0001001 /;"	d
+B00010010	binary.h	/^#define B00010010 /;"	d
+B00010011	binary.h	/^#define B00010011 /;"	d
+B000101	binary.h	/^#define B000101 /;"	d
+B0001010	binary.h	/^#define B0001010 /;"	d
+B00010100	binary.h	/^#define B00010100 /;"	d
+B00010101	binary.h	/^#define B00010101 /;"	d
+B0001011	binary.h	/^#define B0001011 /;"	d
+B00010110	binary.h	/^#define B00010110 /;"	d
+B00010111	binary.h	/^#define B00010111 /;"	d
+B00011	binary.h	/^#define B00011 /;"	d
+B000110	binary.h	/^#define B000110 /;"	d
+B0001100	binary.h	/^#define B0001100 /;"	d
+B00011000	binary.h	/^#define B00011000 /;"	d
+B00011001	binary.h	/^#define B00011001 /;"	d
+B0001101	binary.h	/^#define B0001101 /;"	d
+B00011010	binary.h	/^#define B00011010 /;"	d
+B00011011	binary.h	/^#define B00011011 /;"	d
+B000111	binary.h	/^#define B000111 /;"	d
+B0001110	binary.h	/^#define B0001110 /;"	d
+B00011100	binary.h	/^#define B00011100 /;"	d
+B00011101	binary.h	/^#define B00011101 /;"	d
+B0001111	binary.h	/^#define B0001111 /;"	d
+B00011110	binary.h	/^#define B00011110 /;"	d
+B00011111	binary.h	/^#define B00011111 /;"	d
+B001	binary.h	/^#define B001 /;"	d
+B0010	binary.h	/^#define B0010 /;"	d
+B00100	binary.h	/^#define B00100 /;"	d
+B001000	binary.h	/^#define B001000 /;"	d
+B0010000	binary.h	/^#define B0010000 /;"	d
+B00100000	binary.h	/^#define B00100000 /;"	d
+B00100001	binary.h	/^#define B00100001 /;"	d
+B0010001	binary.h	/^#define B0010001 /;"	d
+B00100010	binary.h	/^#define B00100010 /;"	d
+B00100011	binary.h	/^#define B00100011 /;"	d
+B001001	binary.h	/^#define B001001 /;"	d
+B0010010	binary.h	/^#define B0010010 /;"	d
+B00100100	binary.h	/^#define B00100100 /;"	d
+B00100101	binary.h	/^#define B00100101 /;"	d
+B0010011	binary.h	/^#define B0010011 /;"	d
+B00100110	binary.h	/^#define B00100110 /;"	d
+B00100111	binary.h	/^#define B00100111 /;"	d
+B00101	binary.h	/^#define B00101 /;"	d
+B001010	binary.h	/^#define B001010 /;"	d
+B0010100	binary.h	/^#define B0010100 /;"	d
+B00101000	binary.h	/^#define B00101000 /;"	d
+B00101001	binary.h	/^#define B00101001 /;"	d
+B0010101	binary.h	/^#define B0010101 /;"	d
+B00101010	binary.h	/^#define B00101010 /;"	d
+B00101011	binary.h	/^#define B00101011 /;"	d
+B001011	binary.h	/^#define B001011 /;"	d
+B0010110	binary.h	/^#define B0010110 /;"	d
+B00101100	binary.h	/^#define B00101100 /;"	d
+B00101101	binary.h	/^#define B00101101 /;"	d
+B0010111	binary.h	/^#define B0010111 /;"	d
+B00101110	binary.h	/^#define B00101110 /;"	d
+B00101111	binary.h	/^#define B00101111 /;"	d
+B0011	binary.h	/^#define B0011 /;"	d
+B00110	binary.h	/^#define B00110 /;"	d
+B001100	binary.h	/^#define B001100 /;"	d
+B0011000	binary.h	/^#define B0011000 /;"	d
+B00110000	binary.h	/^#define B00110000 /;"	d
+B00110001	binary.h	/^#define B00110001 /;"	d
+B0011001	binary.h	/^#define B0011001 /;"	d
+B00110010	binary.h	/^#define B00110010 /;"	d
+B00110011	binary.h	/^#define B00110011 /;"	d
+B001101	binary.h	/^#define B001101 /;"	d
+B0011010	binary.h	/^#define B0011010 /;"	d
+B00110100	binary.h	/^#define B00110100 /;"	d
+B00110101	binary.h	/^#define B00110101 /;"	d
+B0011011	binary.h	/^#define B0011011 /;"	d
+B00110110	binary.h	/^#define B00110110 /;"	d
+B00110111	binary.h	/^#define B00110111 /;"	d
+B00111	binary.h	/^#define B00111 /;"	d
+B001110	binary.h	/^#define B001110 /;"	d
+B0011100	binary.h	/^#define B0011100 /;"	d
+B00111000	binary.h	/^#define B00111000 /;"	d
+B00111001	binary.h	/^#define B00111001 /;"	d
+B0011101	binary.h	/^#define B0011101 /;"	d
+B00111010	binary.h	/^#define B00111010 /;"	d
+B00111011	binary.h	/^#define B00111011 /;"	d
+B001111	binary.h	/^#define B001111 /;"	d
+B0011110	binary.h	/^#define B0011110 /;"	d
+B00111100	binary.h	/^#define B00111100 /;"	d
+B00111101	binary.h	/^#define B00111101 /;"	d
+B0011111	binary.h	/^#define B0011111 /;"	d
+B00111110	binary.h	/^#define B00111110 /;"	d
+B00111111	binary.h	/^#define B00111111 /;"	d
+B01	binary.h	/^#define B01 /;"	d
+B010	binary.h	/^#define B010 /;"	d
+B0100	binary.h	/^#define B0100 /;"	d
+B01000	binary.h	/^#define B01000 /;"	d
+B010000	binary.h	/^#define B010000 /;"	d
+B0100000	binary.h	/^#define B0100000 /;"	d
+B01000000	binary.h	/^#define B01000000 /;"	d
+B01000001	binary.h	/^#define B01000001 /;"	d
+B0100001	binary.h	/^#define B0100001 /;"	d
+B01000010	binary.h	/^#define B01000010 /;"	d
+B01000011	binary.h	/^#define B01000011 /;"	d
+B010001	binary.h	/^#define B010001 /;"	d
+B0100010	binary.h	/^#define B0100010 /;"	d
+B01000100	binary.h	/^#define B01000100 /;"	d
+B01000101	binary.h	/^#define B01000101 /;"	d
+B0100011	binary.h	/^#define B0100011 /;"	d
+B01000110	binary.h	/^#define B01000110 /;"	d
+B01000111	binary.h	/^#define B01000111 /;"	d
+B01001	binary.h	/^#define B01001 /;"	d
+B010010	binary.h	/^#define B010010 /;"	d
+B0100100	binary.h	/^#define B0100100 /;"	d
+B01001000	binary.h	/^#define B01001000 /;"	d
+B01001001	binary.h	/^#define B01001001 /;"	d
+B0100101	binary.h	/^#define B0100101 /;"	d
+B01001010	binary.h	/^#define B01001010 /;"	d
+B01001011	binary.h	/^#define B01001011 /;"	d
+B010011	binary.h	/^#define B010011 /;"	d
+B0100110	binary.h	/^#define B0100110 /;"	d
+B01001100	binary.h	/^#define B01001100 /;"	d
+B01001101	binary.h	/^#define B01001101 /;"	d
+B0100111	binary.h	/^#define B0100111 /;"	d
+B01001110	binary.h	/^#define B01001110 /;"	d
+B01001111	binary.h	/^#define B01001111 /;"	d
+B0101	binary.h	/^#define B0101 /;"	d
+B01010	binary.h	/^#define B01010 /;"	d
+B010100	binary.h	/^#define B010100 /;"	d
+B0101000	binary.h	/^#define B0101000 /;"	d
+B01010000	binary.h	/^#define B01010000 /;"	d
+B01010001	binary.h	/^#define B01010001 /;"	d
+B0101001	binary.h	/^#define B0101001 /;"	d
+B01010010	binary.h	/^#define B01010010 /;"	d
+B01010011	binary.h	/^#define B01010011 /;"	d
+B010101	binary.h	/^#define B010101 /;"	d
+B0101010	binary.h	/^#define B0101010 /;"	d
+B01010100	binary.h	/^#define B01010100 /;"	d
+B01010101	binary.h	/^#define B01010101 /;"	d
+B0101011	binary.h	/^#define B0101011 /;"	d
+B01010110	binary.h	/^#define B01010110 /;"	d
+B01010111	binary.h	/^#define B01010111 /;"	d
+B01011	binary.h	/^#define B01011 /;"	d
+B010110	binary.h	/^#define B010110 /;"	d
+B0101100	binary.h	/^#define B0101100 /;"	d
+B01011000	binary.h	/^#define B01011000 /;"	d
+B01011001	binary.h	/^#define B01011001 /;"	d
+B0101101	binary.h	/^#define B0101101 /;"	d
+B01011010	binary.h	/^#define B01011010 /;"	d
+B01011011	binary.h	/^#define B01011011 /;"	d
+B010111	binary.h	/^#define B010111 /;"	d
+B0101110	binary.h	/^#define B0101110 /;"	d
+B01011100	binary.h	/^#define B01011100 /;"	d
+B01011101	binary.h	/^#define B01011101 /;"	d
+B0101111	binary.h	/^#define B0101111 /;"	d
+B01011110	binary.h	/^#define B01011110 /;"	d
+B01011111	binary.h	/^#define B01011111 /;"	d
+B011	binary.h	/^#define B011 /;"	d
+B0110	binary.h	/^#define B0110 /;"	d
+B01100	binary.h	/^#define B01100 /;"	d
+B011000	binary.h	/^#define B011000 /;"	d
+B0110000	binary.h	/^#define B0110000 /;"	d
+B01100000	binary.h	/^#define B01100000 /;"	d
+B01100001	binary.h	/^#define B01100001 /;"	d
+B0110001	binary.h	/^#define B0110001 /;"	d
+B01100010	binary.h	/^#define B01100010 /;"	d
+B01100011	binary.h	/^#define B01100011 /;"	d
+B011001	binary.h	/^#define B011001 /;"	d
+B0110010	binary.h	/^#define B0110010 /;"	d
+B01100100	binary.h	/^#define B01100100 /;"	d
+B01100101	binary.h	/^#define B01100101 /;"	d
+B0110011	binary.h	/^#define B0110011 /;"	d
+B01100110	binary.h	/^#define B01100110 /;"	d
+B01100111	binary.h	/^#define B01100111 /;"	d
+B01101	binary.h	/^#define B01101 /;"	d
+B011010	binary.h	/^#define B011010 /;"	d
+B0110100	binary.h	/^#define B0110100 /;"	d
+B01101000	binary.h	/^#define B01101000 /;"	d
+B01101001	binary.h	/^#define B01101001 /;"	d
+B0110101	binary.h	/^#define B0110101 /;"	d
+B01101010	binary.h	/^#define B01101010 /;"	d
+B01101011	binary.h	/^#define B01101011 /;"	d
+B011011	binary.h	/^#define B011011 /;"	d
+B0110110	binary.h	/^#define B0110110 /;"	d
+B01101100	binary.h	/^#define B01101100 /;"	d
+B01101101	binary.h	/^#define B01101101 /;"	d
+B0110111	binary.h	/^#define B0110111 /;"	d
+B01101110	binary.h	/^#define B01101110 /;"	d
+B01101111	binary.h	/^#define B01101111 /;"	d
+B0111	binary.h	/^#define B0111 /;"	d
+B01110	binary.h	/^#define B01110 /;"	d
+B011100	binary.h	/^#define B011100 /;"	d
+B0111000	binary.h	/^#define B0111000 /;"	d
+B01110000	binary.h	/^#define B01110000 /;"	d
+B01110001	binary.h	/^#define B01110001 /;"	d
+B0111001	binary.h	/^#define B0111001 /;"	d
+B01110010	binary.h	/^#define B01110010 /;"	d
+B01110011	binary.h	/^#define B01110011 /;"	d
+B011101	binary.h	/^#define B011101 /;"	d
+B0111010	binary.h	/^#define B0111010 /;"	d
+B01110100	binary.h	/^#define B01110100 /;"	d
+B01110101	binary.h	/^#define B01110101 /;"	d
+B0111011	binary.h	/^#define B0111011 /;"	d
+B01110110	binary.h	/^#define B01110110 /;"	d
+B01110111	binary.h	/^#define B01110111 /;"	d
+B01111	binary.h	/^#define B01111 /;"	d
+B011110	binary.h	/^#define B011110 /;"	d
+B0111100	binary.h	/^#define B0111100 /;"	d
+B01111000	binary.h	/^#define B01111000 /;"	d
+B01111001	binary.h	/^#define B01111001 /;"	d
+B0111101	binary.h	/^#define B0111101 /;"	d
+B01111010	binary.h	/^#define B01111010 /;"	d
+B01111011	binary.h	/^#define B01111011 /;"	d
+B011111	binary.h	/^#define B011111 /;"	d
+B0111110	binary.h	/^#define B0111110 /;"	d
+B01111100	binary.h	/^#define B01111100 /;"	d
+B01111101	binary.h	/^#define B01111101 /;"	d
+B0111111	binary.h	/^#define B0111111 /;"	d
+B01111110	binary.h	/^#define B01111110 /;"	d
+B01111111	binary.h	/^#define B01111111 /;"	d
+B1	binary.h	/^#define B1 /;"	d
+B10	binary.h	/^#define B10 /;"	d
+B100	binary.h	/^#define B100 /;"	d
+B1000	binary.h	/^#define B1000 /;"	d
+B10000	binary.h	/^#define B10000 /;"	d
+B100000	binary.h	/^#define B100000 /;"	d
+B1000000	binary.h	/^#define B1000000 /;"	d
+B10000000	binary.h	/^#define B10000000 /;"	d
+B10000001	binary.h	/^#define B10000001 /;"	d
+B1000001	binary.h	/^#define B1000001 /;"	d
+B10000010	binary.h	/^#define B10000010 /;"	d
+B10000011	binary.h	/^#define B10000011 /;"	d
+B100001	binary.h	/^#define B100001 /;"	d
+B1000010	binary.h	/^#define B1000010 /;"	d
+B10000100	binary.h	/^#define B10000100 /;"	d
+B10000101	binary.h	/^#define B10000101 /;"	d
+B1000011	binary.h	/^#define B1000011 /;"	d
+B10000110	binary.h	/^#define B10000110 /;"	d
+B10000111	binary.h	/^#define B10000111 /;"	d
+B10001	binary.h	/^#define B10001 /;"	d
+B100010	binary.h	/^#define B100010 /;"	d
+B1000100	binary.h	/^#define B1000100 /;"	d
+B10001000	binary.h	/^#define B10001000 /;"	d
+B10001001	binary.h	/^#define B10001001 /;"	d
+B1000101	binary.h	/^#define B1000101 /;"	d
+B10001010	binary.h	/^#define B10001010 /;"	d
+B10001011	binary.h	/^#define B10001011 /;"	d
+B100011	binary.h	/^#define B100011 /;"	d
+B1000110	binary.h	/^#define B1000110 /;"	d
+B10001100	binary.h	/^#define B10001100 /;"	d
+B10001101	binary.h	/^#define B10001101 /;"	d
+B1000111	binary.h	/^#define B1000111 /;"	d
+B10001110	binary.h	/^#define B10001110 /;"	d
+B10001111	binary.h	/^#define B10001111 /;"	d
+B1001	binary.h	/^#define B1001 /;"	d
+B10010	binary.h	/^#define B10010 /;"	d
+B100100	binary.h	/^#define B100100 /;"	d
+B1001000	binary.h	/^#define B1001000 /;"	d
+B10010000	binary.h	/^#define B10010000 /;"	d
+B10010001	binary.h	/^#define B10010001 /;"	d
+B1001001	binary.h	/^#define B1001001 /;"	d
+B10010010	binary.h	/^#define B10010010 /;"	d
+B10010011	binary.h	/^#define B10010011 /;"	d
+B100101	binary.h	/^#define B100101 /;"	d
+B1001010	binary.h	/^#define B1001010 /;"	d
+B10010100	binary.h	/^#define B10010100 /;"	d
+B10010101	binary.h	/^#define B10010101 /;"	d
+B1001011	binary.h	/^#define B1001011 /;"	d
+B10010110	binary.h	/^#define B10010110 /;"	d
+B10010111	binary.h	/^#define B10010111 /;"	d
+B10011	binary.h	/^#define B10011 /;"	d
+B100110	binary.h	/^#define B100110 /;"	d
+B1001100	binary.h	/^#define B1001100 /;"	d
+B10011000	binary.h	/^#define B10011000 /;"	d
+B10011001	binary.h	/^#define B10011001 /;"	d
+B1001101	binary.h	/^#define B1001101 /;"	d
+B10011010	binary.h	/^#define B10011010 /;"	d
+B10011011	binary.h	/^#define B10011011 /;"	d
+B100111	binary.h	/^#define B100111 /;"	d
+B1001110	binary.h	/^#define B1001110 /;"	d
+B10011100	binary.h	/^#define B10011100 /;"	d
+B10011101	binary.h	/^#define B10011101 /;"	d
+B1001111	binary.h	/^#define B1001111 /;"	d
+B10011110	binary.h	/^#define B10011110 /;"	d
+B10011111	binary.h	/^#define B10011111 /;"	d
+B101	binary.h	/^#define B101 /;"	d
+B1010	binary.h	/^#define B1010 /;"	d
+B10100	binary.h	/^#define B10100 /;"	d
+B101000	binary.h	/^#define B101000 /;"	d
+B1010000	binary.h	/^#define B1010000 /;"	d
+B10100000	binary.h	/^#define B10100000 /;"	d
+B10100001	binary.h	/^#define B10100001 /;"	d
+B1010001	binary.h	/^#define B1010001 /;"	d
+B10100010	binary.h	/^#define B10100010 /;"	d
+B10100011	binary.h	/^#define B10100011 /;"	d
+B101001	binary.h	/^#define B101001 /;"	d
+B1010010	binary.h	/^#define B1010010 /;"	d
+B10100100	binary.h	/^#define B10100100 /;"	d
+B10100101	binary.h	/^#define B10100101 /;"	d
+B1010011	binary.h	/^#define B1010011 /;"	d
+B10100110	binary.h	/^#define B10100110 /;"	d
+B10100111	binary.h	/^#define B10100111 /;"	d
+B10101	binary.h	/^#define B10101 /;"	d
+B101010	binary.h	/^#define B101010 /;"	d
+B1010100	binary.h	/^#define B1010100 /;"	d
+B10101000	binary.h	/^#define B10101000 /;"	d
+B10101001	binary.h	/^#define B10101001 /;"	d
+B1010101	binary.h	/^#define B1010101 /;"	d
+B10101010	binary.h	/^#define B10101010 /;"	d
+B10101011	binary.h	/^#define B10101011 /;"	d
+B101011	binary.h	/^#define B101011 /;"	d
+B1010110	binary.h	/^#define B1010110 /;"	d
+B10101100	binary.h	/^#define B10101100 /;"	d
+B10101101	binary.h	/^#define B10101101 /;"	d
+B1010111	binary.h	/^#define B1010111 /;"	d
+B10101110	binary.h	/^#define B10101110 /;"	d
+B10101111	binary.h	/^#define B10101111 /;"	d
+B1011	binary.h	/^#define B1011 /;"	d
+B10110	binary.h	/^#define B10110 /;"	d
+B101100	binary.h	/^#define B101100 /;"	d
+B1011000	binary.h	/^#define B1011000 /;"	d
+B10110000	binary.h	/^#define B10110000 /;"	d
+B10110001	binary.h	/^#define B10110001 /;"	d
+B1011001	binary.h	/^#define B1011001 /;"	d
+B10110010	binary.h	/^#define B10110010 /;"	d
+B10110011	binary.h	/^#define B10110011 /;"	d
+B101101	binary.h	/^#define B101101 /;"	d
+B1011010	binary.h	/^#define B1011010 /;"	d
+B10110100	binary.h	/^#define B10110100 /;"	d
+B10110101	binary.h	/^#define B10110101 /;"	d
+B1011011	binary.h	/^#define B1011011 /;"	d
+B10110110	binary.h	/^#define B10110110 /;"	d
+B10110111	binary.h	/^#define B10110111 /;"	d
+B10111	binary.h	/^#define B10111 /;"	d
+B101110	binary.h	/^#define B101110 /;"	d
+B1011100	binary.h	/^#define B1011100 /;"	d
+B10111000	binary.h	/^#define B10111000 /;"	d
+B10111001	binary.h	/^#define B10111001 /;"	d
+B1011101	binary.h	/^#define B1011101 /;"	d
+B10111010	binary.h	/^#define B10111010 /;"	d
+B10111011	binary.h	/^#define B10111011 /;"	d
+B101111	binary.h	/^#define B101111 /;"	d
+B1011110	binary.h	/^#define B1011110 /;"	d
+B10111100	binary.h	/^#define B10111100 /;"	d
+B10111101	binary.h	/^#define B10111101 /;"	d
+B1011111	binary.h	/^#define B1011111 /;"	d
+B10111110	binary.h	/^#define B10111110 /;"	d
+B10111111	binary.h	/^#define B10111111 /;"	d
+B11	binary.h	/^#define B11 /;"	d
+B110	binary.h	/^#define B110 /;"	d
+B1100	binary.h	/^#define B1100 /;"	d
+B11000	binary.h	/^#define B11000 /;"	d
+B110000	binary.h	/^#define B110000 /;"	d
+B1100000	binary.h	/^#define B1100000 /;"	d
+B11000000	binary.h	/^#define B11000000 /;"	d
+B11000001	binary.h	/^#define B11000001 /;"	d
+B1100001	binary.h	/^#define B1100001 /;"	d
+B11000010	binary.h	/^#define B11000010 /;"	d
+B11000011	binary.h	/^#define B11000011 /;"	d
+B110001	binary.h	/^#define B110001 /;"	d
+B1100010	binary.h	/^#define B1100010 /;"	d
+B11000100	binary.h	/^#define B11000100 /;"	d
+B11000101	binary.h	/^#define B11000101 /;"	d
+B1100011	binary.h	/^#define B1100011 /;"	d
+B11000110	binary.h	/^#define B11000110 /;"	d
+B11000111	binary.h	/^#define B11000111 /;"	d
+B11001	binary.h	/^#define B11001 /;"	d
+B110010	binary.h	/^#define B110010 /;"	d
+B1100100	binary.h	/^#define B1100100 /;"	d
+B11001000	binary.h	/^#define B11001000 /;"	d
+B11001001	binary.h	/^#define B11001001 /;"	d
+B1100101	binary.h	/^#define B1100101 /;"	d
+B11001010	binary.h	/^#define B11001010 /;"	d
+B11001011	binary.h	/^#define B11001011 /;"	d
+B110011	binary.h	/^#define B110011 /;"	d
+B1100110	binary.h	/^#define B1100110 /;"	d
+B11001100	binary.h	/^#define B11001100 /;"	d
+B11001101	binary.h	/^#define B11001101 /;"	d
+B1100111	binary.h	/^#define B1100111 /;"	d
+B11001110	binary.h	/^#define B11001110 /;"	d
+B11001111	binary.h	/^#define B11001111 /;"	d
+B1101	binary.h	/^#define B1101 /;"	d
+B11010	binary.h	/^#define B11010 /;"	d
+B110100	binary.h	/^#define B110100 /;"	d
+B1101000	binary.h	/^#define B1101000 /;"	d
+B11010000	binary.h	/^#define B11010000 /;"	d
+B11010001	binary.h	/^#define B11010001 /;"	d
+B1101001	binary.h	/^#define B1101001 /;"	d
+B11010010	binary.h	/^#define B11010010 /;"	d
+B11010011	binary.h	/^#define B11010011 /;"	d
+B110101	binary.h	/^#define B110101 /;"	d
+B1101010	binary.h	/^#define B1101010 /;"	d
+B11010100	binary.h	/^#define B11010100 /;"	d
+B11010101	binary.h	/^#define B11010101 /;"	d
+B1101011	binary.h	/^#define B1101011 /;"	d
+B11010110	binary.h	/^#define B11010110 /;"	d
+B11010111	binary.h	/^#define B11010111 /;"	d
+B11011	binary.h	/^#define B11011 /;"	d
+B110110	binary.h	/^#define B110110 /;"	d
+B1101100	binary.h	/^#define B1101100 /;"	d
+B11011000	binary.h	/^#define B11011000 /;"	d
+B11011001	binary.h	/^#define B11011001 /;"	d
+B1101101	binary.h	/^#define B1101101 /;"	d
+B11011010	binary.h	/^#define B11011010 /;"	d
+B11011011	binary.h	/^#define B11011011 /;"	d
+B110111	binary.h	/^#define B110111 /;"	d
+B1101110	binary.h	/^#define B1101110 /;"	d
+B11011100	binary.h	/^#define B11011100 /;"	d
+B11011101	binary.h	/^#define B11011101 /;"	d
+B1101111	binary.h	/^#define B1101111 /;"	d
+B11011110	binary.h	/^#define B11011110 /;"	d
+B11011111	binary.h	/^#define B11011111 /;"	d
+B111	binary.h	/^#define B111 /;"	d
+B1110	binary.h	/^#define B1110 /;"	d
+B11100	binary.h	/^#define B11100 /;"	d
+B111000	binary.h	/^#define B111000 /;"	d
+B1110000	binary.h	/^#define B1110000 /;"	d
+B11100000	binary.h	/^#define B11100000 /;"	d
+B11100001	binary.h	/^#define B11100001 /;"	d
+B1110001	binary.h	/^#define B1110001 /;"	d
+B11100010	binary.h	/^#define B11100010 /;"	d
+B11100011	binary.h	/^#define B11100011 /;"	d
+B111001	binary.h	/^#define B111001 /;"	d
+B1110010	binary.h	/^#define B1110010 /;"	d
+B11100100	binary.h	/^#define B11100100 /;"	d
+B11100101	binary.h	/^#define B11100101 /;"	d
+B1110011	binary.h	/^#define B1110011 /;"	d
+B11100110	binary.h	/^#define B11100110 /;"	d
+B11100111	binary.h	/^#define B11100111 /;"	d
+B11101	binary.h	/^#define B11101 /;"	d
+B111010	binary.h	/^#define B111010 /;"	d
+B1110100	binary.h	/^#define B1110100 /;"	d
+B11101000	binary.h	/^#define B11101000 /;"	d
+B11101001	binary.h	/^#define B11101001 /;"	d
+B1110101	binary.h	/^#define B1110101 /;"	d
+B11101010	binary.h	/^#define B11101010 /;"	d
+B11101011	binary.h	/^#define B11101011 /;"	d
+B111011	binary.h	/^#define B111011 /;"	d
+B1110110	binary.h	/^#define B1110110 /;"	d
+B11101100	binary.h	/^#define B11101100 /;"	d
+B11101101	binary.h	/^#define B11101101 /;"	d
+B1110111	binary.h	/^#define B1110111 /;"	d
+B11101110	binary.h	/^#define B11101110 /;"	d
+B11101111	binary.h	/^#define B11101111 /;"	d
+B1111	binary.h	/^#define B1111 /;"	d
+B11110	binary.h	/^#define B11110 /;"	d
+B111100	binary.h	/^#define B111100 /;"	d
+B1111000	binary.h	/^#define B1111000 /;"	d
+B11110000	binary.h	/^#define B11110000 /;"	d
+B11110001	binary.h	/^#define B11110001 /;"	d
+B1111001	binary.h	/^#define B1111001 /;"	d
+B11110010	binary.h	/^#define B11110010 /;"	d
+B11110011	binary.h	/^#define B11110011 /;"	d
+B111101	binary.h	/^#define B111101 /;"	d
+B1111010	binary.h	/^#define B1111010 /;"	d
+B11110100	binary.h	/^#define B11110100 /;"	d
+B11110101	binary.h	/^#define B11110101 /;"	d
+B1111011	binary.h	/^#define B1111011 /;"	d
+B11110110	binary.h	/^#define B11110110 /;"	d
+B11110111	binary.h	/^#define B11110111 /;"	d
+B11111	binary.h	/^#define B11111 /;"	d
+B111110	binary.h	/^#define B111110 /;"	d
+B1111100	binary.h	/^#define B1111100 /;"	d
+B11111000	binary.h	/^#define B11111000 /;"	d
+B11111001	binary.h	/^#define B11111001 /;"	d
+B1111101	binary.h	/^#define B1111101 /;"	d
+B11111010	binary.h	/^#define B11111010 /;"	d
+B11111011	binary.h	/^#define B11111011 /;"	d
+B111111	binary.h	/^#define B111111 /;"	d
+B1111110	binary.h	/^#define B1111110 /;"	d
+B11111100	binary.h	/^#define B11111100 /;"	d
+B11111101	binary.h	/^#define B11111101 /;"	d
+B1111111	binary.h	/^#define B1111111 /;"	d
+B11111110	binary.h	/^#define B11111110 /;"	d
+B11111111	binary.h	/^#define B11111111 /;"	d
+BIN	Print.h	/^#define BIN /;"	d
+BUFFER_LENGTH	Wire.h	/^#define BUFFER_LENGTH /;"	d
+BV	../../variants/launchpad_f5529/pins_energia.h	/^#define BV(/;"	d
+BV	WInterrupts.c	/^#define BV(/;"	d	file:
+Binary_h	binary.h	/^#define Binary_h$/;"	d
+CHANGE	Energia.h	/^#define CHANGE /;"	d
+CHardwareSerial	usci_isr_handler.h	/^typedef void CHardwareSerial;$/;"	t
+Character_h	WCharacter.h	/^#define Character_h$/;"	d
+Client	Client.h	/^class Client : public Stream {$/;"	c
+DEBUG_UARTRXD	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t DEBUG_UARTRXD = 45;  \/* Receive  Data (RXD) at P4.5 *\/$/;"	v
+DEBUG_UARTRXD_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define DEBUG_UARTRXD_SET_MODE /;"	d
+DEBUG_UARTTXD	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t DEBUG_UARTTXD = 46;  \/* Transmit Data (TXD) at P4.4 *\/$/;"	v
+DEBUG_UARTTXD_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define DEBUG_UARTTXD_SET_MODE /;"	d
+DEBUG_UART_MODULE_OFFSET	../../variants/launchpad_f5529/pins_energia.h	/^#define DEBUG_UART_MODULE_OFFSET /;"	d
+DEC	Print.h	/^#define DEC /;"	d
+DEFAULT	Energia.h	/^#define DEFAULT /;"	d
+DEG_TO_RAD	Energia.h	/^#define DEG_TO_RAD /;"	d
+EXTERNAL	Energia.h	/^#define EXTERNAL /;"	d
+EXTERNAL_NUM_INTERRUPTS	wiring_private.h	/^#define EXTERNAL_NUM_INTERRUPTS /;"	d
+Energia_h	Energia.h	/^#define Energia_h$/;"	d
+F	WString.h	/^#define F(/;"	d
+FALLING	Energia.h	/^#define FALLING /;"	d
+FLASH_SIZE	../../variants/launchpad_f5529/Board.mk	/^FLASH_SIZE = 131072$/;"	m
+FRACT_INC	wiring.c	/^#define FRACT_INC /;"	d	file:
+FRACT_MAX	wiring.c	/^#define FRACT_MAX /;"	d	file:
+F_CPU	../../variants/launchpad_f5529/Board.mk	/^F_CPU = 25000000L$/;"	m
+F_TIMER	Tone.cpp	/^#define F_TIMER /;"	d	file:
+GREEN_LED	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t GREEN_LED = 44;$/;"	v
+HALF_PI	Energia.h	/^#define HALF_PI /;"	d
+HEX	Print.h	/^#define HEX /;"	d
+HIGH	Energia.h	/^#define HIGH /;"	d
+HardwareSerial	HardwareSerial.h	/^		HardwareSerial(ring_buffer *rx_buffer, ring_buffer *tx_buffer, uint8_t uartOffset, uint16_t rxPinMode, uint16_t txPinMode, uint8_t rxPin, uint8_t txPin)$/;"	f	class:HardwareSerial
+HardwareSerial	HardwareSerial.h	/^class HardwareSerial : public Stream$/;"	c
+HardwareSerial_h	HardwareSerial.h	/^#define HardwareSerial_h$/;"	d
+INPUT	Energia.h	/^#define INPUT /;"	d
+INPUT_PULLDOWN	Energia.h	/^#define INPUT_PULLDOWN /;"	d
+INPUT_PULLUP	Energia.h	/^#define INPUT_PULLUP /;"	d
+INTERNAL1V2	Energia.h	/^#define INTERNAL1V2 /;"	d
+INTERNAL1V5	Energia.h	/^#define INTERNAL1V5 /;"	d
+INTERNAL2V0	Energia.h	/^#define INTERNAL2V0 /;"	d
+INTERNAL2V5	Energia.h	/^#define INTERNAL2V5 /;"	d
+IPAddress	IPAddress.cpp	/^IPAddress::IPAddress()$/;"	f	class:IPAddress
+IPAddress	IPAddress.cpp	/^IPAddress::IPAddress(const uint8_t *address)$/;"	f	class:IPAddress
+IPAddress	IPAddress.cpp	/^IPAddress::IPAddress(uint32_t address)$/;"	f	class:IPAddress
+IPAddress	IPAddress.cpp	/^IPAddress::IPAddress(uint8_t first_octet, uint8_t second_octet, uint8_t third_octet, uint8_t fourth_octet)$/;"	f	class:IPAddress
+IPAddress	IPAddress.h	/^class IPAddress : public Printable {$/;"	c
+IPAddress_h	IPAddress.h	/^#define IPAddress_h$/;"	d
+LOW	Energia.h	/^#define LOW /;"	d
+LSBFIRST	Energia.h	/^#define LSBFIRST /;"	d
+MACAddress	MACAddress.cpp	/^MACAddress::MACAddress()$/;"	f	class:MACAddress
+MACAddress	MACAddress.cpp	/^MACAddress::MACAddress(const uint8_t *address)$/;"	f	class:MACAddress
+MACAddress	MACAddress.cpp	/^MACAddress::MACAddress(uint8_t first_octet, uint8_t second_octet, uint8_t third_octet, uint8_t fourth_octet, uint8_t fifth_octet, uint8_t sixth_octet)$/;"	f	class:MACAddress
+MACAddress	MACAddress.h	/^class MACAddress : public Printable {$/;"	c
+MACAddress_h	MACAddress.h	/^#define MACAddress_h$/;"	d
+MCU	../../variants/launchpad_f5529/Board.mk	/^MCU = msp430f5529$/;"	m
+MCU_FLAG	../../variants/launchpad_f5529/Board.mk	/^MCU_FLAG = -mmcu=$(MCU)$/;"	m
+MICROSECONDS_PER_WDT_OVERFLOW	wiring.c	/^#define MICROSECONDS_PER_WDT_OVERFLOW /;"	d	file:
+MILLIS_INC	wiring.c	/^#define MILLIS_INC /;"	d	file:
+MISO	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t MISO    = 14;  \/* P3.1 *\/$/;"	v
+MOSI	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t MOSI    = 15;  \/* P3.0 *\/$/;"	v
+MSBFIRST	Energia.h	/^#define MSBFIRST /;"	d
+NEEDS_BUFF_PTR	TimerSerial.h	/^ #define NEEDS_BUFF_PTR /;"	d
+NEW_H	new.h	/^#define NEW_H$/;"	d
+NOT_A_PIN	Energia.h	/^#define NOT_A_PIN /;"	d
+NOT_A_PORT	Energia.h	/^#define NOT_A_PORT /;"	d
+NOT_ON_ADC	Energia.h	/^#define NOT_ON_ADC /;"	d
+NOT_ON_TIMER	Energia.h	/^#define NOT_ON_TIMER /;"	d
+NO_SKIP_CHAR	Stream.cpp	/^#define NO_SKIP_CHAR /;"	d	file:
+NUM_INTS_PER_PORT	WInterrupts.c	/^#define NUM_INTS_PER_PORT /;"	d	file:
+OCT	Print.h	/^#define OCT /;"	d
+OUTPUT	Energia.h	/^#define OUTPUT /;"	d
+P1	Energia.h	/^  P1 = 1,$/;"	e	enum:__anon1
+P1_0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_0 = 43;$/;"	v
+P1_1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_1 = 42;$/;"	v
+P1_2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_2 = 35;$/;"	v
+P1_3	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_3 = 36;$/;"	v
+P1_4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_4 = 37;$/;"	v
+P1_5	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_5 = 38;$/;"	v
+P1_6	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P1_6 = 5;$/;"	v
+P2	Energia.h	/^  P2,$/;"	e	enum:__anon1
+P2_0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_0 = 19;$/;"	v
+P2_1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_1 = 41;$/;"	v
+P2_2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_2 = 18;$/;"	v
+P2_3	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_3 = 12;$/;"	v
+P2_4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_4 = 39;$/;"	v
+P2_5	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_5 = 40;$/;"	v
+P2_6	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_6 = 13;$/;"	v
+P2_7	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P2_7 = 8;$/;"	v
+P3	Energia.h	/^  P3,$/;"	e	enum:__anon1
+P3_0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_0 = 15;$/;"	v
+P3_1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_1 = 14;$/;"	v
+P3_2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_2 = 7;$/;"	v
+P3_3	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_3 = 4;$/;"	v
+P3_4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_4 = 3;$/;"	v
+P3_5	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_5 = 30;$/;"	v
+P3_6	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_6 = 29;$/;"	v
+P3_7	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P3_7 = 32;$/;"	v
+P4	Energia.h	/^  P4,$/;"	e	enum:__anon1
+P4_0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_0 = 33;$/;"	v
+P4_1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_1 = 10;$/;"	v
+P4_2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_2 = 9;$/;"	v
+P4_3	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_3 = 34;$/;"	v
+P4_4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_4 = 46;$/;"	v
+P4_5	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_5 = 45;$/;"	v
+P4_7	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P4_7 = 44;$/;"	v
+P5	Energia.h	/^  P5,$/;"	e	enum:__anon1
+P6	Energia.h	/^  P6,$/;"	e	enum:__anon1
+P6_0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_0 = 23;$/;"	v
+P6_1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_1 = 24;$/;"	v
+P6_2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_2 = 25;$/;"	v
+P6_3	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_3 = 26;$/;"	v
+P6_4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_4 = 27;$/;"	v
+P6_5	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_5 = 2;$/;"	v
+P6_6	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P6_6 = 6;$/;"	v
+P7	Energia.h	/^  P7,$/;"	e	enum:__anon1
+P7_0	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P7_0 = 28;$/;"	v
+P7_4	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P7_4 = 17;$/;"	v
+P8	Energia.h	/^  P8,$/;"	e	enum:__anon1
+P8_1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P8_1 = 11;$/;"	v
+P8_2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t P8_2 = 31;$/;"	v
+PARSE_TIMEOUT	Stream.cpp	/^#define PARSE_TIMEOUT /;"	d	file:
+PGM_P	avr/pgmspace.h	/^#define PGM_P /;"	d
+PI	Energia.h	/^#define PI /;"	d
+PJ	Energia.h	/^  PJ,$/;"	e	enum:__anon1
+PORT_SELECTION0	Energia.h	/^#define PORT_SELECTION0 /;"	d
+PORT_SELECTION1	Energia.h	/^#define PORT_SELECTION1 /;"	d
+PROGMEM	avr/pgmspace.h	/^#define PROGMEM$/;"	d
+PSTR	avr/pgmspace.h	/^#define PSTR(/;"	d
+PUSH1	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t PUSH1 = 41;$/;"	v
+PUSH2	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t PUSH2 = 42;$/;"	v
+PWM_DUTY	wiring_analog.c	/^#define PWM_DUTY(/;"	d	file:
+PWM_PERIOD	wiring_analog.c	/^#define PWM_PERIOD /;"	d	file:
+Pins_Energia_h	../../variants/launchpad_f5529/pins_energia.h	/^#define Pins_Energia_h$/;"	d
+Port_1	WInterrupts.c	/^void Port_1(void)$/;"	f
+Port_2	WInterrupts.c	/^void Port_2(void)$/;"	f
+Port_3	WInterrupts.c	/^void Port_3(void)$/;"	f
+Port_4	WInterrupts.c	/^void Port_4(void)$/;"	f
+Print	Print.h	/^    Print() : write_error(0) {}$/;"	f	class:Print
+Print	Print.h	/^class Print$/;"	c
+Print_h	Print.h	/^#define Print_h$/;"	d
+Printable	Printable.h	/^class Printable$/;"	c
+Printable_h	Printable.h	/^#define Printable_h$/;"	d
+RAD_TO_DEG	Energia.h	/^#define RAD_TO_DEG /;"	d
+RANDOM_MAX	random.c	/^#define RANDOM_MAX /;"	d	file:
+RED_LED	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t RED_LED = 43;$/;"	v
+REFV_MASK	wiring_analog.c	/^#define REFV_MASK /;"	d	file:
+REF_MASK	wiring_analog.c	/^#define REF_MASK /;"	d	file:
+RISING	Energia.h	/^#define RISING /;"	d
+RX_PIN	TimerSerial.h	/^#define RX_PIN /;"	d
+SCK	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t SCK     = 7;  \/* P3.2 *\/$/;"	v
+SERIAL1_AVAILABLE	../../variants/launchpad_f5529/pins_energia.h	/^#define SERIAL1_AVAILABLE /;"	d
+SERIAL_BUFFER_SIZE	HardwareSerial.cpp	/^#define SERIAL_BUFFER_SIZE /;"	d	file:
+SERIAL_BUFFER_SIZE	TimerSerial.cpp	/^#define SERIAL_BUFFER_SIZE /;"	d	file:
+SETARRAY	Tone.cpp	/^#define SETARRAY(/;"	d	file:
+SFRACT_INC	wiring.c	/^uint16_t SFRACT_INC;$/;"	v
+SMCLK	HardwareSerial.cpp	/^#define SMCLK /;"	d	file:
+SMILLIS_INC	wiring.c	/^uint16_t SMILLIS_INC;$/;"	v
+SPIMISO_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define SPIMISO_SET_MODE /;"	d
+SPIMOSI_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define SPIMOSI_SET_MODE /;"	d
+SPISCK_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define SPISCK_SET_MODE /;"	d
+SS	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t SS      = 8;  \/* P2.7 *\/$/;"	v
+Serial	HardwareSerial.cpp	/^HardwareSerial Serial(&rx_buffer, &tx_buffer, DEBUG_UART_MODULE_OFFSET, DEBUG_UARTRXD_SET_MODE, DEBUG_UARTTXD_SET_MODE, DEBUG_UARTRXD, DEBUG_UARTTXD);$/;"	v
+Serial	TimerSerial.cpp	/^TimerSerial Serial;$/;"	v
+Serial1	HardwareSerial.cpp	/^HardwareSerial Serial1(&rx_buffer1, &tx_buffer1, AUX_UART_MODULE_OFFSET, AUX_UARTRXD_SET_MODE, AUX_UARTTXD_SET_MODE, AUX_UARTRXD, AUX_UARTTXD);$/;"	v
+Server	Server.h	/^class Server : public Print {$/;"	c
+Stream	Stream.h	/^    Stream() {_timeout=1000;}$/;"	f	class:Stream
+Stream	Stream.h	/^class Stream : public Print$/;"	c
+Stream_h	Stream.h	/^#define Stream_h$/;"	d
+String	WString.cpp	/^String::String(String &&rval)$/;"	f	class:String
+String	WString.cpp	/^String::String(StringSumHelper &&rval)$/;"	f	class:String
+String	WString.cpp	/^String::String(char c)$/;"	f	class:String
+String	WString.cpp	/^String::String(const String &value)$/;"	f	class:String
+String	WString.cpp	/^String::String(const __FlashStringHelper *pstr)$/;"	f	class:String
+String	WString.cpp	/^String::String(const char *cstr)$/;"	f	class:String
+String	WString.cpp	/^String::String(double value, unsigned char decimalPlaces)$/;"	f	class:String
+String	WString.cpp	/^String::String(float value, unsigned char decimalPlaces)$/;"	f	class:String
+String	WString.cpp	/^String::String(int value, unsigned char base)$/;"	f	class:String
+String	WString.cpp	/^String::String(long value, unsigned char base)$/;"	f	class:String
+String	WString.cpp	/^String::String(unsigned char value, unsigned char base)$/;"	f	class:String
+String	WString.cpp	/^String::String(unsigned int value, unsigned char base)$/;"	f	class:String
+String	WString.cpp	/^String::String(unsigned long value, unsigned char base)$/;"	f	class:String
+String	WString.h	/^class String$/;"	c
+StringIfHelper	WString.h	/^	void StringIfHelper() const {}$/;"	f	class:String
+StringSumHelper	WString.h	/^	StringSumHelper(char c) : String(c) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(const String &s) : String(s) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(const char *p) : String(p) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(double num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(float num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(int num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(long num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(unsigned char num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(unsigned int num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^	StringSumHelper(unsigned long num) : String(num) {}$/;"	f	class:StringSumHelper
+StringSumHelper	WString.h	/^class StringSumHelper : public String$/;"	c
+String_class_h	WString.h	/^#define String_class_h$/;"	d
+T0A0	Energia.h	/^  T0A0,$/;"	e	enum:__anon2
+T0A1	Energia.h	/^  T0A1,$/;"	e	enum:__anon2
+T0A2	Energia.h	/^  T0A2,$/;"	e	enum:__anon2
+T0A3	Energia.h	/^  T0A3,$/;"	e	enum:__anon2
+T0A4	Energia.h	/^  T0A4,$/;"	e	enum:__anon2
+T0B0	Energia.h	/^  T0B0,$/;"	e	enum:__anon2
+T0B1	Energia.h	/^  T0B1,$/;"	e	enum:__anon2
+T0B2	Energia.h	/^  T0B2,$/;"	e	enum:__anon2
+T0B3	Energia.h	/^  T0B3,$/;"	e	enum:__anon2
+T0B4	Energia.h	/^  T0B4,$/;"	e	enum:__anon2
+T0B5	Energia.h	/^  T0B5,$/;"	e	enum:__anon2
+T0B6	Energia.h	/^  T0B6,$/;"	e	enum:__anon2
+T1A0	Energia.h	/^  T1A0,$/;"	e	enum:__anon2
+T1A1	Energia.h	/^  T1A1,$/;"	e	enum:__anon2
+T1A2	Energia.h	/^  T1A2,$/;"	e	enum:__anon2
+T1A3	Energia.h	/^  T1A3,$/;"	e	enum:__anon2
+T1A4	Energia.h	/^  T1A4,$/;"	e	enum:__anon2
+T1A5	Energia.h	/^  T1A5,$/;"	e	enum:__anon2
+T1B0	Energia.h	/^  T1B0,$/;"	e	enum:__anon2
+T1B1	Energia.h	/^  T1B1,$/;"	e	enum:__anon2
+T1B2	Energia.h	/^  T1B2,$/;"	e	enum:__anon2
+T2A0	Energia.h	/^  T2A0,$/;"	e	enum:__anon2
+T2A1	Energia.h	/^  T2A1,$/;"	e	enum:__anon2
+T2A2	Energia.h	/^  T2A2,$/;"	e	enum:__anon2
+T2B0	Energia.h	/^  T2B0,$/;"	e	enum:__anon2
+T2B1	Energia.h	/^  T2B1,$/;"	e	enum:__anon2
+T2B2	Energia.h	/^  T2B2$/;"	e	enum:__anon2
+TEMPSENSOR	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t TEMPSENSOR = 128 + 10;$/;"	v
+TICKS_PER_BIT	TimerSerial.cpp	/^static uint16_t TICKS_PER_BIT;$/;"	v	file:
+TICKS_PER_BIT_DIV2	TimerSerial.cpp	/^static uint16_t TICKS_PER_BIT_DIV2;$/;"	v	file:
+TICKS_PER_WDT_OVERFLOW	wiring.c	/^#define TICKS_PER_WDT_OVERFLOW /;"	d	file:
+TIMER0_A0_ISR	Tone.cpp	/^void TIMER0_A0_ISR(void)$/;"	f
+TIMER0_A0_VECTOR	TimerSerial.cpp	/^#define TIMER0_A0_VECTOR /;"	d	file:
+TIMER0_A1_ISR	Tone.cpp	/^void TIMER0_A1_ISR(void)$/;"	f
+TIMER0_A1_VECTOR	TimerSerial.cpp	/^#define TIMER0_A1_VECTOR /;"	d	file:
+TIMERA0_VECTOR	TimerSerial.cpp	/^ #define TIMERA0_VECTOR /;"	d	file:
+TIMERA1_VECTOR	TimerSerial.cpp	/^ #define TIMERA1_VECTOR /;"	d	file:
+TIMERSERIAL_BAUD	TimerSerial.h	/^    #define TIMERSERIAL_BAUD /;"	d
+TWISCL	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t TWISCL  = 14;  \/* P3.1 *\/$/;"	v
+TWISCL_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define TWISCL_SET_MODE /;"	d
+TWISDA	../../variants/launchpad_f5529/pins_energia.h	/^static const uint8_t TWISDA  = 15;  \/* P3.0 *\/$/;"	v
+TWISDA_SET_MODE	../../variants/launchpad_f5529/pins_energia.h	/^#define TWISDA_SET_MODE /;"	d
+TWI_BUFFER_LENGTH	twi.h	/^#define TWI_BUFFER_LENGTH /;"	d
+TWI_ERROR_ADDR_NACK	twi.h	/^#define TWI_ERROR_ADDR_NACK /;"	d
+TWI_ERROR_BUF_TO_LONG	twi.h	/^#define TWI_ERROR_BUF_TO_LONG /;"	d
+TWI_ERROR_DATA_NACK	twi.h	/^#define TWI_ERROR_DATA_NACK /;"	d
+TWI_ERROR_OTHER	twi.h	/^#define TWI_ERROR_OTHER /;"	d
+TWI_ERRROR_NO_ERROR	twi.h	/^#define TWI_ERRROR_NO_ERROR /;"	d
+TWI_EXIT	twi.h	/^#define TWI_EXIT /;"	d
+TWI_FREQ	twi.h	/^#define TWI_FREQ /;"	d
+TWI_IDLE	twi.h	/^#define TWI_IDLE /;"	d
+TWI_MRX	twi.h	/^#define TWI_MRX /;"	d
+TWI_MR_PREP_DATA_RECV	twi.h	/^#define TWI_MR_PREP_DATA_RECV /;"	d
+TWI_MR_PREP_STOP	twi.h	/^#define TWI_MR_PREP_STOP /;"	d
+TWI_MR_PROC_DATA_RECV	twi.h	/^#define TWI_MR_PROC_DATA_RECV /;"	d
+TWI_MTX	twi.h	/^#define TWI_MTX /;"	d
+TWI_MT_PREP_DATA_ACK	twi.h	/^#define TWI_MT_PREP_DATA_ACK /;"	d
+TWI_MT_PROC_ADDR_ACK	twi.h	/^#define TWI_MT_PROC_ADDR_ACK /;"	d
+TWI_MT_PROC_DATA_ACK	twi.h	/^#define TWI_MT_PROC_DATA_ACK /;"	d
+TWI_PREP_SLA_ADDR_ACK	twi.h	/^#define TWI_PREP_SLA_ADDR_ACK /;"	d
+TWI_READY	twi.h	/^#define TWI_READY /;"	d
+TWI_SL_PREP_DATA_ACK	twi.h	/^#define TWI_SL_PREP_DATA_ACK /;"	d
+TWI_SL_PROC_ADDR	twi.h	/^#define TWI_SL_PROC_ADDR /;"	d
+TWI_SL_PROC_BYTE	twi.h	/^#define TWI_SL_PROC_BYTE /;"	d
+TWI_SL_PROC_DATA_ACK	twi.h	/^#define TWI_SL_PROC_DATA_ACK /;"	d
+TWI_SL_RECV_BYTE	twi.h	/^#define TWI_SL_RECV_BYTE /;"	d
+TWI_SL_RESET	twi.h	/^#define TWI_SL_RESET /;"	d
+TWI_SL_SEND_BYTE	twi.h	/^#define TWI_SL_SEND_BYTE /;"	d
+TWI_SL_START	twi.h	/^#define TWI_SL_START /;"	d
+TWI_SND_START	twi.h	/^#define TWI_SND_START /;"	d
+TWI_SRX	twi.h	/^#define TWI_SRX /;"	d
+TWI_STX	twi.h	/^#define TWI_STX /;"	d
+TWO_PI	Energia.h	/^#define TWO_PI /;"	d
+TX_PIN	TimerSerial.h	/^#define TX_PIN /;"	d
+TimerSerial	TimerSerial.cpp	/^TimerSerial::TimerSerial()$/;"	f	class:TimerSerial
+TimerSerial	TimerSerial.h	/^class TimerSerial : public Stream$/;"	c
+TimerSerial__RxIsr	TimerSerial.cpp	/^static void TimerSerial__RxIsr(void)$/;"	f	file:
+TimerSerial__TxIsr	TimerSerial.cpp	/^static void TimerSerial__TxIsr(void)$/;"	f	file:
+TimerSerial_h	TimerSerial.h	/^#define TimerSerial_h$/;"	d
+TwoWire	Wire.cpp	/^TwoWire::TwoWire()$/;"	f	class:TwoWire
+TwoWire	Wire.h	/^class TwoWire : public Stream$/;"	c
+TwoWire_h	Wire.h	/^#define TwoWire_h$/;"	d
+UCAxABCTL	HardwareSerial.cpp	/^#define UCAxABCTL /;"	d	file:
+UCAxBR0	HardwareSerial.cpp	/^#define UCAxBR0 /;"	d	file:
+UCAxBR1	HardwareSerial.cpp	/^#define UCAxBR1 /;"	d	file:
+UCAxBRW	HardwareSerial.cpp	/^#define UCAxBRW /;"	d	file:
+UCAxCTL0	HardwareSerial.cpp	/^#define UCAxCTL0 /;"	d	file:
+UCAxCTL1	HardwareSerial.cpp	/^#define UCAxCTL1 /;"	d	file:
+UCAxCTLW0	HardwareSerial.cpp	/^#define UCAxCTLW0 /;"	d	file:
+UCAxICTL	HardwareSerial.cpp	/^#define UCAxICTL /;"	d	file:
+UCAxIE	HardwareSerial.cpp	/^#define UCAxIE /;"	d	file:
+UCAxIFG	HardwareSerial.cpp	/^#define UCAxIFG /;"	d	file:
+UCAxIRCTL	HardwareSerial.cpp	/^#define UCAxIRCTL /;"	d	file:
+UCAxIRRCTL	HardwareSerial.cpp	/^#define UCAxIRRCTL /;"	d	file:
+UCAxIRTCTL	HardwareSerial.cpp	/^#define UCAxIRTCTL /;"	d	file:
+UCAxIV	HardwareSerial.cpp	/^#define UCAxIV /;"	d	file:
+UCAxMCTL	HardwareSerial.cpp	/^#define UCAxMCTL /;"	d	file:
+UCAxMCTLW	HardwareSerial.cpp	/^#define UCAxMCTLW /;"	d	file:
+UCAxMCTLW_H	HardwareSerial.cpp	/^#define UCAxMCTLW_H /;"	d	file:
+UCAxMCTLW_L	HardwareSerial.cpp	/^#define UCAxMCTLW_L /;"	d	file:
+UCAxRXBUF	HardwareSerial.cpp	/^#define UCAxRXBUF /;"	d	file:
+UCAxSTAT	HardwareSerial.cpp	/^#define UCAxSTAT /;"	d	file:
+UCAxTXBUF	HardwareSerial.cpp	/^#define UCAxTXBUF /;"	d	file:
+UCBxABCTL	twi.c	/^#define UCBxABCTL /;"	d	file:
+UCBxBR0	twi.c	/^#define UCBxBR0 /;"	d	file:
+UCBxBR1	twi.c	/^#define UCBxBR1 /;"	d	file:
+UCBxBRW	twi.c	/^#define UCBxBRW /;"	d	file:
+UCBxCTL0	twi.c	/^#define UCBxCTL0 /;"	d	file:
+UCBxCTL1	twi.c	/^#define UCBxCTL1 /;"	d	file:
+UCBxCTLW0	twi.c	/^#define UCBxCTLW0 /;"	d	file:
+UCBxICTL	twi.c	/^#define UCBxICTL /;"	d	file:
+UCBxIE	twi.c	/^#define UCBxIE /;"	d	file:
+UCBxIFG	twi.c	/^#define UCBxIFG /;"	d	file:
+UCBxIRCTL	twi.c	/^#define UCBxIRCTL /;"	d	file:
+UCBxIRRCTL	twi.c	/^#define UCBxIRRCTL /;"	d	file:
+UCBxIRTCTL	twi.c	/^#define UCBxIRTCTL /;"	d	file:
+UCBxIV	twi.c	/^#define UCBxIV /;"	d	file:
+UCBxMCTL	twi.c	/^#define UCBxMCTL /;"	d	file:
+UCBxMCTLW	twi.c	/^#define UCBxMCTLW /;"	d	file:
+UCBxRXBUF	twi.c	/^#define UCBxRXBUF /;"	d	file:
+UCBxSTAT	twi.c	/^#define UCBxSTAT /;"	d	file:
+UCBxTXBUF	twi.c	/^#define UCBxTXBUF /;"	d	file:
+UPLOAD_COMMAND	../../variants/launchpad_f5529/Board.mk	/^UPLOAD_COMMAND = $(MSPDEBUG) $(VERBOSE_UPLOAD) tilib --force-reset "prog build\/$(SKETCH_NAME).bin"$/;"	m
+USARTTXBUF	TimerSerial.cpp	/^static volatile unsigned int USARTTXBUF;$/;"	v	file:
+USCIA0_ISR	usci_isr_handler.c	/^void USCIA0_ISR(void)$/;"	f
+USCIA1_ISR	usci_isr_handler.c	/^void USCIA1_ISR(void)$/;"	f
+USCIAB0RX_ISR	usci_isr_handler.c	/^void USCIAB0RX_ISR(void)$/;"	f
+USCIAB0TX_ISR	usci_isr_handler.c	/^void USCIAB0TX_ISR(void)$/;"	f
+USCIB0_ISR	usci_isr_handler.c	/^void USCIB0_ISR(void)$/;"	f
+USCIB1_ISR	usci_isr_handler.c	/^void USCIB1_ISR(void)$/;"	f
+USCI_B0_ISR	twi.c	/^void USCI_B0_ISR(void)$/;"	f
+USCI_ERROR	Wire.h	/^#define USCI_ERROR /;"	d
+USCI_UART_UCRXIFG	usci_isr_handler.c	/^#define USCI_UART_UCRXIFG /;"	d	file:
+USCI_UART_UCTXIFG	usci_isr_handler.c	/^#define USCI_UART_UCTXIFG /;"	d	file:
+USE_USCI_A1	../../variants/launchpad_f5529/pins_energia.h	/^#define USE_USCI_A1$/;"	d
+USI_ISR	twi.c	/^void USI_ISR(void)$/;"	f
+Wire	Wire.cpp	/^TwoWire Wire = TwoWire();$/;"	v
+WiringPrivate_h	wiring_private.h	/^#define WiringPrivate_h$/;"	d
+XUSCI_A1_OFFSET	usci_isr_handler.c	/^#define XUSCI_A1_OFFSET /;"	d	file:
+_ATOF_	atof.h	/^#define _ATOF_$/;"	d
+_ITOA_	itoa.h	/^#define _ITOA_$/;"	d
+_SFR_BYTE	avr/pgmspace.h	/^#define _SFR_BYTE(/;"	d
+__PGMSPACE_H_	avr/pgmspace.h	/^#define __PGMSPACE_H_ /;"	d
+__cxa_guard_abort	new.cpp	/^void __cxa_guard_abort (__guard *) {}; $/;"	f
+__cxa_guard_acquire	new.cpp	/^int __cxa_guard_acquire(__guard *g) {return !*(char *)(g);};$/;"	f
+__cxa_guard_release	new.cpp	/^void __cxa_guard_release (__guard *g) {*(char *)g = 1;};$/;"	f
+__cxa_pure_virtual	new.cpp	/^void __cxa_pure_virtual(void) {};$/;"	f
+__guard	new.h	/^__extension__ typedef int __guard __attribute__((mode (__DI__)));$/;"	t
+_address	IPAddress.h	/^    uint8_t _address[4];  \/\/ IPv4 address$/;"	m	class:IPAddress
+_address	MACAddress.h	/^    uint8_t _address[6];  \/\/ Ethernet\/WiFi MAC address$/;"	m	class:MACAddress
+_rx_buffer	HardwareSerial.h	/^		ring_buffer *_rx_buffer;$/;"	m	class:HardwareSerial
+_rx_buffer	TimerSerial.h	/^    ring_buffer_ts *_rx_buffer; \/\/ gcc seems to get confused on the g2231 without this$/;"	m	class:TimerSerial
+_startMillis	Stream.h	/^    unsigned long _startMillis;  \/\/ used for timeout measurement$/;"	m	class:Stream
+_timeout	Stream.h	/^    unsigned long _timeout;      \/\/ number of milliseconds to wait for the next char before aborting timed read$/;"	m	class:Stream
+_tx_buffer	HardwareSerial.h	/^		ring_buffer *_tx_buffer;$/;"	m	class:HardwareSerial
+_tx_buffer	TimerSerial.h	/^    ring_buffer_ts *_tx_buffer;$/;"	m	class:TimerSerial
+analogFrequency	wiring_analog.c	/^void analogFrequency(uint32_t freq)$/;"	f
+analogRead	wiring_analog.c	/^uint16_t analogRead(uint8_t pin)$/;"	f
+analogReference	wiring_analog.c	/^void analogReference(uint16_t mode)$/;"	f
+analogResolution	wiring_analog.c	/^void analogResolution(uint16_t res)$/;"	f
+analogWrite	wiring_analog.c	/^void analogWrite(uint8_t pin, int val)$/;"	f
+analog_div	wiring_analog.c	/^uint16_t analog_reference = DEFAULT, analog_period = F_CPU\/490, analog_div = ID_0, analog_res=255; \/\/ devide clock with 0, 2, 4, 8$/;"	v
+analog_period	wiring_analog.c	/^uint16_t analog_reference = DEFAULT, analog_period = F_CPU\/490, analog_div = ID_0, analog_res=255; \/\/ devide clock with 0, 2, 4, 8$/;"	v
+analog_reference	wiring_analog.c	/^uint16_t analog_reference = DEFAULT, analog_period = F_CPU\/490, analog_div = ID_0, analog_res=255; \/\/ devide clock with 0, 2, 4, 8$/;"	v
+analog_res	wiring_analog.c	/^uint16_t analog_reference = DEFAULT, analog_period = F_CPU\/490, analog_div = ID_0, analog_res=255; \/\/ devide clock with 0, 2, 4, 8$/;"	v
+atof	atof.c	/^double atof (const char *p)$/;"	f
+attachInterrupt	WInterrupts.c	/^void attachInterrupt(uint8_t interruptNum, void (*userFunc)(void), int mode) {$/;"	f
+available	HardwareSerial.cpp	/^int HardwareSerial::available(void)$/;"	f	class:HardwareSerial
+available	TimerSerial.cpp	/^int TimerSerial::available()$/;"	f	class:TimerSerial
+available	Wire.cpp	/^int TwoWire::available(void)$/;"	f	class:TwoWire
+b	TimerSerial.cpp	/^    } b;$/;"	m	union:uint8x2_t	typeref:struct:uint8x2_t::__anon3	file:
+begin	HardwareSerial.cpp	/^void HardwareSerial::begin(unsigned long baud)$/;"	f	class:HardwareSerial
+begin	TimerSerial.cpp	/^void TimerSerial::begin(register unsigned long baud)$/;"	f	class:TimerSerial
+begin	Wire.cpp	/^void TwoWire::begin(int address)$/;"	f	class:TwoWire
+begin	Wire.cpp	/^void TwoWire::begin(uint8_t address)$/;"	f	class:TwoWire
+begin	Wire.cpp	/^void TwoWire::begin(void)$/;"	f	class:TwoWire
+beginTransmission	Wire.cpp	/^void TwoWire::beginTransmission(int address)$/;"	f	class:TwoWire
+beginTransmission	Wire.cpp	/^void TwoWire::beginTransmission(uint8_t address)$/;"	f	class:TwoWire
+bit	Energia.h	/^#define bit(/;"	d
+bitClear	Energia.h	/^#define bitClear(/;"	d
+bitRead	Energia.h	/^#define bitRead(/;"	d
+bitSet	Energia.h	/^#define bitSet(/;"	d
+bitWrite	Energia.h	/^#define bitWrite(/;"	d
+bit_pos	WInterrupts.c	/^#define bit_pos(/;"	d	file:
+bit_pos	wiring_digital.c	/^#define bit_pos(/;"	d	file:
+boolean	Energia.h	/^typedef uint8_t boolean;$/;"	t
+buffer	HardwareSerial.cpp	/^	unsigned char buffer[SERIAL_BUFFER_SIZE];$/;"	m	struct:ring_buffer	file:
+buffer	TimerSerial.cpp	/^    unsigned char buffer[SERIAL_BUFFER_SIZE];$/;"	m	struct:ring_buffer_ts	file:
+buffer	WString.h	/^	char *buffer;	        \/\/ the actual char array$/;"	m	class:String
+byte	Energia.h	/^typedef uint8_t byte;$/;"	t
+c_str	WString.h	/^	const char * c_str() const { return buffer; }$/;"	f	class:String
+capacity	WString.h	/^	unsigned int capacity;  \/\/ the array length minus one (for the '\\0')$/;"	m	class:String
+cbi	twi.c	/^#define cbi(/;"	d	file:
+changeBuffer	WString.cpp	/^unsigned char String::changeBuffer(unsigned int maxStrLen)$/;"	f	class:String
+charAt	WString.cpp	/^char String::charAt(unsigned int loc) const$/;"	f	class:String
+clearWriteError	Print.h	/^    void clearWriteError() { setWriteError(0); }$/;"	f	class:Print
+client_h	Client.h	/^#define client_h$/;"	d
+clockCyclesPerMicrosecond	Energia.h	/^#define clockCyclesPerMicrosecond(/;"	d
+clockCyclesToMicroseconds	Energia.h	/^#define clockCyclesToMicroseconds(/;"	d
+compareTo	WString.cpp	/^int String::compareTo(const String &s) const$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(char c)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(const String &s)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(const __FlashStringHelper * str)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(const char *cstr)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(const char *cstr, unsigned int length)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(double num)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(float num)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(int num)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(long num)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(unsigned char num)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(unsigned int num)$/;"	f	class:String
+concat	WString.cpp	/^unsigned char String::concat(unsigned long num)$/;"	f	class:String
+constrain	Energia.h	/^#define constrain(/;"	d
+copy	WString.cpp	/^String & String::copy(const __FlashStringHelper *pstr, unsigned int length)$/;"	f	class:String
+copy	WString.cpp	/^String & String::copy(const char *cstr, unsigned int length)$/;"	f	class:String
+data	TimerSerial.cpp	/^        uint8_t data:8;     \/\/ working value for bits received$/;"	m	struct:uint8x2_t::__anon3	file:
+degrees	Energia.h	/^#define degrees(/;"	d
+delay	wiring.c	/^void delay(uint32_t milliseconds)$/;"	f
+delayMicroseconds	wiring.c	/^void delayMicroseconds(unsigned int us)$/;"	f
+detachInterrupt	WInterrupts.c	/^void detachInterrupt(uint8_t interruptNum) {$/;"	f
+digitalPinToADCIn	Energia.h	/^#define digitalPinToADCIn(/;"	d
+digitalPinToBitMask	Energia.h	/^#define digitalPinToBitMask(/;"	d
+digitalPinToPort	Energia.h	/^#define digitalPinToPort(/;"	d
+digitalPinToTimer	Energia.h	/^#define digitalPinToTimer(/;"	d
+digitalRead	wiring_digital.c	/^int digitalRead(uint8_t pin)$/;"	f
+digitalWrite	wiring_digital.c	/^void digitalWrite(uint8_t pin, uint8_t val)$/;"	f
+digital_pin_to_analog_in	../../variants/launchpad_f5529/pins_energia.h	/^const uint32_t digital_pin_to_analog_in[] = {$/;"	v
+digital_pin_to_bit_mask	../../variants/launchpad_f5529/pins_energia.h	/^const uint8_t digital_pin_to_bit_mask[] = {$/;"	v
+digital_pin_to_port	../../variants/launchpad_f5529/pins_energia.h	/^const uint8_t digital_pin_to_port[] = {$/;"	v
+digital_pin_to_timer	../../variants/launchpad_f5529/pins_energia.h	/^const uint8_t digital_pin_to_timer[] = {$/;"	v
+disableWatchDog	wiring.c	/^void disableWatchDog()$/;"	f
+do_random	random.c	/^do_random(unsigned long *ctx)$/;"	f	file:
+dtostrf	avr/dtostrf.c	/^char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {$/;"	f
+enableWatchDog	wiring.c	/^void enableWatchDog()$/;"	f
+enableWatchDogIntervalMode	wiring.c	/^void enableWatchDogIntervalMode(void)$/;"	f
+enableXtal	wiring.c	/^void enableXtal()$/;"	f
+end	HardwareSerial.cpp	/^void HardwareSerial::end()$/;"	f	class:HardwareSerial
+end	TimerSerial.cpp	/^void TimerSerial::end()$/;"	f	class:TimerSerial
+endTransmission	Wire.cpp	/^uint8_t TwoWire::endTransmission(uint8_t sendStop)$/;"	f	class:TwoWire
+endTransmission	Wire.cpp	/^uint8_t TwoWire::endTransmission(void)$/;"	f	class:TwoWire
+endsWith	WString.cpp	/^unsigned char String::endsWith( const String &s2 ) const$/;"	f	class:String
+equals	WString.cpp	/^unsigned char String::equals(const String &s2) const$/;"	f	class:String
+equals	WString.cpp	/^unsigned char String::equals(const char *cstr) const$/;"	f	class:String
+equalsIgnoreCase	WString.cpp	/^unsigned char String::equalsIgnoreCase( const String &s2 ) const$/;"	f	class:String
+false	Energia.h	/^#define false /;"	d
+find	Stream.cpp	/^bool  Stream::find(char *target)$/;"	f	class:Stream
+find	Stream.cpp	/^bool Stream::find(char *target, size_t length)$/;"	f	class:Stream
+findUntil	Stream.cpp	/^bool  Stream::findUntil(char *target, char *terminator)$/;"	f	class:Stream
+findUntil	Stream.cpp	/^bool Stream::findUntil(char *target, size_t targetLen, char *terminator, size_t termLen)$/;"	f	class:Stream
+flush	HardwareSerial.cpp	/^void HardwareSerial::flush()$/;"	f	class:HardwareSerial
+flush	TimerSerial.cpp	/^void TimerSerial::flush()$/;"	f	class:TimerSerial
+flush	Wire.cpp	/^void TwoWire::flush(void)$/;"	f	class:TwoWire
+getBytes	WString.cpp	/^void String::getBytes(unsigned char *buf, unsigned int bufsize, unsigned int index) const$/;"	f	class:String
+getWriteError	Print.h	/^    int getWriteError() { return write_error; }$/;"	f	class:Print
+head	HardwareSerial.cpp	/^	volatile unsigned int head;$/;"	m	struct:ring_buffer	file:
+head	TimerSerial.cpp	/^    volatile unsigned int head;$/;"	m	struct:ring_buffer_ts	file:
+highByte	Energia.h	/^#define highByte(/;"	d
+i2c_state_isr	twi.c	/^void i2c_state_isr(void)  \/\/ I2C Service$/;"	f
+i2c_txrx_isr	twi.c	/^void i2c_txrx_isr(void)  \/\/ RX\/TX Service$/;"	f
+indexOf	WString.cpp	/^int String::indexOf( char ch, unsigned int fromIndex ) const$/;"	f	class:String
+indexOf	WString.cpp	/^int String::indexOf(char c) const$/;"	f	class:String
+indexOf	WString.cpp	/^int String::indexOf(const String &s2) const$/;"	f	class:String
+indexOf	WString.cpp	/^int String::indexOf(const String &s2, unsigned int fromIndex) const$/;"	f	class:String
+init	WString.cpp	/^inline void String::init(void)$/;"	f	class:String
+init	wiring.c	/^void init()$/;"	f
+initClocks	wiring.c	/^void initClocks(void)$/;"	f
+initTimers	Tone.cpp	/^static void inline initTimers()$/;"	f	file:
+intChangeVectP1	WInterrupts.c	/^static volatile uint8_t intChangeVectP1 = 0x00;$/;"	v	file:
+intChangeVectP2	WInterrupts.c	/^static volatile uint8_t intChangeVectP2 = 0x00;$/;"	v	file:
+intChangeVectP3	WInterrupts.c	/^static volatile uint8_t intChangeVectP3 = 0x00;$/;"	v	file:
+intChangeVectP4	WInterrupts.c	/^static volatile uint8_t intChangeVectP4 = 0x00;$/;"	v	file:
+intFuncP1	WInterrupts.c	/^static volatile voidFuncPtr intFuncP1[NUM_INTS_PER_PORT];$/;"	v	file:
+intFuncP2	WInterrupts.c	/^static volatile voidFuncPtr intFuncP2[NUM_INTS_PER_PORT];$/;"	v	file:
+intFuncP3	WInterrupts.c	/^static volatile voidFuncPtr intFuncP3[NUM_INTS_PER_PORT];$/;"	v	file:
+intFuncP4	WInterrupts.c	/^static volatile voidFuncPtr intFuncP4[NUM_INTS_PER_PORT];$/;"	v	file:
+interrupts	Energia.h	/^#define interrupts(/;"	d
+invalidate	WString.cpp	/^void String::invalidate(void)$/;"	f	class:String
+isAlpha	WCharacter.h	/^inline boolean isAlpha(int c)$/;"	f
+isAlphaNumeric	WCharacter.h	/^inline boolean isAlphaNumeric(int c) $/;"	f
+isAscii	WCharacter.h	/^inline boolean isAscii(int c)$/;"	f
+isControl	WCharacter.h	/^inline boolean isControl(int c)$/;"	f
+isDigit	WCharacter.h	/^inline boolean isDigit(int c)$/;"	f
+isGraph	WCharacter.h	/^inline boolean isGraph(int c)$/;"	f
+isHexadecimalDigit	WCharacter.h	/^inline boolean isHexadecimalDigit(int c)$/;"	f
+isLowerCase	WCharacter.h	/^inline boolean isLowerCase(int c)$/;"	f
+isPrintable	WCharacter.h	/^inline boolean isPrintable(int c)$/;"	f
+isPunct	WCharacter.h	/^inline boolean isPunct(int c)$/;"	f
+isSpace	WCharacter.h	/^inline boolean isSpace(int c)$/;"	f
+isUpperCase	WCharacter.h	/^inline boolean isUpperCase(int c)$/;"	f
+isWhitespace	WCharacter.h	/^inline boolean isWhitespace(int c)$/;"	f
+isrTimer	Tone.cpp	/^#define isrTimer(/;"	d	file:
+itoa	itoa.c	/^extern char* itoa( int value, char *string, int radix )$/;"	f
+lastIndexOf	WString.cpp	/^int String::lastIndexOf( char theChar ) const$/;"	f	class:String
+lastIndexOf	WString.cpp	/^int String::lastIndexOf(char ch, unsigned int fromIndex) const$/;"	f	class:String
+lastIndexOf	WString.cpp	/^int String::lastIndexOf(const String &s2) const$/;"	f	class:String
+lastIndexOf	WString.cpp	/^int String::lastIndexOf(const String &s2, unsigned int fromIndex) const$/;"	f	class:String
+len	WString.h	/^	unsigned int len;       \/\/ the String length (not counting the '\\0')$/;"	m	class:String
+length	WString.h	/^	inline unsigned int length(void) const {return len;}$/;"	f	class:String
+lock	HardwareSerial.h	/^		uint8_t lock;$/;"	m	class:HardwareSerial
+lowByte	Energia.h	/^#define lowByte(/;"	d
+ltoa	itoa.c	/^extern char* ltoa( long value, char *string, int radix )$/;"	f
+main	main.cpp	/^int main(void)$/;"	f
+makeWord	WMath.cpp	/^unsigned int makeWord(unsigned char h, unsigned char l) { return (h << 8) | l; }$/;"	f
+makeWord	WMath.cpp	/^unsigned int makeWord(unsigned int w) { return w; }$/;"	f
+map	WMath.cpp	/^long map(long x, long in_min, long in_max, long out_min, long out_max)$/;"	f
+mask	TimerSerial.cpp	/^        uint8_t mask:8;     \/\/ bit mask to set data bits. Also used as a loop end flag$/;"	m	struct:uint8x2_t::__anon3	file:
+mask_data	TimerSerial.cpp	/^    uint16_t mask_data;     \/\/ access both as a word: mask is low byte, data is high byte$/;"	m	union:uint8x2_t	file:
+max	Energia.h	/^#define max(/;"	d
+memcpy_P	avr/pgmspace.h	/^#define memcpy_P(/;"	d
+micros	wiring.c	/^unsigned long micros()$/;"	f
+microsecondsToClockCycles	Energia.h	/^#define microsecondsToClockCycles(/;"	d
+millis	wiring.c	/^unsigned long millis()$/;"	f
+min	Energia.h	/^#define min(/;"	d
+move	WString.cpp	/^void String::move(String &rhs)$/;"	f	class:String
+next	random.c	/^static unsigned long next = 1;$/;"	v	file:
+noInterrupts	Energia.h	/^#define noInterrupts(/;"	d
+noTone	Tone.cpp	/^void noTone(uint8_t _pin)$/;"	f
+onReceive	Wire.cpp	/^void TwoWire::onReceive( void (*function)(int) )$/;"	f	class:TwoWire
+onReceiveService	Wire.cpp	/^void TwoWire::onReceiveService(uint8_t* inBytes, int numBytes)$/;"	f	class:TwoWire
+onRequest	Wire.cpp	/^void TwoWire::onRequest( void (*function)(void) )$/;"	f	class:TwoWire
+onRequestService	Wire.cpp	/^void TwoWire::onRequestService(void)$/;"	f	class:TwoWire
+operator !=	WString.h	/^	unsigned char operator != (const String &rhs) const {return !equals(rhs);}$/;"	f	class:String
+operator !=	WString.h	/^	unsigned char operator != (const char *cstr) const {return !equals(cstr);}$/;"	f	class:String
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, char c)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, const String &rhs)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, const __FlashStringHelper *rhs)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, const char *cstr)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, double num)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, float num)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, int num)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, long num)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, unsigned char num)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, unsigned int num)$/;"	f
+operator +	WString.cpp	/^StringSumHelper & operator + (const StringSumHelper &lhs, unsigned long num)$/;"	f
+operator +=	WString.h	/^	String & operator += (char c)			{concat(c); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (const String &rhs)	{concat(rhs); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (const __FlashStringHelper *str){concat(str); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (const char *cstr)		{concat(cstr); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (double num)		{concat(num); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (float num)		{concat(num); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (int num)			{concat(num); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (long num)			{concat(num); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (unsigned char num)		{concat(num); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (unsigned int num)		{concat(num); return (*this);}$/;"	f	class:String
+operator +=	WString.h	/^	String & operator += (unsigned long num)	{concat(num); return (*this);}$/;"	f	class:String
+operator <	WString.cpp	/^unsigned char String::operator<(const String &rhs) const$/;"	f	class:String
+operator <=	WString.cpp	/^unsigned char String::operator<=(const String &rhs) const$/;"	f	class:String
+operator =	IPAddress.cpp	/^IPAddress& IPAddress::operator=(const uint8_t *address)$/;"	f	class:IPAddress
+operator =	IPAddress.cpp	/^IPAddress& IPAddress::operator=(uint32_t address)$/;"	f	class:IPAddress
+operator =	MACAddress.cpp	/^MACAddress& MACAddress::operator=(const uint8_t *address)$/;"	f	class:MACAddress
+operator =	WString.cpp	/^String & String::operator = (String &&rval)$/;"	f	class:String
+operator =	WString.cpp	/^String & String::operator = (StringSumHelper &&rval)$/;"	f	class:String
+operator =	WString.cpp	/^String & String::operator = (const String &rhs)$/;"	f	class:String
+operator =	WString.cpp	/^String & String::operator = (const __FlashStringHelper *pstr)$/;"	f	class:String
+operator =	WString.cpp	/^String & String::operator = (const char *cstr)$/;"	f	class:String
+operator ==	IPAddress.cpp	/^bool IPAddress::operator==(const uint8_t* addr)$/;"	f	class:IPAddress
+operator ==	IPAddress.h	/^    bool operator==(const IPAddress& addr) { return (*((uint32_t*)_address)) == (*((uint32_t*)addr._address)); };$/;"	f	class:IPAddress
+operator ==	MACAddress.cpp	/^bool MACAddress::operator==(const MACAddress& addr)$/;"	f	class:MACAddress
+operator ==	MACAddress.cpp	/^bool MACAddress::operator==(const uint8_t* addr)$/;"	f	class:MACAddress
+operator ==	WString.h	/^	unsigned char operator == (const String &rhs) const {return equals(rhs);}$/;"	f	class:String
+operator ==	WString.h	/^	unsigned char operator == (const char *cstr) const {return equals(cstr);}$/;"	f	class:String
+operator >	WString.cpp	/^unsigned char String::operator>(const String &rhs) const$/;"	f	class:String
+operator >=	WString.cpp	/^unsigned char String::operator>=(const String &rhs) const$/;"	f	class:String
+operator StringIfHelperType	WString.h	/^	operator StringIfHelperType() const { return buffer ? &String::StringIfHelper : 0; }$/;"	f	class:String
+operator []	IPAddress.h	/^    uint8_t operator[](int index) const { return _address[index]; };$/;"	f	class:IPAddress
+operator []	IPAddress.h	/^    uint8_t& operator[](int index) { return _address[index]; };$/;"	f	class:IPAddress
+operator []	MACAddress.h	/^    uint8_t operator[](int index) const { return _address[index]; };$/;"	f	class:MACAddress
+operator []	MACAddress.h	/^    uint8_t& operator[](int index) { return _address[index]; };$/;"	f	class:MACAddress
+operator []	WString.cpp	/^char & String::operator[](unsigned int index)$/;"	f	class:String
+operator []	WString.cpp	/^char String::operator[]( unsigned int index ) const$/;"	f	class:String
+operator bool	HardwareSerial.cpp	/^HardwareSerial::operator bool() {$/;"	f	class:HardwareSerial
+operator delete	new.cpp	/^void operator delete(void * ptr)$/;"	f
+operator new	new.cpp	/^void * operator new(size_t size)$/;"	f
+operator uint32_t	IPAddress.h	/^    operator uint32_t() { return *((uint32_t*)_address); };$/;"	f	class:IPAddress
+parseFloat	Stream.cpp	/^float Stream::parseFloat()$/;"	f	class:Stream
+parseFloat	Stream.cpp	/^float Stream::parseFloat(char skipChar){$/;"	f	class:Stream
+parseInt	Stream.cpp	/^long Stream::parseInt()$/;"	f	class:Stream
+parseInt	Stream.cpp	/^long Stream::parseInt(char skipChar)$/;"	f	class:Stream
+peek	HardwareSerial.cpp	/^int HardwareSerial::peek(void)$/;"	f	class:HardwareSerial
+peek	TimerSerial.cpp	/^int TimerSerial::peek()$/;"	f	class:TimerSerial
+peek	Wire.cpp	/^int TwoWire::peek(void)$/;"	f	class:TwoWire
+peekNextDigit	Stream.cpp	/^int Stream::peekNextDigit()$/;"	f	class:Stream
+pgm_read_byte	avr/pgmspace.h	/^#define pgm_read_byte(/;"	d
+pgm_read_byte_far	avr/pgmspace.h	/^#define pgm_read_byte_far(/;"	d
+pgm_read_byte_near	avr/pgmspace.h	/^#define pgm_read_byte_near(/;"	d
+pgm_read_dword	avr/pgmspace.h	/^#define pgm_read_dword(/;"	d
+pgm_read_dword_far	avr/pgmspace.h	/^#define pgm_read_dword_far(/;"	d
+pgm_read_dword_near	avr/pgmspace.h	/^#define pgm_read_dword_near(/;"	d
+pgm_read_float	avr/pgmspace.h	/^#define pgm_read_float(/;"	d
+pgm_read_float_far	avr/pgmspace.h	/^#define pgm_read_float_far(/;"	d
+pgm_read_float_near	avr/pgmspace.h	/^#define pgm_read_float_near(/;"	d
+pgm_read_word	avr/pgmspace.h	/^#define pgm_read_word(/;"	d
+pgm_read_word_far	avr/pgmspace.h	/^#define pgm_read_word_far(/;"	d
+pgm_read_word_near	avr/pgmspace.h	/^#define pgm_read_word_near(/;"	d
+pinMode	wiring_digital.c	/^void pinMode(uint8_t pin, uint8_t mode)$/;"	f
+pinMode_int	wiring_digital.c	/^void pinMode_int(uint8_t pin, uint16_t mode)$/;"	f
+portDirRegister	Energia.h	/^#define portDirRegister(/;"	d
+portInputRegister	Energia.h	/^#define portInputRegister(/;"	d
+portOutputRegister	Energia.h	/^#define portOutputRegister(/;"	d
+portPMReg	Energia.h	/^#define portPMReg(/;"	d
+portRenRegister	Energia.h	/^#define portRenRegister(/;"	d
+portSel0Register	Energia.h	/^#define portSel0Register(/;"	d
+portSel1Register	Energia.h	/^#define portSel1Register(/;"	d
+portSel2Register	Energia.h	/^#define portSel2Register(/;"	d
+portSelRegister	Energia.h	/^#define portSelRegister(/;"	d
+port_to_dir	../../variants/launchpad_f5529/pins_energia.h	/^const uint16_t port_to_dir[] = {$/;"	v
+port_to_input	../../variants/launchpad_f5529/pins_energia.h	/^const uint16_t port_to_input[] = {$/;"	v
+port_to_output	../../variants/launchpad_f5529/pins_energia.h	/^const uint16_t port_to_output[] = {$/;"	v
+port_to_pmap	../../variants/launchpad_f5529/pins_energia.h	/^const uint16_t port_to_pmap[] = {$/;"	v
+port_to_ren	../../variants/launchpad_f5529/pins_energia.h	/^const uint16_t port_to_ren[] = {$/;"	v
+port_to_sel0	../../variants/launchpad_f5529/pins_energia.h	/^const uint16_t port_to_sel0[] = {  \/* put this PxSEL register under the group of PxSEL0 *\/$/;"	v
+print	Print.cpp	/^size_t Print::print(char c)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(const Printable& x)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(const String &s)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(const char str[])$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(double n, int digits)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(int n, int base)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(long n, int base)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(unsigned char b, int base)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(unsigned int n, int base)$/;"	f	class:Print
+print	Print.cpp	/^size_t Print::print(unsigned long n, int base)$/;"	f	class:Print
+printFloat	Print.cpp	/^size_t Print::printFloat(double number, uint8_t digits) $/;"	f	class:Print
+printNumber	Print.cpp	/^size_t Print::printNumber(unsigned long n, uint8_t base) {$/;"	f	class:Print
+printTo	IPAddress.cpp	/^size_t IPAddress::printTo(Print& p) const$/;"	f	class:IPAddress
+printTo	MACAddress.cpp	/^size_t MACAddress::printTo(Print& p) const$/;"	f	class:MACAddress
+println	Print.cpp	/^size_t Print::println(char c)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(const Printable& x)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(const String &s)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(const char c[])$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(double num, int digits)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(int num, int base)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(long num, int base)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(unsigned char b, int base)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(unsigned int num, int base)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(unsigned long num, int base)$/;"	f	class:Print
+println	Print.cpp	/^size_t Print::println(void)$/;"	f	class:Print
+prog_char	avr/pgmspace.h	/^typedef char prog_char;$/;"	t
+prog_int16_t	avr/pgmspace.h	/^typedef int16_t prog_int16_t;$/;"	t
+prog_int32_t	avr/pgmspace.h	/^typedef int32_t prog_int32_t;$/;"	t
+prog_int8_t	avr/pgmspace.h	/^typedef int8_t prog_int8_t;$/;"	t
+prog_uchar	avr/pgmspace.h	/^typedef unsigned char prog_uchar;$/;"	t
+prog_uint16_t	avr/pgmspace.h	/^typedef uint16_t prog_uint16_t;$/;"	t
+prog_uint32_t	avr/pgmspace.h	/^typedef uint32_t prog_uint32_t;$/;"	t
+prog_uint8_t	avr/pgmspace.h	/^typedef uint8_t prog_uint8_t;$/;"	t
+prog_void	avr/pgmspace.h	/^typedef void prog_void;$/;"	t
+pulseIn	wiring_pulse.c	/^unsigned long pulseIn(uint8_t pin, uint8_t state, unsigned long timeout)$/;"	f
+radians	Energia.h	/^#define radians(/;"	d
+random	WMath.cpp	/^long random(long howbig)$/;"	f
+random	WMath.cpp	/^long random(long howsmall, long howbig)$/;"	f
+random	random.c	/^random(void)$/;"	f
+randomSeed	WMath.cpp	/^void randomSeed(unsigned int seed)$/;"	f
+random_r	random.c	/^random_r(unsigned long *ctx)$/;"	f
+rawIPAddress	Client.h	/^  uint8_t* rawIPAddress(IPAddress& addr) { return addr.raw_address(); };$/;"	f	class:Client
+raw_address	IPAddress.h	/^    uint8_t* raw_address() { return _address; };$/;"	f	class:IPAddress
+raw_address	MACAddress.h	/^    uint8_t* raw_address() { return _address; };$/;"	f	class:MACAddress
+read	HardwareSerial.cpp	/^int HardwareSerial::read(void)$/;"	f	class:HardwareSerial
+read	TimerSerial.cpp	/^int TimerSerial::read()$/;"	f	class:TimerSerial
+read	Wire.cpp	/^int TwoWire::read(void)$/;"	f	class:TwoWire
+readBytes	Stream.cpp	/^size_t Stream::readBytes(char *buffer, size_t length)$/;"	f	class:Stream
+readBytesUntil	Stream.cpp	/^size_t Stream::readBytesUntil(char terminator, char *buffer, size_t length)$/;"	f	class:Stream
+readString	Stream.cpp	/^String Stream::readString()$/;"	f	class:Stream
+readStringUntil	Stream.cpp	/^String Stream::readStringUntil(char terminator)$/;"	f	class:Stream
+remove	WString.cpp	/^void String::remove(unsigned int index){$/;"	f	class:String
+remove	WString.cpp	/^void String::remove(unsigned int index, unsigned int count){$/;"	f	class:String
+replace	WString.cpp	/^void String::replace(char find, char replace)$/;"	f	class:String
+replace	WString.cpp	/^void String::replace(const String& find, const String& replace)$/;"	f	class:String
+requestFrom	Wire.cpp	/^uint8_t TwoWire::requestFrom(int address, int quantity)$/;"	f	class:TwoWire
+requestFrom	Wire.cpp	/^uint8_t TwoWire::requestFrom(int address, int quantity, int sendStop)$/;"	f	class:TwoWire
+requestFrom	Wire.cpp	/^uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity)$/;"	f	class:TwoWire
+requestFrom	Wire.cpp	/^uint8_t TwoWire::requestFrom(uint8_t address, uint8_t quantity, uint8_t sendStop)$/;"	f	class:TwoWire
+reserve	WString.cpp	/^unsigned char String::reserve(unsigned int size)$/;"	f	class:String
+ring_buffer	HardwareSerial.cpp	/^struct ring_buffer$/;"	s	file:
+ring_buffer_ts	TimerSerial.cpp	/^struct ring_buffer_ts$/;"	s	file:
+round	Energia.h	/^#define round(/;"	d
+rxBuffer	Wire.cpp	/^uint8_t TwoWire::rxBuffer[BUFFER_LENGTH];$/;"	m	class:TwoWire	file:
+rxBuffer	Wire.h	/^    static uint8_t rxBuffer[];$/;"	m	class:TwoWire
+rxBufferIndex	Wire.cpp	/^uint8_t TwoWire::rxBufferIndex = 0;$/;"	m	class:TwoWire	file:
+rxBufferIndex	Wire.h	/^    static uint8_t rxBufferIndex;$/;"	m	class:TwoWire
+rxBufferLength	Wire.cpp	/^uint8_t TwoWire::rxBufferLength = 0;$/;"	m	class:TwoWire	file:
+rxBufferLength	Wire.h	/^    static uint8_t rxBufferLength;$/;"	m	class:TwoWire
+rxPin	HardwareSerial.h	/^		uint8_t rxPin;$/;"	m	class:HardwareSerial
+rxPinMode	HardwareSerial.h	/^		uint16_t rxPinMode;$/;"	m	class:HardwareSerial
+rx_buffer	HardwareSerial.cpp	/^ring_buffer rx_buffer  =  { { 0 }, 0, 0 };$/;"	v
+rx_buffer	TimerSerial.cpp	/^static ring_buffer_ts rx_buffer;$/;"	v	file:
+rx_buffer1	HardwareSerial.cpp	/^ring_buffer rx_buffer1  =  { { 0 }, 0, 0 };$/;"	v
+sbi	twi.c	/^#define sbi(/;"	d	file:
+send_start	twi.c	/^void send_start()$/;"	f
+serialEvent	HardwareSerial.cpp	/^void serialEvent() {}$/;"	f
+serialEvent	TimerSerial.cpp	/^void serialEvent() {}$/;"	f
+serialEvent1	HardwareSerial.cpp	/^void serialEvent1() {}$/;"	f
+serialEventRun	HardwareSerial.cpp	/^void serialEventRun(void)$/;"	f
+serialEventRun	TimerSerial.cpp	/^void serialEventRun(void)$/;"	f
+server_h	Server.h	/^#define server_h$/;"	d
+setCharAt	WString.cpp	/^void String::setCharAt(unsigned int loc, char c) $/;"	f	class:String
+setTimeout	Stream.cpp	/^void Stream::setTimeout(unsigned long timeout)  \/\/ sets the maximum number of milliseconds to wait$/;"	f	class:Stream
+setTimer	Tone.cpp	/^static void setTimer(uint8_t n, unsigned int frequency, unsigned long duration)$/;"	f	file:
+setWriteError	Print.h	/^    void setWriteError(int err = 1) { write_error = err; }$/;"	f	class:Print
+shiftIn	wiring_shift.c	/^uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder) {$/;"	f
+shiftOut	wiring_shift.c	/^void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val)$/;"	f
+sleep	wiring.c	/^void sleep(uint32_t milliseconds)$/;"	f
+sleepSeconds	wiring.c	/^void sleepSeconds(uint32_t seconds)$/;"	f
+sleeping	wiring.c	/^volatile uint8_t sleeping = false;$/;"	v
+sprintf_P	avr/pgmspace.h	/^#define sprintf_P(/;"	d
+sq	Energia.h	/^#define sq(/;"	d
+srandom	random.c	/^srandom(unsigned long seed)$/;"	f
+startsWith	WString.cpp	/^unsigned char String::startsWith( const String &s2 ) const$/;"	f	class:String
+startsWith	WString.cpp	/^unsigned char String::startsWith( const String &s2, unsigned int offset ) const$/;"	f	class:String
+stay_asleep	wiring.c	/^volatile boolean stay_asleep = false;$/;"	v
+still_asleep	usci_isr_handler.c	/^static boolean still_asleep;  \/\/ Used to validate whether a user ISR has issued wakeup() inside LPM3\/LPM4 sleep modes.$/;"	v	file:
+stopTimer	Tone.cpp	/^static void inline stopTimer(uint8_t n)$/;"	f	file:
+store_char	HardwareSerial.cpp	/^inline void store_char(unsigned char c, ring_buffer *buffer)$/;"	f
+store_rxchar	TimerSerial.cpp	/^#define store_rxchar(/;"	d	file:
+strcat_P	avr/pgmspace.h	/^#define strcat_P(/;"	d
+strcmp_P	avr/pgmspace.h	/^#define strcmp_P(/;"	d
+strcpy_P	avr/pgmspace.h	/^#define strcpy_P(/;"	d
+strlen_P	avr/pgmspace.h	/^#define strlen_P(/;"	d
+strstr_P	avr/pgmspace.h	/^#define strstr_P(/;"	d
+substring	WString.cpp	/^String String::substring(unsigned int left, unsigned int right) const$/;"	f	class:String
+substring	WString.h	/^	String substring( unsigned int beginIndex ) const { return substring(beginIndex, len); };$/;"	f	class:String
+suspend	wiring.c	/^void suspend(void)$/;"	f
+tail	HardwareSerial.cpp	/^	volatile unsigned int tail;$/;"	m	struct:ring_buffer	file:
+tail	TimerSerial.cpp	/^    volatile unsigned int tail;$/;"	m	struct:ring_buffer_ts	file:
+timedPeek	Stream.cpp	/^int Stream::timedPeek()$/;"	f	class:Stream
+timedRead	Stream.cpp	/^int Stream::timedRead()$/;"	f	class:Stream
+toAscii	WCharacter.h	/^inline int toAscii(int c)$/;"	f
+toCharArray	WString.h	/^	void toCharArray(char *buf, unsigned int bufsize, unsigned int index=0) const$/;"	f	class:String
+toFloat	WString.cpp	/^float String::toFloat(void) const$/;"	f	class:String
+toInt	WString.cpp	/^long String::toInt(void) const$/;"	f	class:String
+toLowerCase	WCharacter.h	/^inline int toLowerCase(int c)$/;"	f
+toLowerCase	WString.cpp	/^void String::toLowerCase(void)$/;"	f	class:String
+toUpperCase	WCharacter.h	/^inline int toUpperCase(int c)$/;"	f
+toUpperCase	WString.cpp	/^void String::toUpperCase(void)$/;"	f	class:String
+tone	Tone.cpp	/^void tone(uint8_t _pin, unsigned int frequency, unsigned long duration)$/;"	f
+tone_bit	Tone.cpp	/^static uint8_t tone_bit[AVAILABLE_TONE_PINS] = { SETARRAY(255)  };$/;"	v	file:
+tone_interval	Tone.cpp	/^static uint16_t tone_interval[AVAILABLE_TONE_PINS] = { SETARRAY(-1)  };$/;"	v	file:
+tone_out	Tone.cpp	/^volatile static uint8_t *tone_out[AVAILABLE_TONE_PINS] = { SETARRAY(0) };$/;"	v	file:
+tone_periods	Tone.cpp	/^static int16_t tone_periods[AVAILABLE_TONE_PINS] = { SETARRAY(0)  };$/;"	v	file:
+tone_pins	Tone.cpp	/^static uint8_t tone_pins[AVAILABLE_TONE_PINS] = { SETARRAY(255) };$/;"	v	file:
+tone_state	Tone.cpp	/^static uint8_t tone_state = 0; \/\/ 0==not initialized, 1==timer running$/;"	v	file:
+transmitting	Wire.cpp	/^uint8_t TwoWire::transmitting = 0;$/;"	m	class:TwoWire	file:
+transmitting	Wire.h	/^    static uint8_t transmitting;$/;"	m	class:TwoWire
+trim	WString.cpp	/^void String::trim(void)$/;"	f	class:String
+true	Energia.h	/^#define true /;"	d
+twi_attachSlaveRxEvent	twi.c	/^void twi_attachSlaveRxEvent( void (*function)(uint8_t*, int) )$/;"	f
+twi_attachSlaveTxEvent	twi.c	/^void twi_attachSlaveTxEvent( void (*function)(void) )$/;"	f
+twi_error	twi.c	/^static volatile uint8_t twi_error;$/;"	v	file:
+twi_h	twi.h	/^#define twi_h$/;"	d
+twi_inRepStart	twi.c	/^static volatile uint8_t twi_inRepStart;         \/\/ in the middle of a repeated start$/;"	v	file:
+twi_init	twi.c	/^void twi_init(void)$/;"	f
+twi_masterBuffer	twi.c	/^static uint8_t twi_masterBuffer[TWI_BUFFER_LENGTH];$/;"	v	file:
+twi_masterBufferIndex	twi.c	/^static volatile uint8_t twi_masterBufferIndex;$/;"	v	file:
+twi_masterBufferLength	twi.c	/^static uint8_t twi_masterBufferLength;$/;"	v	file:
+twi_my_addr	twi.c	/^static uint8_t twi_my_addr;$/;"	v	file:
+twi_onSlaveReceive	twi.c	/^static void (*twi_onSlaveReceive)(uint8_t*, int);$/;"	v	file:
+twi_onSlaveTransmit	twi.c	/^static void (*twi_onSlaveTransmit)(void);$/;"	v	file:
+twi_readFrom	twi.c	/^uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length, uint8_t sendStop)$/;"	f
+twi_rxBuffer	twi.c	/^static uint8_t twi_rxBuffer[TWI_BUFFER_LENGTH];$/;"	v	file:
+twi_rxBufferIndex	twi.c	/^static volatile uint8_t twi_rxBufferIndex;$/;"	v	file:
+twi_sendStop	twi.c	/^static volatile uint8_t twi_sendStop;           \/\/ should the transaction end with a stop$/;"	v	file:
+twi_setAddress	twi.c	/^void twi_setAddress(uint8_t address)$/;"	f
+twi_slarw	twi.c	/^static uint8_t twi_slarw;$/;"	v	file:
+twi_state	twi.c	/^static volatile uint8_t twi_state;$/;"	v	file:
+twi_transmit	twi.c	/^uint8_t twi_transmit(const uint8_t* data, uint8_t length)$/;"	f
+twi_txBuffer	twi.c	/^static uint8_t twi_txBuffer[TWI_BUFFER_LENGTH];$/;"	v	file:
+twi_txBufferIndex	twi.c	/^static volatile uint8_t twi_txBufferIndex;$/;"	v	file:
+twi_txBufferLength	twi.c	/^static volatile uint8_t twi_txBufferLength;$/;"	v	file:
+twi_writeTo	twi.c	/^uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait, uint8_t sendStop)$/;"	f
+txAddress	Wire.cpp	/^uint8_t TwoWire::txAddress = 0;$/;"	m	class:TwoWire	file:
+txAddress	Wire.h	/^    static uint8_t txAddress;$/;"	m	class:TwoWire
+txBuffer	Wire.cpp	/^uint8_t TwoWire::txBuffer[BUFFER_LENGTH];$/;"	m	class:TwoWire	file:
+txBuffer	Wire.h	/^    static uint8_t txBuffer[];$/;"	m	class:TwoWire
+txBufferIndex	Wire.cpp	/^uint8_t TwoWire::txBufferIndex = 0;$/;"	m	class:TwoWire	file:
+txBufferIndex	Wire.h	/^    static uint8_t txBufferIndex;$/;"	m	class:TwoWire
+txBufferLength	Wire.cpp	/^uint8_t TwoWire::txBufferLength = 0;$/;"	m	class:TwoWire	file:
+txBufferLength	Wire.h	/^    static uint8_t txBufferLength;$/;"	m	class:TwoWire
+txPin	HardwareSerial.h	/^		uint8_t txPin;$/;"	m	class:HardwareSerial
+txPinMode	HardwareSerial.h	/^		uint16_t txPinMode;$/;"	m	class:HardwareSerial
+tx_buffer	HardwareSerial.cpp	/^ring_buffer tx_buffer  =  { { 0 }, 0, 0 };$/;"	v
+tx_buffer	TimerSerial.cpp	/^ static ring_buffer_ts tx_buffer; \/\/ required for the g2231, without it we get garbage$/;"	v	file:
+tx_buffer1	HardwareSerial.cpp	/^ring_buffer tx_buffer1  =  { { 0 }, 0, 0 };$/;"	v
+uartOffset	HardwareSerial.h	/^		uint8_t uartOffset;$/;"	m	class:HardwareSerial
+uart_rx_isr	HardwareSerial.cpp	/^void uart_rx_isr(uint8_t offset)$/;"	f
+uart_tx_isr	HardwareSerial.cpp	/^void uart_tx_isr(uint8_t offset)$/;"	f
+uint8x2_t	TimerSerial.cpp	/^typedef union uint8x2_t {$/;"	u	file:
+uint8x2_t	TimerSerial.cpp	/^} uint8x2_t;$/;"	t	typeref:union:uint8x2_t	file:
+ultoa	itoa.c	/^extern char* ultoa( unsigned long value, char *string, int radix )$/;"	f
+usci_isr_handler_h	usci_isr_handler.h	/^#define usci_isr_handler_h$/;"	d
+usci_isr_install	usci_isr_handler.c	/^void usci_isr_install(){}$/;"	f
+user_onReceive	Wire.cpp	/^void (*TwoWire::user_onReceive)(int);$/;"	v
+user_onReceive	Wire.h	/^    static void (*user_onReceive)(int);$/;"	m	class:TwoWire
+user_onRequest	Wire.cpp	/^void (*TwoWire::user_onRequest)(void);$/;"	v
+user_onRequest	Wire.h	/^    static void (*user_onRequest)(void);$/;"	m	class:TwoWire
+utoa	itoa.c	/^extern char* utoa( unsigned long value, char *string, int radix )$/;"	f
+valid_digit	atof.c	/^#define valid_digit(/;"	d	file:
+vlo_freq	wiring.c	/^volatile uint16_t vlo_freq = 0;$/;"	v
+voidFuncPtr	wiring_private.h	/^typedef void (*voidFuncPtr)(void);$/;"	t
+wakeup	Energia.h	/^#define wakeup(/;"	d
+watchdog_isr	wiring.c	/^void watchdog_isr (void)$/;"	f
+wdt_fract	wiring.c	/^volatile unsigned int wdt_fract = 0;$/;"	v
+wdt_millis	wiring.c	/^volatile unsigned long wdt_millis = 0;$/;"	v
+wdt_overflow_count	wiring.c	/^volatile unsigned long wdt_overflow_count = 0;$/;"	v
+white_space	atof.c	/^#define white_space(/;"	d	file:
+word	Energia.h	/^#define word(/;"	d
+word	Energia.h	/^typedef unsigned int word;$/;"	t
+write	HardwareSerial.cpp	/^size_t HardwareSerial::write(uint8_t c)$/;"	f	class:HardwareSerial
+write	Print.cpp	/^size_t Print::write(const uint8_t *buffer, size_t size)$/;"	f	class:Print
+write	Print.h	/^    size_t write(const char *str) { return write((const uint8_t *)str, strlen(str)); }$/;"	f	class:Print
+write	TimerSerial.cpp	/^size_t TimerSerial::write(uint8_t c)$/;"	f	class:TimerSerial
+write	Wire.cpp	/^size_t TwoWire::write(const uint8_t *data, size_t quantity)$/;"	f	class:TwoWire
+write	Wire.cpp	/^size_t TwoWire::write(uint8_t data)$/;"	f	class:TwoWire
+write	Wire.h	/^    inline size_t write(int n) { return write((uint8_t)n); }$/;"	f	class:TwoWire
+write	Wire.h	/^    inline size_t write(long n) { return write((uint8_t)n); }$/;"	f	class:TwoWire
+write	Wire.h	/^    inline size_t write(unsigned int n) { return write((uint8_t)n); }$/;"	f	class:TwoWire
+write	Wire.h	/^    inline size_t write(unsigned long n) { return write((uint8_t)n); }$/;"	f	class:TwoWire
+write_error	Print.h	/^    int write_error;$/;"	m	class:Print
+~String	WString.cpp	/^String::~String()$/;"	f	class:String
