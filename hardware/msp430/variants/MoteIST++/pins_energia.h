@@ -1,9 +1,13 @@
-/*
+
+// # vim: foldenable foldmethod=marker foldlevel=0 foldnestmax=10
+
+/* {{{ LICENSE
   ************************************************************************
   *	pins_energia.h
   *
-  *	Energia core files for MSP430F5438 MoteIST++
-  *		Copyright (c) 2012 Robert Wessels. All right reserved.
+  *	    Energia core files for MSP430F5438 MoteIST++
+  *
+  *		  Copyright (c) 2012 Robert Wessels. All right reserved.
   *
   *     Contribution: Rei VILO
   *
@@ -28,26 +32,32 @@
   Public License along with this library; if not, write to the
   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
   Boston, MA  02111-1307  USA
-*/
+ }}}*/
 
 #ifndef Pins_Energia_h
 #define Pins_Energia_h
+
+// {{{ Defines
+
 #ifndef BV
 #define BV(x) (1 << (x))
 #endif
 
+// }}}
+
+// {{{ Constants
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__)
-//constantes para o protocolo SPI		Porto / MoteIST Label
+// Constants for SPI		        /*  Port / MoteIST Label   */
 static const uint8_t SS      = 16;  /*  P3.0  / CB1_SCLKO/CS1  */
 static const uint8_t SCK     = 19;  /*  P3.3  / CB1_CSO/SCLK1  */
 static const uint8_t MOSI    = 18;  /*  P3.1  / CB1_SIMO1/SDA1 aka SIMO  */
 static const uint8_t MISO    = 20;  /*  P3.2  / CB1_SOMI1/SCL1 aka SOMI  */
 
-//constantes para protocolo I2C
+// Constants for I2C
 static const uint8_t TWISDA  = 38;  /*  P10.1 / CB2_SIMO1/SDA1 */
 static const uint8_t TWISCL  = 40;  /*  P10.2 / CB2_SOMI1/SCL1 */
 
-										  /* Porto / MoteIST Label */
+										  /* Port / MoteIST Label       */
 static const uint8_t DEBUG_UARTRXD = 11;  /* P3.5  / CB1_UCA0(RXD/SOMI) */
 static const uint8_t DEBUG_UARTTXD = 13;  /* P3.4  / CB1_UCA0(TXD/SIMO) */
 static const uint8_t AUX_UARTRXD = 31;    /* P10.5 / CB2_UCA3(RXD/SOMI) */ 
@@ -71,16 +81,16 @@ static const uint8_t AUX_UARTTXD = 33;	  /* P10.4 / CB2_UCA3(TXD/SIMO) */
 #define USE_USCI_A1
 #endif
 
-//pinos Analogicos do MoteIST++ (a ser definido)
+// MoteIST++ analogic pins (To be defined)
 static const uint8_t A0 = 14;//CB1_ADC
 static const uint8_t A1 = 76;//ADC7
 static const uint8_t A2 = 77;//ADC6
 static const uint8_t A3 = 78;//ADC5
 static const uint8_t A4 = 79;//ADC4
 
+// }}}
 
-/*
- MSP430F5438a MoteIST++ pin mapping
+/* {{{ MSP430F5438a MoteIST++ pin mapping
 
 					 CBC1            						              CBC2
 				   +--\/--+                                             +--\/--+
@@ -128,11 +138,11 @@ CB1_UCB0CLK/UCAOSTE|19  20|CB1_UCBO(SOMI/SCL)              CB2_CS0/SCLK1|19  20|
 
 
 
-*/
+ }}} */
 
-/* Pinos baseados na placa do MoteIST++ */
+/* {{{ MoteIST++ board pins */
 
-//conector CBC1
+// CBC1
 static const uint8_t CBC1_1 = 1;
 static const uint8_t CBC1_2 = 2;
 static const uint8_t CBC1_3 = 3;
@@ -154,7 +164,7 @@ static const uint8_t CBC1_18 = 18;
 static const uint8_t CBC1_19 = 19;
 static const uint8_t CBC1_20 = 20;
 
-//conector CBC2
+// CBC2
 static const uint8_t CBC2_1 = 21;
 static const uint8_t CBC2_2 = 22;
 static const uint8_t CBC2_3 = 23;
@@ -176,7 +186,7 @@ static const uint8_t CBC2_18 = 38;
 static const uint8_t CBC2_19 = 39;
 static const uint8_t CBC2_20 = 40;
 
-//Hirose
+// Hirose
 //static const uint8_t HRS_1 = GND
 //static const uint8_t HRS_2 = VCC
 static const uint8_t HRS_3 = 43;
@@ -229,7 +239,17 @@ static const uint8_t HRS_49 = 89;
 //static const uint8_t HRS_50 = VCC
 //static const uint8_t HRS_51 = GND
 
+// }}}
 
+// {{{ Variables for the Programmer
+
+static const uint8_t LED1 = 10; //CBC1_10
+static const uint8_t LED2 = 9;  //CBC1_9
+static const uint8_t LED3 = 8;  //CBC1_8
+
+// }}}
+
+// {{{ Arduino main
 #ifdef ARDUINO_MAIN
 
 const uint16_t port_to_input[] = {
@@ -812,5 +832,6 @@ const uint32_t digital_pin_to_analog_in[] = {
 	NOT_ON_ADC,		/* 51 */
 };	
 
-#endif // #ifdef ARDUINO_MAIN
+#endif // #ifdef ARDUINO_MAIN }}}
+
 #endif // #ifndef Pins_Energia_h
