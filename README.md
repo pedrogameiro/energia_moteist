@@ -1,8 +1,4 @@
-# MoteIST
-
-<p align="center">
-  <img src="http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST?action=download&upname=fotos5.jpg" alt="moteist++s5 1011" >
-</p>
+# MoteIST TI Energia Third-Party Hardware
 
 To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST).
 
@@ -15,10 +11,15 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 
 ### Basic Installation
 
-[Energia official guide](http://energia.nu/Guide_Environment.html) 
+[Energia official guide](http://energia.nu/Guide_Environment.html) (Third-Party Hardware section)
 
 ```shell
 cd <ENERGIA_SKETCH_FOLDER>
 git clone https://github.com/pedrogameiro/energia_moteist
 ```
 
+## Hardware
+
+<p align="center">
+  <img src="http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST?action=download&upname=fotos5.jpg" alt="moteist++s5 1011" >
+</p>
