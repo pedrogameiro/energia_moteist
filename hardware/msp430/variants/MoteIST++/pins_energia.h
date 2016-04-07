@@ -1,5 +1,7 @@
-
 // # vim: foldenable foldmethod=marker foldlevel=0 foldnestmax=10
+
+#ifndef Pins_Energia_h
+#define Pins_Energia_h
 
 /* {{{ LICENSE
   ************************************************************************
@@ -33,9 +35,6 @@
   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
   Boston, MA  02111-1307  USA
  }}}*/
-
-#ifndef Pins_Energia_h
-#define Pins_Energia_h
 
 // {{{ Defines
 
@@ -242,10 +241,9 @@ static const uint8_t HRS_49 = 89;
 // }}}
 
 // {{{ Variables for the Programmer
-
-static const uint8_t LED1 = 10; //CBC1_10
-static const uint8_t LED2 = 9;  //CBC1_9
-static const uint8_t LED3 = 8;  //CBC1_8
+static const uint8_t LED1 = 50;  //HRS_10
+static const uint8_t LED2 = 49;  //HRS_9
+static const uint8_t LED3 = 48;  //HRS_8
 
 // }}}
 
@@ -643,7 +641,7 @@ const uint8_t digital_pin_to_port[] = {
 
 const uint8_t digital_pin_to_bit_mask[] = {
 	NOT_A_PIN, /* 0,  pin count starts at 1 */
-	BV(2), 	   /* 1 P4.2 */ 
+	BV(2), 	   /* 1 P4.2 */  //CBC_1
 	BV(1),     /* 2 P2.1 */
 	BV(1),     /* 3 P4.1 */
 	BV(2),     /* 4 P2.2 */
@@ -663,7 +661,7 @@ const uint8_t digital_pin_to_bit_mask[] = {
 	BV(1),     /* 18 P3.1 */
 	BV(3),     /* 19 P3.3 */
 	BV(2),     /* 20 P3.2 */
-	NOT_A_PIN, /* 1 */
+	NOT_A_PIN, /* 1 */      //CBC_2
 	BV(1),     /* 2 P1.1 */
 	BV(3),     /* 3 PJ.3 */
 	BV(2),     /* 4 P1.2 */
@@ -683,7 +681,7 @@ const uint8_t digital_pin_to_bit_mask[] = {
 	BV(1),     /* 18 P10.1 */
 	BV(3),     /* 19 P10.3 */
 	BV(2),     /* 20 P10.2 */
-	NOT_A_PIN, /* 1 */
+	NOT_A_PIN, /* 1 */      //HIROSE
 	NOT_A_PIN, /* 2 */
 	BV(0),     /* 3 P1.0 */
 	BV(3),     /* 4 P1.3 */
