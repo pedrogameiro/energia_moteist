@@ -9,9 +9,9 @@
 
 // {{{ Definitions
 
-//#define LED1 0x7F    //P4.7 (active Low)
-//#define LED2 0xBF    //P4.6 (active Low)
-//#define LED3 0xDF    //P4.5 (active Low)
+#define LED1 0x7F    //P4.7 (active Low)
+#define LED2 0xBF    //P4.6 (active Low)
+#define LED3 0xDF    //P4.5 (active Low)
 #define SFD 0x02// P1.1
 #define FIFO 0x04// P1.2
 #define FIFOP 0x40// P1.6
@@ -80,26 +80,192 @@
 #define TXFIFO 0x3E // W Transmit FIFO Byte Register
 #define RXFIFO 0x3F // R/W Receiver FIFO Byte Register
 
-/// }}}
+// }}}
+
+//Global Variables
+char receive_buffer[128];
+char send_buffer[128];
+char statusByte;
+
+//Functions Prototypes
+void toggle_leds(char mask);
+void activate_switches(void);
+void software_delay(void);
+void CS_down(void);
+void CS_up(void);
+void send_command_CC2420(unsigned int n);
+void commandStrobe(char strobe);
+void change_frequency_channel(int channel);
+void transmit_test_packet(char numero);
 
 
-Radio::Radio(){
-    pinMode(LED1, OUTPUT);
-    pinMode(LED2, OUTPUT);
-    pinMode(LED3, OUTPUT);
+void cc2420_init(){
+
+	
+	WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
+  	P5SEL |= 0x0C;                            // Port select XT2
+  	P7SEL |= 0x03;                            // Port select XT1
+
+  	UCSCTL6 &= ~(XT1OFF + XT2OFF);            // Set XT1 & XT2 On
+  	UCSCTL6 |= XCAP_3;                        // Internal load cap
+
+  	// Loop until XT1,XT2 & DCO stabilizes
+  	do{
+    UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
+                                            // Clear XT2,XT1,DCO fault flags
+    SFRIFG1 &= ~OFIFG;                     	// Clear fault flags
+
+	}while (SFRIFG1&OFIFG);          		// Test oscillator fault flag
+
+  	UCSCTL6 &= ~XT2DRIVE0;                  // Decrease XT2 Drive according to
+                                            // expected frequency
+  	UCSCTL4 |= SELA_0 + SELS_5;             // Select SMCLK, ACLK source and DCO source*/
+  
+                                        
+  	//configure LEDs and set them ON                            
+  	P4DIR |= ~LED1+~LED2+~LED3;               // Set P4.5-7 to output direction
+  	P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
+	
+  	
+  	// Configure Timers and SPI mode in msp430f5438
+  	UCB3CTL1 |= UCSWRST;                      // **Put state machine in reset**
+  	UCB3CTL0 |= UCMST+UCSYNC+UCCKPH+UCMSB;    // 3-pin, 8-bit SPI master
+                                              // Clock polarity high, MSB
+  	UCB3CTL1 |= UCSSEL_1;                     // SMCLK
+  	UCB3BR0 = 0x02;                           // /2
+  	UCB3BR1 = 0;                              //
+  	UCB3CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+                                     
+    //activate_switches();
+
+    //configure for cc2420 comunication board on CBC2
+    P1DIR &= ~SFD&~FIFO&~FIFOP&~CCA;  	// Set as Inputs
+  	P1REN |= SFD+FIFO+FIFOP+CCA; 		// set pull resistor
+  	P1OUT &= ~SFD&~FIFO&~FIFOP&~CCA;  	// set pull-Down
+  	P9DIR |= RESET+VREGEN;			 	// set Reset and VREGEN pins as outputs
+  	P10DIR |= CS;						// Set as Output
+  	P10SEL |= CLK+SIMO+SOMI;			// select SPI function instead of GPI/O
+  	P10DIR &= ~SOMI;                   	// set SOMI as input
+  	P10OUT &= ~P10MASK;  				// Unsed pins go low
+  	
+  	//Inicialize zigbee CB
+  	P9OUT |= VREGEN;				    // Start the voltage regulator to have 1.8 for core
+  	P9OUT &= ~RESET;				    // Reset (active Low)
+  	software_delay();
+  	P9OUT |= RESET;						// Release reset
+  	CS_up();	
+
+}
+
+/*
+   Destroys the first 4 bytes of send_buffer.
+*/
+void change_pan(char pan[]){
+
+	char byte_high = pan[0];
+	char byte_low = pan[1];
+
+    send_buffer[0]=0xE8; 
+	send_buffer[1]=0x80;
+	send_buffer[2]=byte_low; 
+	send_buffer[3]=byte_high;
+	send_command_CC2420(4);
+}
+
+int example(void) {
+
+    cc2420_init();
+  	
+    unsigned char cont=0;
+    unsigned char p1in;
+
+  	commandStrobe(SXOSCON); 			// Start Oscilator
+  	
+  	toggle_leds(LED2);
+  	
+  	receive_buffer[0]=0;
+	send_buffer[0]=0;
+	while(receive_buffer[0]==0){ //for debug
+		cont = cont + 1;  // in case cc2420 does not respond, this gets stuck!
+		commandStrobe(SNOP);
+	}
+
+	P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
+	
+	change_frequency_channel(25);
+	
+	commandStrobe(STXCAL); 				// Calibrate the oscillator
+	
+	commandStrobe(0); // NOP	
+	toggle_leds(LED2);
+	software_delay();
+    toggle_leds(LED2);
+    
+    // change PAN to 0x0022 - used for address recognition
+    send_buffer[0]=0xE8; 
+	send_buffer[1]=0x80;
+	send_buffer[2]=0x22; 
+	send_buffer[3]=0x00;
+	send_command_CC2420(4);
+	
+	software_delay();
+	toggle_leds(LED2);
+	
+	//wait until CC2420 is ready to transmit
+	while(statusByte!=0x46){
+		if(statusByte==0x42 || statusByte==0x40){
+			commandStrobe(STXCAL);
+		}
+		else if(statusByte==0x4C || statusByte==0x48){
+			commandStrobe(SRXON);
+		}
+		else if(statusByte==0x66 || statusByte==0x62){
+			commandStrobe(SFLUSHTX);
+		}
+		software_delay();
+	}
+   	toggle_leds(LED2);
+   	
+   	cont = 0;
+   	
+
+	//transmission-reception cycle
+	//when transmitting, both LED1 and LED3 toggle their state
+	//when a packet is received, LED2 toggles its state
+   	while(1){
+   		software_delay();
+   		
+   		toggle_leds(LED1);
+		toggle_leds(LED3);
+   		
+   		commandStrobe(SNOP);
+   		
+   		if(statusByte == 0x66){  //check for TXFIFO underflow
+			commandStrobe(SFLUSHTX);
+		}
+		
+		transmit_test_packet(cont);
+		cont++;
+		
+		//test for received packet
+		p1in = P1IN;
+		if((p1in & FIFOP) > 0){
+			commandStrobe(SFLUSHRX);
+			//transmit_test_packet(0xFF);  //uncomment if sniffer available
+			toggle_leds(LED2);
+		}
+   	}
+  	
+  	return 0;
 }
 
 //routine to toggle specific leds
-void Radio::toggle_pin(uint8_t pin){
- int state = digitalRead(pin);
-  if (state == LOW)
-    digitalWrite(pin,HIGH);
-  else if (state == HIGH)
-    digitalWrite(pin,LOW);
+void toggle_leds(char mask){
+	P4OUT ^= (~mask);
 }
 
 //routine to activate the switches that supply power to the communication boards
-void Radio::activate_switches(void){
+void activate_switches(void){
 	P3SEL |= 0x80;                            // P3.7 - SDA - Assign I2C pins
 	P5SEL |= 0x10;							  // P5.4 - SCL
                              
@@ -121,19 +287,19 @@ void Radio::activate_switches(void){
 }
 
 //generic software delay routine
-void Radio::software_delay(void){
+void software_delay(void){
 	volatile unsigned int i;
 
 	for(i=50000;i!=0;i--){};	
 }
 
 //routine to lower CC2420 chip select
-void Radio::CS_down(void){
+void CS_down(void){
 	P10OUT &= NCS;
 }
 
 //routine to pull CC2420 chip select up
-void Radio::CS_up(void){
+void CS_up(void){
 	P10OUT|=CS;
 }
 
@@ -141,7 +307,7 @@ void Radio::CS_up(void){
 //the input is the number of bytes to send 
 //the command is read from send_buffer array
 //CC2420 status is stored in statusByte
-void Radio::send_command_CC2420(unsigned int n){
+void send_command_CC2420(unsigned int n){
 	volatile unsigned int i;
 
 	CS_down();
@@ -159,7 +325,7 @@ void Radio::send_command_CC2420(unsigned int n){
 
 //routine to send a command strobe to CC2420
 //the input is the strobe to send (one byte only)
-void Radio::commandStrobe(char strobe){
+void commandStrobe(char strobe){
 
 	software_delay();
 	
@@ -168,7 +334,7 @@ void Radio::commandStrobe(char strobe){
 }
 
 //routine to change the channel in which CC2420 operates
-void Radio::change_frequency_channel(int channel){
+void change_frequency_channel(int channel){
 	unsigned int freq, aux;
 	unsigned char byte_high, byte_low;
 	
@@ -186,8 +352,51 @@ void Radio::change_frequency_channel(int channel){
 }
 
 
+char getbytehigh(int doublebyte){
+	char byte_high = doublebyte >> 8;
+    return byte_high;
+}
+
+char getbytelow(int doublebyte){
+	char byte_low = doublebyte & 0x00FF;
+    return byte_low;
+}
+
+/*
+    seq_num: zigbee network sequence number
+    size: Number of bytes to send from send_buffer, staring from byte >=18 to till 128.
+*/
+void transmit_packet(char seq_num, int panid, int src_addr, int dst_addr, int size){
+	
+	send_buffer[0]=TXFIFO;      //TXFIFO address
+    send_buffer[1]=size;		//packet length
+    send_buffer[2]=0x41;
+    send_buffer[3]=0x88;
+    send_buffer[4]=0x01;
+    send_buffer[5]=getbytelow(panid);   	//PAN ID low
+    send_buffer[6]=getbytehigh(panid);      //PAN ID high      
+    send_buffer[7]=getbytelow(dst_addr);    //destination address low     
+    send_buffer[8]=getbytehigh(dst_addr);	//destination address high
+    send_buffer[9]=getbytelow(src_addr);	//source address low
+    send_buffer[10]=getbytehigh(src_addr);	//source address high
+    send_buffer[11]=0x3F;                     
+    send_buffer[12]=0x06;                     
+    send_buffer[13]=seq_num;
+    send_buffer[14]=0x02;                     
+    send_buffer[15]=0x00;
+    send_buffer[16]=0x01;                     
+    send_buffer[17]=0x3E;
+    ///////
+    // send_buffer[18:127] should already be filled
+    ///////
+
+    send_command_CC2420(127);
+
+    commandStrobe(STXON);
+}
+
 //routine to build and transmit the test packet
-void Radio::transmit_test_packet(char numero){
+void transmit_test_packet(char numero){
 	int i;
 	
 	send_buffer[0]=TXFIFO;  //TXFIFO address

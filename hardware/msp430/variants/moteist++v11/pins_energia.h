@@ -7,7 +7,7 @@
   ************************************************************************
   *	pins_energia.h
   *
-  *	    Energia core files for MSP430F5438 MoteIST++
+  *	    Energia core files for MSP430F5438 MoteIST++S0413
   *
   *		  Copyright (c) 2012 Robert Wessels. All right reserved.
   *
@@ -91,51 +91,63 @@ static const uint8_t A4 = 79;//ADC4
 
 /* {{{ MSP430F5438a MoteIST++ pin mapping
 
-					 CBC1            						              CBC2
-				   +--\/--+                                             +--\/--+
-    CB1_NMI_SBWTD01|1    2|CB1_SFD/TA10                  RST_NMI_SBWTDOI|1    2|CB2_INT0 
-          CB1_GPIO4|3    4|CB1_FIFO_TA11                       CB2_GPIO2|3    4|CB2_TIMER0 
-     	  CB1_GPIO3|5    6|CB1_FIFOP_TA12                    CB2_SELECT2|5    6|CB2_TIMER1
-          CB1_GPIO2|7    8|CB1_CCA_RCCLK                     CB2_SELECT1|7    8|CB2_INT1 
-           CB_GPIO1|9   10|CB1_RESET                         CB2_SELECT0|9   10|CB2_RESET 
- CB1_UCAO(RXD/SOMI)|11  12|CB1_VREGEN_ACKL                CB2_RXD0/SOMI0|11  12|CB2_GPIO1 
- CB1_UCAO(TXD/SIMO)|13  14|CB1_ADC12CLK/DMAE0             CB2_TXD0/SIMO0|13  14|CB2_ADC 
-                   |15  16|CB1_CSn_UCBOSTE/UCAOCLK          	 CB2_VCC|15  16|CB2_SCLK0/CS1 
-                   |17  18|CB1_UCBO(SIMO/SDA)               	 CB2_GND|17  18|CB2_SIMO1/SDA1 
-CB1_UCB0CLK/UCAOSTE|19  20|CB1_UCBO(SOMI/SCL)              CB2_CS0/SCLK1|19  20|CB2_SOMI1/SCL1 
-                   +------+                          			        +------+
+                     CBC1            					
+                   +--\/--+                             
+  *CB1_NMI_SBWTD01*|1    2|CB1_SFD/TA10                 
+          CB1_GPIO4|3    4|CB1_FIFO_TA11                
+          CB1_GPIO3|5    6|CB1_FIFOP_TA12               
+          CB1_GPIO2|7    8|CB1_CCA_RCCLK                
+           CB_GPIO1|9   10|CB1_RESET                    
+ CB1_UCAO(RXD/SOMI)|11  12|*CB1_GPIO1*                  
+ CB1_UCAO(TXD/SIMO)|13  14|*CB1_ADC*
+                   |15  16|CB1_CSn_UCBOSTE/UCAOCLK      
+                   |17  18|CB1_UCBO(SIMO/SDA)           
+CB1_UCB0CLK/UCAOSTE|19  20|CB1_UCBO(SOMI/SCL)           
+                   +------+                          	
 
-								 HIROSE
-							   +---\/---+
-			                GND|1	  27|HRXD0
-					  VCCHIROSE|2	  28|HTXD0
-						  HINT3|3     29|PW0
-						  HINT2|4     30|PW0
-					      HINT1|5     31|PW1
-				    	  HINT0|6     32|PW2
-							   |7     33|PW3
-						   LED3|8     34|PW4
-					       LED2|9     35|PW5
-						   LED1|10    36|PW6
-							   |11    37|ADC7
-							   |12    38|ADC6
-							   |13    39|ADC5
-						    PW7|14    40|ADC4
-						  HGPIO|15    41|
-					      HSIMO|16    42|
-						  HSOMI|17    43|
-						  HSCLK|18    44|HGPIO1
-						  HRXD1|19    45|THRU1
-						  HTXD1|20    46|THRU2
-						   HSCL|21    47|THRU3
-						   HSDA|22    48|HGPIO2
-					       PWM0|23    49|PWM2
-						   PWM1|24    50|VCCHIROSE
-							   |25    51|GND
-							   |26    	|
-							   +--------+
+                      CBC2
+                    +--\/--+
+     RST_NMI_SBWTDOI|1    2|CB2_INT0 
+         *CB2_GPIO2*|3    4|CB2_TIMER0 
+         CB2_SELECT2|5    6|CB2_TIMER1
+         CB2_SELECT1|7    8|CB2_INT1 
+         CB2_SELECT0|9   10|*CB2_RESET*
+      CB2_RXD0/SOMI0|11  12|*CB2_GPIO1*
+      CB2_TXD0/SIMO0|13  14|*CB2_ADC*
+             CB2_VCC|15  16|CB2_SCLK0/CS1 
+             CB2_GND|17  18|CB2_SIMO1/SDA1 
+       CB2_CS0/SCLK1|19  20|CB2_SOMI1/SCL1 
+                    +------+              
 
-
+                     HIROSE
+                   +---\/---+
+                GND|1	  27|HRXD0
+          VCCHIROSE|2	  28|HTXD0
+              HINT3|3     29|PW0
+              HINT2|4     30|PW0
+              HINT1|5     31|PW1
+              HINT0|6     32|PW2
+                   |7     33|PW3
+               LED3|8     34|PW4
+               LED2|9     35|PW5
+               LED1|10    36|PW6
+                   |11    37|ADC7
+                   |12    38|ADC6
+                   |13    39|ADC5
+                PW7|14    40|ADC4
+              HGPIO|15    41|
+              HSIMO|16    42|
+              HSOMI|17    43|
+              HSCLK|18    44|HGPIO1
+              HRXD1|19    45|THRU1
+              HTXD1|20    46|THRU2
+               HSCL|21    47|THRU3
+               HSDA|22    48|HGPIO2
+               PWM0|23    49|PWM2
+               PWM1|24    50|VCCHIROSE
+                   |25    51|GND
+                   |26    	|
+                   +--------+
 
  }}} */
 
@@ -249,6 +261,8 @@ static const uint8_t LED3 = 48;  //HRS_8
 
 // {{{ Arduino main
 #ifdef ARDUINO_MAIN
+
+// {{{ Ports
 
 const uint16_t port_to_input[] = {
 	NOT_A_PORT,
@@ -445,6 +459,9 @@ const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of
 //	NOT_A_PORT,
 //};
 
+// }}}
+
+// {{{ Pins
 
 const uint8_t digital_pin_to_timer[] = {
 	NOT_ON_TIMER, /* dummy */
@@ -555,11 +572,11 @@ const uint8_t digital_pin_to_port[] = {
 	P2,          /* 7 */
 	P2,          /* 8 */
 	P3,          /* 9 */
-	P2,          /* 10 */
+	P5,          /* 10 */
 	P3,          /* 11 */
 	P2,          /* 12 */
 	P3,          /* 13 */
-	P2,          /* 14 */
+	P5,          /* 14 */
 	NOT_A_PIN,    /* 15 */
 	P3,          /* 16 */
 	NOT_A_PIN,   /* 17 */
@@ -568,7 +585,7 @@ const uint8_t digital_pin_to_port[] = {
 	P3,          /* 20 */
 	NOT_A_PIN,   /* 21 */  /* CBC2 */
 	P1,          /* 22 */
-	PJ,   		 /* 23 */
+	P4,   		 /* 23 */
 	P1,          /* 24 */
 	P10,         /* 25 */
 	P1,          /* 26 */
@@ -579,7 +596,7 @@ const uint8_t digital_pin_to_port[] = {
 	P10,         /* 31 */
 	P9,          /* 32 */
 	P10,         /* 33 */
-	P11,         /* 34 */
+	P5,          /* 34 */
 	NOT_A_PIN,   /* 35 */
 	P10,         /* 36 */
 	NOT_A_PIN,   /* 37 */
@@ -641,7 +658,7 @@ const uint8_t digital_pin_to_port[] = {
 
 const uint8_t digital_pin_to_bit_mask[] = {
 	NOT_A_PIN, /* 0,  pin count starts at 1 */
-	BV(2), 	   /* 1 P4.2 */  //CBC_1
+	BV(2), 	   /* 1 P4.2 */  //CBC_1 // [New version]TODO
 	BV(1),     /* 2 P2.1 */
 	BV(1),     /* 3 P4.1 */
 	BV(2),     /* 4 P2.2 */
@@ -650,11 +667,11 @@ const uint8_t digital_pin_to_bit_mask[] = {
 	BV(0),     /* 7 P2.0 */
 	BV(4),     /* 8 P2.4 */
 	BV(6),     /* 9 P3.6 */
-	BV(5),     /* 10 P2.5 */
+	BV(1),     /* 10 P5.1 */
 	BV(5),     /* 11 P3.5 */
-	BV(6),     /* 12 P2.6 */
+	BV(7),     /* 12 P2.7 [New version] */ 
 	BV(4),     /* 13 P3.4 */
-	BV(7),     /* 14 P2.7 */
+	BV(1),     /* 14 P5.1 [New version] */
 	NOT_A_PIN, /* 15 */
 	BV(0),     /* 16 P3.0 */
 	NOT_A_PIN, /* 17 */
@@ -663,18 +680,18 @@ const uint8_t digital_pin_to_bit_mask[] = {
 	BV(2),     /* 20 P3.2 */
 	NOT_A_PIN, /* 1 */      //CBC_2
 	BV(1),     /* 2 P1.1 */
-	BV(3),     /* 3 PJ.3 */
+	BV(1),     /* 3 PJ.3 */
 	BV(2),     /* 4 P1.2 */
 	BV(7),     /* 5 P10.7 */
 	BV(6),     /* 6 P1.6 */
 	BV(0),     /* 7 P11.0 */
 	BV(7),     /* 8 P1.7 */
 	BV(1),     /* 9 P11.1 */
-	BV(7),     /* 10 P9.7 */
+	BV(6),     /* 10 P9.6 [New version] */
 	BV(5),     /* 11 P10.5 */
-	BV(6),     /* 12 P9.6 */
+	BV(6),     /* 12 P9.7 [New version] */
 	BV(4),     /* 13 P10.4 */
-	BV(2),     /* 14 P11.2 */
+	BV(0),     /* 14 P5.0 [New version] */
 	NOT_A_PIN, /* 15 */
 	BV(0),     /* 16 P10.0 */
 	NOT_A_PIN, /* 17 */
@@ -829,6 +846,8 @@ const uint32_t digital_pin_to_analog_in[] = {
 	NOT_ON_ADC,		/* 50 */
 	NOT_ON_ADC,		/* 51 */
 };	
+
+// }}}
 
 #endif // #ifdef ARDUINO_MAIN }}}
 
