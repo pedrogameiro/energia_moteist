@@ -1,13 +1,9 @@
-// # vim: foldenable foldmethod=marker foldlevel=0 foldnestmax=10
 
-// {{{ Includes
+#include <msp430.h>
 
-#include "Energia.h"
-#include "radio.h"
-
-// }}}
-
-// {{{ Definitions
+#ifndef BV
+#define BV(x) (1 << (x))
+#endif
 
 #define LED1 0x7F    //P4.7 (active Low)
 #define LED2 0xBF    //P4.6 (active Low)
@@ -80,7 +76,15 @@
 #define TXFIFO 0x3E // W Transmit FIFO Byte Register
 #define RXFIFO 0x3F // R/W Receiver FIFO Byte Register
 
-// }}}
+// CC2420 status bytes
+// BV(0) Reserved
+#define SB_RSSI_VALID       BV(1)
+#define SB_LOCK             BV(2)
+#define SB_TX_ACTIVE        BV(3)
+#define SB_ENC_BUSY         BV(4)
+#define SB_TX_UNDERFLOW     BV(5)
+#define SB_XOSC16M_STABLE   BV(6)
+// BV(7) Reserved
 
 //Global Variables
 char receive_buffer[128];
@@ -98,209 +102,186 @@ void commandStrobe(char strobe);
 void change_frequency_channel(int channel);
 void transmit_test_packet(char numero);
 
-
-void cc2420_init(){
-
-	
-	WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
-  	P5SEL |= 0x0C;                            // Port select XT2
-  	P7SEL |= 0x03;                            // Port select XT1
-
-  	UCSCTL6 &= ~(XT1OFF + XT2OFF);            // Set XT1 & XT2 On
-  	UCSCTL6 |= XCAP_3;                        // Internal load cap
-
-  	// Loop until XT1,XT2 & DCO stabilizes
-  	do{
-    UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
-                                            // Clear XT2,XT1,DCO fault flags
-    SFRIFG1 &= ~OFIFG;                     	// Clear fault flags
-
-	}while (SFRIFG1&OFIFG);          		// Test oscillator fault flag
-
-  	UCSCTL6 &= ~XT2DRIVE0;                  // Decrease XT2 Drive according to
-                                            // expected frequency
-  	UCSCTL4 |= SELA_0 + SELS_5;             // Select SMCLK, ACLK source and DCO source*/
-  
-                                        
-  	//configure LEDs and set them ON                            
-  	P4DIR |= ~LED1+~LED2+~LED3;               // Set P4.5-7 to output direction
-  	P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
-	
-  	
-  	// Configure Timers and SPI mode in msp430f5438
-  	UCB3CTL1 |= UCSWRST;                      // **Put state machine in reset**
-  	UCB3CTL0 |= UCMST+UCSYNC+UCCKPH+UCMSB;    // 3-pin, 8-bit SPI master
-                                              // Clock polarity high, MSB
-  	UCB3CTL1 |= UCSSEL_1;                     // SMCLK
-  	UCB3BR0 = 0x02;                           // /2
-  	UCB3BR1 = 0;                              //
-  	UCB3CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
-                                     
-    //activate_switches();
-
-    //configure for cc2420 comunication board on CBC2
-    P1DIR &= ~SFD&~FIFO&~FIFOP&~CCA;  	// Set as Inputs
-  	P1REN |= SFD+FIFO+FIFOP+CCA; 		// set pull resistor
-  	P1OUT &= ~SFD&~FIFO&~FIFOP&~CCA;  	// set pull-Down
-  	P9DIR |= RESET+VREGEN;			 	// set Reset and VREGEN pins as outputs
-  	P10DIR |= CS;						// Set as Output
-  	P10SEL |= CLK+SIMO+SOMI;			// select SPI function instead of GPI/O
-  	P10DIR &= ~SOMI;                   	// set SOMI as input
-  	P10OUT &= ~P10MASK;  				// Unsed pins go low
-  	
-  	//Inicialize zigbee CB
-  	P9OUT |= VREGEN;				    // Start the voltage regulator to have 1.8 for core
-  	P9OUT &= ~RESET;				    // Reset (active Low)
-  	software_delay();
-  	P9OUT |= RESET;						// Release reset
-  	CS_up();	
-
-}
-
-/*
-   Destroys the first 4 bytes of send_buffer.
-*/
-void change_pan(char pan[]){
-
-	char byte_high = pan[0];
-	char byte_low = pan[1];
-
-    send_buffer[0]=0xE8; 
-	send_buffer[1]=0x80;
-	send_buffer[2]=byte_low; 
-	send_buffer[3]=byte_high;
-	send_command_CC2420(4);
-}
-
 int example(void) {
-
-    cc2420_init();
-  	
     unsigned char cont=0;
     unsigned char p1in;
+    
+    WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
+    P5SEL |= 0x0C;                            // Port select XT2
+    P7SEL |= 0x03;                            // Port select XT1
 
-  	commandStrobe(SXOSCON); 			// Start Oscilator
-  	
-  	toggle_leds(LED2);
-  	
-  	receive_buffer[0]=0;
-	send_buffer[0]=0;
-	while(receive_buffer[0]==0){ //for debug
-		cont = cont + 1;  // in case cc2420 does not respond, this gets stuck!
-		commandStrobe(SNOP);
-	}
+    UCSCTL6 &= ~(XT1OFF + XT2OFF);            // Set XT1 & XT2 On
+    UCSCTL6 |= XCAP_3;                        // Internal load cap
 
-	P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
-	
-	change_frequency_channel(25);
-	
-	commandStrobe(STXCAL); 				// Calibrate the oscillator
-	
-	commandStrobe(0); // NOP	
-	toggle_leds(LED2);
-	software_delay();
+    // Loop until XT1,XT2 & DCO stabilizes
+    do
+    {
+    UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
+                                              // Clear XT2,XT1,DCO fault flags
+    SFRIFG1 &= ~OFIFG;                      // Clear fault flags
+      }while (SFRIFG1&OFIFG);               // Test oscillator fault flag
+
+    UCSCTL6 &= ~XT2DRIVE0;                  // Decrease XT2 Drive according to
+                                            // expected frequency
+    UCSCTL4 |= SELA_0 + SELS_5;             // Select SMCLK, ACLK source and DCO source*/
+  
+                                        
+    //configure LEDs and set them ON                            
+    P4DIR |= ~LED1+~LED2+~LED3;               // Set P4.5-7 to output direction
+    P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
+    
+    
+    // Configure Timers and SPI mode in msp430f5438
+    UCB3CTL1 |= UCSWRST;                      // **Put state machine in reset**
+    UCB3CTL0 |= UCMST+UCSYNC+UCCKPH+UCMSB;    // 3-pin, 8-bit SPI master
+                                              // Clock polarity high, MSB
+    UCB3CTL1 |= UCSSEL_1;                     // SMCLK
+    UCB3BR0 = 0x02;                           // /2
+    UCB3BR1 = 0;                              //
+    UCB3CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
+                                     
+        //activate_switches();
+    
+        //configure for cc2420 comunication board on CBC2
+        P1DIR &= ~SFD&~FIFO&~FIFOP&~CCA;    //Set as Inputs
+    P1REN |= SFD+FIFO+FIFOP+CCA;        // set pull resistor
+    P1OUT &= ~SFD&~FIFO&~FIFOP&~CCA;    // set pull-Down
+    P9DIR |= RESET+VREGEN;              // set Reset and VREGEN pins as outputs
+    P10DIR |= CS;                       // Set as Output
+    P10SEL |= CLK+SIMO+SOMI;            // select SPI function instead of GPI/O
+    P10DIR &= ~SOMI;                    // set SOMI as input
+    P10OUT &= ~P10MASK;                 //Unsed pins go low
+    
+    //Inicialize zigbee CB
+    P9OUT |= VREGEN;                    //Start the voltage regulator to have 1.8 for core
+    P9OUT &= ~RESET;                    //Reset (active Low)
+    software_delay();
+    P9OUT |= RESET;                     //Release reset
+    CS_up();    
+    
+    commandStrobe(SXOSCON);             // Start Oscilator
+    
     toggle_leds(LED2);
     
-    // change PAN to 0x0022 - used for address recognition
-    send_buffer[0]=0xE8; 
-	send_buffer[1]=0x80;
-	send_buffer[2]=0x22; 
-	send_buffer[3]=0x00;
-	send_command_CC2420(4);
-	
-	software_delay();
-	toggle_leds(LED2);
-	
-	//wait until CC2420 is ready to transmit
-	while(statusByte!=0x46){
-		if(statusByte==0x42 || statusByte==0x40){
-			commandStrobe(STXCAL);
-		}
-		else if(statusByte==0x4C || statusByte==0x48){
-			commandStrobe(SRXON);
-		}
-		else if(statusByte==0x66 || statusByte==0x62){
-			commandStrobe(SFLUSHTX);
-		}
-		software_delay();
-	}
-   	toggle_leds(LED2);
-   	
-   	cont = 0;
-   	
+    receive_buffer[0]=0;
+    send_buffer[0]=0;
+    while(receive_buffer[0]==0){ //for debug
+        cont = cont + 1;  // in case cc2420 does not respond, this gets stuck!
+        commandStrobe(SNOP);
+    }
 
-	//transmission-reception cycle
-	//when transmitting, both LED1 and LED3 toggle their state
-	//when a packet is received, LED2 toggles its state
-   	while(1){
-   		software_delay();
-   		
-   		toggle_leds(LED1);
-		toggle_leds(LED3);
-   		
-   		commandStrobe(SNOP);
-   		
-   		if(statusByte == 0x66){  //check for TXFIFO underflow
-			commandStrobe(SFLUSHTX);
-		}
-		
-		transmit_test_packet(cont);
-		cont++;
-		
-		//test for received packet
-		p1in = P1IN;
-		if((p1in & FIFOP) > 0){
-			commandStrobe(SFLUSHRX);
-			//transmit_test_packet(0xFF);  //uncomment if sniffer available
-			toggle_leds(LED2);
-		}
-   	}
-  	
-  	return 0;
+    P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
+    
+    change_frequency_channel(25);
+    
+    commandStrobe(STXCAL);              // Calibrate the oscillator
+    
+    commandStrobe(0); // NOP    
+    toggle_leds(LED2);
+    software_delay();
+        toggle_leds(LED2);
+    
+        // change PAN to 0x0022 - used for address recognition
+        send_buffer[0]=0xE8; 
+    send_buffer[1]=0x80;
+    send_buffer[2]=0x22; 
+    send_buffer[3]=0x00;
+    send_command_CC2420(4);
+    
+    software_delay();
+    toggle_leds(LED2);
+    
+    //wait until CC2420 is ready to transmit
+    while(statusByte!=0x46){
+        if(statusByte==0x42 || statusByte==0x40){
+            commandStrobe(STXCAL);
+        }
+        else if(statusByte==0x4C || statusByte==0x48){
+            commandStrobe(SRXON);
+        }
+        else if(statusByte==0x66 || statusByte==0x62){
+            commandStrobe(SFLUSHTX);
+        }
+        software_delay();
+        toggle_leds(LED2);
+    }
+    toggle_leds(LED2);
+    
+    cont = 0;
+    
+
+    //transmission-reception cycle
+    //when transmitting, both LED1 and LED3 toggle their state
+    //when a packet is received, LED2 toggles its state
+    while(1){
+        software_delay();
+        
+        toggle_leds(LED1);
+        toggle_leds(LED3);
+        
+        commandStrobe(SNOP);
+        
+        if(statusByte == 0x66){  //check for TXFIFO underflow
+            commandStrobe(SFLUSHTX);
+        }
+        
+        transmit_test_packet(cont);
+        cont++;
+        
+        //test for received packet
+        p1in = P1IN;
+        if((p1in & FIFOP) > 0){
+            commandStrobe(SFLUSHRX);
+            transmit_test_packet(0xFF);  //uncomment if sniffer available
+            toggle_leds(LED2);
+        }
+    }
+    
+    return 0;
 }
 
 //routine to toggle specific leds
 void toggle_leds(char mask){
-	P4OUT ^= (~mask);
+    P4OUT ^= (~mask);
 }
 
 //routine to activate the switches that supply power to the communication boards
 void activate_switches(void){
-	P3SEL |= 0x80;                            // P3.7 - SDA - Assign I2C pins
-	P5SEL |= 0x10;							  // P5.4 - SCL
+    P3SEL |= 0x80;                            // P3.7 - SDA - Assign I2C pins
+    P5SEL |= 0x10;                            // P5.4 - SCL
                              
-	UCB1CTL1 |= UCSWRST;                      // Enable SW reset
+    UCB1CTL1 |= UCSWRST;                      // Enable SW reset
   
-	UCB1CTL0 = UCMST + UCMODE_3 + UCSYNC;     // I2C Master, synchronous mode
-	UCB1CTL1 = UCSSEL_2 + UCSWRST;            // Use SMCLK
-	UCB1BR0 = 12;                             // fSCL = SMCLK/12 = ~100kHz
-  	UCB1BR1 = 0;
-  	UCB1I2CSA = 0x48;                         // Slave Address is 090h 1001 0000 -> address (7bit, A0=A1=0) + R/!W
+    UCB1CTL0 = UCMST + UCMODE_3 + UCSYNC;     // I2C Master, synchronous mode
+    UCB1CTL1 = UCSSEL_2 + UCSWRST;            // Use SMCLK
+    UCB1BR0 = 12;                             // fSCL = SMCLK/12 = ~100kHz
+    UCB1BR1 = 0;
+    UCB1I2CSA = 0x48;                         // Slave Address is 090h 1001 0000 -> address (7bit, A0=A1=0) + R/!W
   
-  	UCB1CTL1 &= ~UCSWRST;                     // Clear SW reset*/
+    UCB1CTL1 &= ~UCSWRST;                     // Clear SW reset*/
 
-	while (UCB1CTL1 & UCTXSTP);               // Ensure stop condition got sent
+    while (UCB1CTL1 & UCTXSTP);               // Ensure stop condition got sent
     UCB1CTL1 |= UCTR + UCTXSTT;               // I2C start condition
-  	UCB1TXBUF = 0xFF;  	                      // Send init data
-  	while(UCB1CTL1 & UCTXSTT);                // Start condition sent?
-  	UCB1CTL1 |= UCTXSTP;				      // I2C1 Stop Condition
+    UCB1TXBUF = 0xFF;                         // Send init data
+    while(UCB1CTL1 & UCTXSTT);                // Start condition sent?
+    UCB1CTL1 |= UCTXSTP;                      // I2C1 Stop Condition
 }
 
 //generic software delay routine
 void software_delay(void){
-	volatile unsigned int i;
+    volatile unsigned int i;
 
-	for(i=50000;i!=0;i--){};	
+    for(i=50000;i!=0;i--){};    
 }
 
 //routine to lower CC2420 chip select
 void CS_down(void){
-	P10OUT &= NCS;
+    P10OUT &= NCS;
 }
 
 //routine to pull CC2420 chip select up
 void CS_up(void){
-	P10OUT|=CS;
+    P10OUT|=CS;
 }
 
 //routine to send a generic command to CC2420 
@@ -308,108 +289,65 @@ void CS_up(void){
 //the command is read from send_buffer array
 //CC2420 status is stored in statusByte
 void send_command_CC2420(unsigned int n){
-	volatile unsigned int i;
+    volatile unsigned int i;
 
-	CS_down();
+    CS_down();
 
-	for(i=0;i<n;i++){
-		UCB3TXBUF = send_buffer[i];
-		while (!(UCB3IFG&UCTXIFG) || !(UCB3IFG&UCRXIFG));
-		receive_buffer[i]=UCB3RXBUF;
-	}
-	
-	statusByte = receive_buffer[0];
-	
-	CS_up();
+    for(i=0;i<n;i++){
+        UCB3TXBUF = send_buffer[i];
+        while (!(UCB3IFG&UCTXIFG) || !(UCB3IFG&UCRXIFG));
+        receive_buffer[i]=UCB3RXBUF;
+    }
+    
+    statusByte = receive_buffer[0];
+    
+    CS_up();
 }
 
 //routine to send a command strobe to CC2420
 //the input is the strobe to send (one byte only)
 void commandStrobe(char strobe){
 
-	software_delay();
-	
-	send_buffer[0] = strobe;
-	send_command_CC2420(1);
+    software_delay();
+    
+    send_buffer[0] = strobe;
+    send_command_CC2420(1);
 }
 
 //routine to change the channel in which CC2420 operates
 void change_frequency_channel(int channel){
-	unsigned int freq, aux;
-	unsigned char byte_high, byte_low;
-	
-	freq = 357 + 5 * (channel - 11);
-	
-	aux = freq & 0xFF00;
-	
-	byte_high = aux >> 8;
-	byte_low = freq & 0x00FF;
-	
-	send_buffer[0]=FSCTRL;
-	send_buffer[1]=byte_high;
-	send_buffer[2]=byte_low;
-	send_command_CC2420(3);
+    unsigned int freq, aux;
+    unsigned char byte_high, byte_low;
+    
+    freq = 357 + 5 * (channel - 11);
+    
+    aux = freq & 0xFF00;
+    
+    byte_high = aux >> 8;
+    byte_low = freq & 0x00FF;
+    
+    send_buffer[0]=FSCTRL;
+    send_buffer[1]=byte_high;
+    send_buffer[2]=byte_low;
+    send_command_CC2420(3);
 }
 
-
-char getbytehigh(int doublebyte){
-	char byte_high = doublebyte >> 8;
-    return byte_high;
-}
-
-char getbytelow(int doublebyte){
-	char byte_low = doublebyte & 0x00FF;
-    return byte_low;
-}
-
-/*
-    seq_num: zigbee network sequence number
-    size: Number of bytes to send from send_buffer, staring from byte >=18 to till 128.
-*/
-void transmit_packet(char seq_num, int panid, int src_addr, int dst_addr, int size){
-	
-	send_buffer[0]=TXFIFO;      //TXFIFO address
-    send_buffer[1]=size;		//packet length
-    send_buffer[2]=0x41;
-    send_buffer[3]=0x88;
-    send_buffer[4]=0x01;
-    send_buffer[5]=getbytelow(panid);   	//PAN ID low
-    send_buffer[6]=getbytehigh(panid);      //PAN ID high      
-    send_buffer[7]=getbytelow(dst_addr);    //destination address low     
-    send_buffer[8]=getbytehigh(dst_addr);	//destination address high
-    send_buffer[9]=getbytelow(src_addr);	//source address low
-    send_buffer[10]=getbytehigh(src_addr);	//source address high
-    send_buffer[11]=0x3F;                     
-    send_buffer[12]=0x06;                     
-    send_buffer[13]=seq_num;
-    send_buffer[14]=0x02;                     
-    send_buffer[15]=0x00;
-    send_buffer[16]=0x01;                     
-    send_buffer[17]=0x3E;
-    ///////
-    // send_buffer[18:127] should already be filled
-    ///////
-
-    send_command_CC2420(127);
-
-    commandStrobe(STXON);
-}
 
 //routine to build and transmit the test packet
 void transmit_test_packet(char numero){
-	int i;
-	
-	send_buffer[0]=TXFIFO;  //TXFIFO address
-    send_buffer[1]=127;		//packet length
+    int i;
+    
+    send_buffer[0]=TXFIFO;  //TXFIFO address
+    send_buffer[1]=127;     //packet length
     send_buffer[2]=0x41;
     send_buffer[3]=0x88;
     send_buffer[4]=0x01;
-    send_buffer[5]=0x22;	//PAN ID low
+    send_buffer[5]=0x22;    //PAN ID low
     send_buffer[6]=0x00;    //PAN ID high      
     send_buffer[7]=0xFF;    //destination address low     
-    send_buffer[8]=0xFF;	//destination address high
-    send_buffer[9]=0x02;	//source address low
-    send_buffer[10]=0x00;	//source address high
+    send_buffer[8]=0xFF;    //destination address high
+    send_buffer[9]=0x02;    //source address low
+    send_buffer[10]=0x00;   //source address high
     send_buffer[11]=0x3F;                     
     send_buffer[12]=0x06;                     
     send_buffer[13]=numero;
