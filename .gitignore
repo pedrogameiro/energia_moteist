@@ -1,3 +1,11 @@
 .idea
 hardware/.lib
 CMakeLists.txt
+local
+.ccsproject
+.cproject
+.launches/
+.project
+.settings/
+Debug/
+targetConfigs/

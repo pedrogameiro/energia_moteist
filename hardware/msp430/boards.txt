@@ -1,34 +1,34 @@
 
 ##############################################################
-lpmsp430f5438a_v8.name= MoteIST++ v8 w/ msp430f5438
-lpmsp430f5438a_v8.upload.protocol=tilib
-lpmsp430f5438a_v8.upload.maximum_size=130048
-lpmsp430f5438a_v8.build.mcu=msp430f5438a
-#lpmsp430f5438a_v8.build.f_cpu=25000000L
-lpmsp430f5438a_v8.build.f_cpu=8000000L
-lpmsp430f5438a_v8.build.core=msp430
-lpmsp430f5438a_v8.build.variant=moteist++v8
-lpmsp430f5438a_v8.upload.maximum_ram_size=1024
+lpmsp430f5438a_v1011.name= MoteIST v1011 w/ msp430f5438
+lpmsp430f5438a_v1011.upload.protocol=tilib
+lpmsp430f5438a_v1011.upload.maximum_size=130048
+lpmsp430f5438a_v1011.build.mcu=msp430f5438a
+lpmsp430f5438a_v1011.build.f_cpu=8000000L
+lpmsp430f5438a_v1011.build.core=msp430
+lpmsp430f5438a_v1011.build.variant=moteist_v1011
+lpmsp430f5438a_v1011.upload.maximum_ram_size=1024
+#lpmsp430f5438a_v1011.build.f_cpu=25000000L
 
 ##############################################################
-lpmsp430f5438a_pepe.name= MoteIST++ v8 w/ PepeOnBoard msp430f5438
+lpmsp430f5438a_pepe.name= MoteIST v1011 w/ PepeOnBoard msp430f5438
 lpmsp430f5438a_pepe.upload.protocol=tilib
 lpmsp430f5438a_pepe.upload.maximum_size=130048
 lpmsp430f5438a_pepe.build.mcu=msp430f5438a
-#lpmsp430f5438a_pepe.build.f_cpu=25000000L
 lpmsp430f5438a_pepe.build.f_cpu=8000000L
 lpmsp430f5438a_pepe.build.core=msp430
-lpmsp430f5438a_pepe.build.variant=moteist++v8_w_pepeonboard
+lpmsp430f5438a_pepe.build.variant=moteist_v1011_pepeonboard
 lpmsp430f5438a_pepe.upload.maximum_ram_size=1024
+#lpmsp430f5438a_pepe.build.f_cpu=25000000L
 
 ##############################################################
-lpmsp430f5438a_v11.name= MoteIST++ v11 w/ msp430f5438
-lpmsp430f5438a_v11.upload.protocol=tilib
-lpmsp430f5438a_v11.upload.maximum_size=130048
-lpmsp430f5438a_v11.build.mcu=msp430f5438a
-#lpmsp430f5438a_v11.build.f_cpu=25000000L
-lpmsp430f5438a_v11.build.f_cpu=8000000L
-lpmsp430f5438a_v11.build.core=msp430
-lpmsp430f5438a_v11.build.variant=moteist++v11
-lpmsp430f5438a_v11.upload.maximum_ram_size=1024
+lpmsp430f5438a_v0413.name= MoteIST v0413 w/ msp430f5438
+lpmsp430f5438a_v0413.upload.protocol=tilib
+lpmsp430f5438a_v0413.upload.maximum_size=130048
+lpmsp430f5438a_v0413.build.mcu=msp430f5438a
+lpmsp430f5438a_v0413.build.f_cpu=8000000L
+lpmsp430f5438a_v0413.build.core=msp430
+lpmsp430f5438a_v0413.build.variant=moteist_v0413
+lpmsp430f5438a_v0413.upload.maximum_ram_size=1024
+#lpmsp430f5438a_v0413.build.f_cpu=25000000L
 

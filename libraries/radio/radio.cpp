@@ -1,5 +1,9 @@
 
 #include <msp430.h>
+#include "cc2420_const.h"
+
+#define mote1011
+//#define mote0413
 
 #ifndef BV
 #define BV(x) (1 << (x))
@@ -12,8 +16,15 @@
 #define FIFO 0x04// P1.2
 #define FIFOP 0x40// P1.6
 #define CCA 0x80// P1.7
-#define RESET 0x80// P9.7
-#define VREGEN 0x40// P9.6
+
+#ifdef mote0413
+	#define RESET 0x40// P9.6
+	//#define VREGEN 0x80// P9.7
+#endif
+#ifdef mote1011
+	#define RESET 0x80// P9.7
+	#define VREGEN 0x40// P9.6
+#endif
 
 #define CS 0x01 //P10.0 chip select High
 #define SIMO 0x02 //P10.1
@@ -106,20 +117,22 @@ int example(void) {
     unsigned char cont=0;
     unsigned char p1in;
     
+    //stop watchdog clock
     WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
-    P5SEL |= 0x0C;                            // Port select XT2
-    P7SEL |= 0x03;                            // Port select XT1
+
+
+    P5SEL |= 0x0C;                            // Port select XT2 P5.2 P5.3
+    P7SEL |= 0x03;                            // Port select XT1 P7.0 P7.1
 
     UCSCTL6 &= ~(XT1OFF + XT2OFF);            // Set XT1 & XT2 On
     UCSCTL6 |= XCAP_3;                        // Internal load cap
 
     // Loop until XT1,XT2 & DCO stabilizes
-    do
-    {
-    UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
-                                              // Clear XT2,XT1,DCO fault flags
-    SFRIFG1 &= ~OFIFG;                      // Clear fault flags
-      }while (SFRIFG1&OFIFG);               // Test oscillator fault flag
+    do{
+		UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
+												// Clear XT2,XT1,DCO fault flags
+		SFRIFG1 &= ~OFIFG;                      // Clear fault flags
+     }while (SFRIFG1 & OFIFG);               // Test oscillator fault flag
 
     UCSCTL6 &= ~XT2DRIVE0;                  // Decrease XT2 Drive according to
                                             // expected frequency
@@ -140,10 +153,10 @@ int example(void) {
     UCB3BR1 = 0;                              //
     UCB3CTL1 &= ~UCSWRST;                     // **Initialize USCI state machine**
                                      
-        //activate_switches();
-    
-        //configure for cc2420 comunication board on CBC2
-        P1DIR &= ~SFD&~FIFO&~FIFOP&~CCA;    //Set as Inputs
+	activate_switches();
+
+	//configure for cc2420 comunication board on CBC2
+	P1DIR &= ~SFD&~FIFO&~FIFOP&~CCA;    //Set as Inputs
     P1REN |= SFD+FIFO+FIFOP+CCA;        // set pull resistor
     P1OUT &= ~SFD&~FIFO&~FIFOP&~CCA;    // set pull-Down
     P9DIR |= RESET+VREGEN;              // set Reset and VREGEN pins as outputs
@@ -160,13 +173,18 @@ int example(void) {
     CS_up();    
     
     commandStrobe(SXOSCON);             // Start Oscilator
+    do{
+        commandStrobe(SNOP);
+        toggle_leds(LED2);
+    }while( !(statusByte & SB_XOSC16M_STABLE) ); // Wait for the Oscilator to startup
+
     
     toggle_leds(LED2);
     
     receive_buffer[0]=0;
     send_buffer[0]=0;
-    while(receive_buffer[0]==0){ //for debug
-        cont = cont + 1;  // in case cc2420 does not respond, this gets stuck!
+    while(receive_buffer[0]==0){	//for debug
+        cont = cont + 1;  			// in case cc2420 does not respond, this gets stuck!
         commandStrobe(SNOP);
     }
 
@@ -179,10 +197,10 @@ int example(void) {
     commandStrobe(0); // NOP    
     toggle_leds(LED2);
     software_delay();
-        toggle_leds(LED2);
+    toggle_leds(LED2);
     
-        // change PAN to 0x0022 - used for address recognition
-        send_buffer[0]=0xE8; 
+    // change PAN to 0x0022 - used for address recognition
+    send_buffer[0]=0xE8; 
     send_buffer[1]=0x80;
     send_buffer[2]=0x22; 
     send_buffer[3]=0x00;
@@ -190,22 +208,43 @@ int example(void) {
     
     software_delay();
     toggle_leds(LED2);
-    
+
+    int i = 0;
+    for (i=0;i<128;i++){
+    	receive_buffer[i]='\0';
+    }
+
+
+
+    /*send_buffer[0] = FSMSTATE;
+    send_command_CC2420(3);
+    char response=receive_buffer[0];*/
+
+
     //wait until CC2420 is ready to transmit
-    while(statusByte!=0x46){
-        if(statusByte==0x42 || statusByte==0x40){
-            commandStrobe(STXCAL);
+    do{
+    	//
+        if( (statusByte == (SB_XOSC16M_STABLE | SB_LOCK)) || (statusByte == (SB_XOSC16M_STABLE)) ){
+            commandStrobe(STXCAL); // Enable and calibrate frequency synthesizer for TX;
+                                   // Go from RX / TX to a wait state where only the synthesizer is running.
         }
-        else if(statusByte==0x4C || statusByte==0x48){
-            commandStrobe(SRXON);
+        // if !SB_RSSI_VALID u-0
+        else if( (statusByte == (SB_XOSC16M_STABLE | SB_LOCK | SB_TX_ACTIVE) ) || (statusByte == (SB_XOSC16M_STABLE | SB_TX_ACTIVE)) ){
+            commandStrobe(SRXON); // Enable RX
         }
-        else if(statusByte==0x66 || statusByte==0x62){
-            commandStrobe(SFLUSHTX);
+        // if Underflow u-0
+        else if( (statusByte == (SB_XOSC16M_STABLE | SB_TX_UNDERFLOW | SB_RSSI_VALID | SB_LOCK) ) || (statusByte == (SB_XOSC16M_STABLE | SB_TX_UNDERFLOW | SB_RSSI_VALID)) ){
+            commandStrobe(SFLUSHTX); // Flush the TX FIFO buffer
         }
         software_delay();
         toggle_leds(LED2);
-    }
-    toggle_leds(LED2);
+    }while( statusByte != (SB_XOSC16M_STABLE | SB_RSSI_VALID | SB_LOCK) );
+
+
+
+
+
+
     
     cont = 0;
     
@@ -221,8 +260,9 @@ int example(void) {
         
         commandStrobe(SNOP);
         
-        if(statusByte == 0x66){  //check for TXFIFO underflow
-            commandStrobe(SFLUSHTX);
+        if( statusByte & SB_TX_UNDERFLOW ){  //check for TXFIFO underflow
+        						 	 	 // SB_XOSC16M_STABLE | SB_RSSI_VALID | SB_LOCK | SB_TX_UNDERFLOW
+            commandStrobe(SFLUSHTX);	// Reset TX Buffer
         }
         
         transmit_test_packet(cont);
@@ -231,7 +271,7 @@ int example(void) {
         //test for received packet
         p1in = P1IN;
         if((p1in & FIFOP) > 0){
-            commandStrobe(SFLUSHRX);
+            commandStrobe(SFLUSHRX);		// Reset RX Buffer
             transmit_test_packet(0xFF);  //uncomment if sniffer available
             toggle_leds(LED2);
         }
@@ -271,7 +311,8 @@ void activate_switches(void){
 void software_delay(void){
     volatile unsigned int i;
 
-    for(i=50000;i!=0;i--){};    
+    for(i=50000;i!=0;i--){};
+
 }
 
 //routine to lower CC2420 chip select
@@ -281,7 +322,7 @@ void CS_down(void){
 
 //routine to pull CC2420 chip select up
 void CS_up(void){
-    P10OUT|=CS;
+    P10OUT |= CS;
 }
 
 //routine to send a generic command to CC2420 
@@ -295,7 +336,11 @@ void send_command_CC2420(unsigned int n){
 
     for(i=0;i<n;i++){
         UCB3TXBUF = send_buffer[i];
-        while (!(UCB3IFG&UCTXIFG) || !(UCB3IFG&UCRXIFG));
+
+        while ( !(UCB3IFG & UCTXIFG) || !(UCB3IFG & UCRXIFG) ){
+        	// Block until
+        }
+
         receive_buffer[i]=UCB3RXBUF;
     }
     
