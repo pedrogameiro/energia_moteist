@@ -190,7 +190,7 @@ int example(void) {
 
     P4OUT &= LED1&LED2&LED3;                  // Set P4.5-7 for LED
     
-    change_frequency_channel(25);
+    change_frequency_channel(11);
     
     commandStrobe(STXCAL);              // Calibrate the oscillator
     
