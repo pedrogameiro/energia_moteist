@@ -377,3 +377,36 @@ int tx(byte[] data,int len) {
 	commandStrobe (STXON);
 
 }
+
+void example(){
+
+	int n=0;
+	char data[128]
+	while(1){
+
+		data[1]=127;		//packet length
+	    data[2]=0x41;
+	    data[3]=0x88;
+	    data[4]=0x01;
+	    data[5]=0x22;	//PAN ID low
+	    data[6]=0x00;    //PAN ID high
+	    data[7]=0xFF;    //destination address low
+	    data[8]=0xFF;	//destination address high
+	    data[9]=0x02;	//source address low
+	    data[10]=0x00;	//source address high
+	    data[11]=0x3F;
+	    data[12]=0x06;
+	    data[13]=n++;
+	    data[14]=0x02;
+	    data[15]=0x00;
+	    data[16]=0x01;
+	    data[17]=0x3E;
+	    for(i=18;i<128;i++)
+	    	data[i]=i;
+
+		tx(data);
+	}
+
+
+
+}

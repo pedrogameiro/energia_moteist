@@ -41,6 +41,7 @@ void cc2420_init(int channel,int panaddr);
 void cc2420_set_channel(int channel);
 int cc2420_get_channel(void);
 void changepan(int panaddr);
+void example();
 
 
 

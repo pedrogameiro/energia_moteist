@@ -73,7 +73,7 @@ static const uint8_t DEBUG_UARTTXD = 13;  /* P3.4  / CB1_UCA0(TXD/SIMO) */
 
 #define DEBUG_UART_MODULE_OFFSET 0x40
 //#define AUX_UART_MODULE_OFFSET 0x0
-#define SERIAL1_AVAILABLE 1
+//#define SERIAL1_AVAILABLE 1
 
 #if defined(__MSP430_HAS_USCI_A1__)
 #define USE_USCI_A1
