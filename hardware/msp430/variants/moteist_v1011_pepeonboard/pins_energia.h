@@ -42,39 +42,39 @@
 #endif
 
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__)
-//constantes para o protocolo SPI		Porto / PEPE Label
-static const uint8_t SS      = 16;  /*  P3.0  / CB1_SCLKO/CS1  */
+////constantes para o protocolo SPI		Porto / PEPE Label
+//static const uint8_t SS      = 16;  /*  P3.0  / CB1_SCLKO/CS1  */
 static const uint8_t SCK     = 19;  /*  P3.3  / CB1_CSO/SCLK1  */
 static const uint8_t MOSI    = 18;  /*  P3.1  / CB1_SIMO1/SDA1 aka SIMO  */
 static const uint8_t MISO    = 20;  /*  P3.2  / CB1_SOMI1/SCL1 aka SOMI  */
-
-//constantes para protocolo I2C
+//
+////constantes para protocolo I2C
 static const uint8_t TWISDA  = 18;  /*  P10.1 / CB2_SIMO1/SDA1 */ /*provavel troca de valor*/
 static const uint8_t TWISCL  = 20;  /*  P10.2 / CB2_SOMI1/SCL1 */ /*provavel troca de valor*/
-
-										  /* Porto / PEPE Label */
-static const uint8_t DEBUG_UARTRXD = 11;  /* P3.5  / CB1_UCA0(RXD/SOMI) */
-static const uint8_t DEBUG_UARTTXD = 13;  /* P3.4  / CB1_UCA0(TXD/SIMO) */
-static const uint8_t AUX_UARTRXD = 11;    /* P10.5 / CB2_UCA3(RXD/SOMI) */ /*provavel troca de valor*/
-static const uint8_t AUX_UARTTXD = 13;	  /* P10.4 / CB2_UCA3(TXD/SIMO) */ /*provavel troca de valor*/
+//
+//										  /* Porto / PEPE Label */
+static const uint8_t DEBUG_UARTRXD = 31;  /* P3.5  / CB1_UCA0(RXD/SOMI) */
+static const uint8_t DEBUG_UARTTXD = 33;  /* P3.4  / CB1_UCA0(TXD/SIMO) */
+//static const uint8_t AUX_UARTRXD = 11;    /* P10.5 / CB2_UCA3(RXD/SOMI) */ /*provavel troca de valor*/
+//static const uint8_t AUX_UARTTXD = 13;	  /* P10.4 / CB2_UCA3(TXD/SIMO) */ /*provavel troca de valor*/
 #define TWISDA_SET_MODE (PORT_SELECTION0)
 #define TWISCL_SET_MODE (PORT_SELECTION0)
 #define DEBUG_UARTRXD_SET_MODE (PORT_SELECTION0 | PORT_SELECTION1 | INPUT)
 #define DEBUG_UARTTXD_SET_MODE (PORT_SELECTION0 | PORT_SELECTION1 | OUTPUT)
-#define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
-#define AUX_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
+//#define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
+//#define AUX_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
 #define SPISCK_SET_MODE (PORT_SELECTION0)
 #define SPIMOSI_SET_MODE (PORT_SELECTION0)
 #define SPIMISO_SET_MODE (PORT_SELECTION0)
 #endif
-
+//
 #define DEBUG_UART_MODULE_OFFSET 0x40
-#define AUX_UART_MODULE_OFFSET 0x0
-#define SERIAL1_AVAILABLE 1
-
-#if defined(__MSP430_HAS_USCI_A1__)
-#define USE_USCI_A1
-#endif
+//#define AUX_UART_MODULE_OFFSET 0x0
+//#define SERIAL1_AVAILABLE 1
+//
+//#if defined(__MSP430_HAS_USCI_A1__)
+//#define USE_USCI_A1
+//#endif
 
 /* Pinos analogicos para o pepe */
 
