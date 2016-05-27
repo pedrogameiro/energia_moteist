@@ -36,12 +36,13 @@ extern uint8_t cc2420_last_correlation;
 extern const struct aes_128_driver cc2420_aes_128_driver;
 
 
-void cc2420_init(int channel,int panaddr);
-
-
+void cc2420_init();
 void cc2420_set_channel(int channel);
 int cc2420_get_channel(void);
-void changepan(int panaddr);
+void cc2420_set_pan(int panid);
+int cc2420_recv(void);
+int cc2420_send(const char *payload, unsigned short pkt_len);
+void cc2420_init(void);
 int example(int channel, int panid);
 
 

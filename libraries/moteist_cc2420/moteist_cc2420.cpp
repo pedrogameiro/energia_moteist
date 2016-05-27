@@ -2,6 +2,7 @@
 #include "stdint.h"
 #include "moteist_cc2420.h"
 #include "moteist_spi.h"
+#include "platform-conf.h"
 
 #define LED1 0x7F    //P4.7 (active Low)
 #define LED2 0xBF    //P4.6 (active Low)
@@ -92,23 +93,22 @@ void CS_up(void);
 void send_command_CC2420(unsigned int n);
 void commandStrobe(char strobe);
 void transmit_test_packet(char numero);
-int get_rx_data(void);
 
+int cc2420_recv(void);
 void cc2420_set_pan(int panid);
 void cc2420_set_channel(int c);
 int cc2420_get_channel(void);
 int cc2420_send(const char *payload, unsigned short pkt_len);
-int init_board();
+void cc2420_init(void);
 
 
 int example(int _channel,int _panid) {
 
-	unsigned char cont = 0;
+	unsigned char seq_num = 0;
 	unsigned char p1in;
 	unsigned int i;
 	int read_bytes=0;
 
-	init_board();
 
 	commandStrobe(SXOSCON); 			// Start Oscilator
 
@@ -118,7 +118,7 @@ int example(int _channel,int _panid) {
 	send_buffer[0] = 0;
 
 	while (receive_buffer[0] == 0) { //for debug
-		cont = cont + 1;  // in case cc2420 does not respond, this gets stuck!
+		seq_num = seq_num + 1;  // in case cc2420 does not respond, this gets stuck!
 		commandStrobe(SNOP);
 	}
 
@@ -150,7 +150,7 @@ int example(int _channel,int _panid) {
 	}
 	toggle_leds(LED2);
 
-	cont = 0;
+	seq_num = 0;
 
 	//transmission-reception cycle
 	//when transmitting, both LED1 and LED3 toggle their state
@@ -162,19 +162,25 @@ int example(int _channel,int _panid) {
 			software_delay(); // 50,000 cycles
 		}
 
-		toggle_leds(LED3);
-
 		commandStrobe(SNOP);
 
 		if (statusByte == 0x66) {  //check for TXFIFO underflow
 			commandStrobe(SFLUSHTX);
 		}
 
-		transmit_test_packet(cont);
-		cont++;
+		transmit_test_packet(seq_num);
+		seq_num++;
 
-		read_bytes = get_rx_data();
+		read_bytes = cc2420_recv();
+		// If a pkt was read && has enough bytes to be the example pkt.
+		if (read_bytes > 0 && read_bytes >= 11){
 
+			int is_example_pkt = receive_buffer[9] == 0x3f && receive_buffer[10] == 0xf0;
+
+			if ( is_example_pkt ){
+				toggle_leds(LED3);
+			}
+		}
 	}
 
 	return 0;
@@ -186,7 +192,7 @@ void toggle_leds(char mask) {
 }
 
 
-int init_board(){
+void cc2420_init(){
 
 	//WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
 	P5SEL |= 0x0C;                            // Port select XT2
@@ -279,14 +285,12 @@ void CS_down(void) {
 	P10OUT &= NCS;
 }
 
-#define CC2420_SPI_ENABLE() CS_down(); /* ENABLE CSn (active low) */
 
 //routine to pull CC2420 chip select up
 void CS_up(void) {
 	P10OUT |= CS;
 }
 
-#define CC2420_SPI_DISABLE() CS_up(); /* ENABLE CSn (active low) */
 
 //routine to send a generic command to CC2420
 //the input is the number of bytes to send
@@ -356,6 +360,8 @@ int cc2420_send(const char *payload, unsigned short pkt_len){
 
 	send_buffer[0] = TXFIFO;  								//TXFIFO address
 	send_buffer[1] = reg_len+preamble_len+pkt_len;		    //packet length
+
+	// TODO Remove this.
 	send_buffer[2] = 0x41;
 	send_buffer[3] = 0x88;
 
@@ -366,6 +372,7 @@ int cc2420_send(const char *payload, unsigned short pkt_len){
 	send_command_CC2420(reg_len + preamble_len + pkt_len);
 
 	commandStrobe(STXON);
+	toggle_leds(LED2);
 
 }
 
@@ -392,6 +399,17 @@ void transmit_test_packet(char seq) {
 	cc2420_send(pkt,pkt_len);
 }
 
+void setreg(enum cc2420_register regname, uint16_t value)
+{
+  CC2420_SPI_ENABLE();
+  SPI_WRITE_FAST(regname);
+  SPI_WRITE_FAST((uint8_t) (value >> 8));
+  SPI_WRITE_FAST((uint8_t) (value & 0xff));
+  SPI_WAITFORTx_ENDED();
+  SPI_WRITE(0);
+  CC2420_SPI_DISABLE();
+}
+
 
 void cc2420_set_pan(int panid){
 
@@ -406,21 +424,17 @@ void cc2420_set_pan(int panid){
 
 
 //routine to build and transmit the test packet
-int get_rx_data() {
+int cc2420_recv() {
 
-	uint8_t i,j;
+	uint8_t i;
 	int len;
 
 	//test for received packet
 	if ((P1IN & FIFOP) < 0) {
 		return 0;
 	}
-	toggle_leds(LED2);
-
-	// For debug
-	for (j=0; j<128; j++){
-		receive_buffer[j]=0;
-	}
+	//TODO uncomment me
+	//toggle_leds(LED2);
 
 	CS_down();
 

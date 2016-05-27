@@ -39,13 +39,6 @@
 #ifndef MOTEIST_SPI_H_
 #define MOTEIST_SPI_H_
 
-// MoteIST specific
-#define SPI_WAITFOREORx() do { while (!(UCB3IFG & UCRXIFG)); } while (0)
-#define SPI_WAITFOREOTx() do { while (!(UCB3IFG & UCTXIFG)); } while (0)
-#define SPI_TXBUF UCB3TXBUF
-#define SPI_RXBUF UCB3RXBUF
-
-
 /* Define macros to use for checking SPI transmission status depending
    on if it is possible to wait for TX buffer ready. This is possible
    on for example MSP430 but not on AVR. */
