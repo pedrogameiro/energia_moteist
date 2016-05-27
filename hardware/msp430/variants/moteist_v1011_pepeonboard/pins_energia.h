@@ -53,28 +53,28 @@ static const uint8_t TWISDA  = 18;  /*  P10.1 / CB2_SIMO1/SDA1 */ /*provavel tro
 static const uint8_t TWISCL  = 20;  /*  P10.2 / CB2_SOMI1/SCL1 */ /*provavel troca de valor*/
 //
 //										  /* Porto / PEPE Label */
-static const uint8_t DEBUG_UARTRXD = 31;  /* P3.5  / CB1_UCA0(RXD/SOMI) */
-static const uint8_t DEBUG_UARTTXD = 33;  /* P3.4  / CB1_UCA0(TXD/SIMO) */
-//static const uint8_t AUX_UARTRXD = 11;    /* P10.5 / CB2_UCA3(RXD/SOMI) */ /*provavel troca de valor*/
-//static const uint8_t AUX_UARTTXD = 13;	  /* P10.4 / CB2_UCA3(TXD/SIMO) */ /*provavel troca de valor*/
+static const uint8_t DEBUG_UARTRXD = 40;  /* P3.5  / CB1_UCA0(RXD/SOMI) */
+static const uint8_t DEBUG_UARTTXD = 39;  /* P3.4  / CB1_UCA0(TXD/SIMO) */
+static const uint8_t AUX_UARTRXD = 11;    /* P10.5 / CB2_UCA3(RXD/SOMI) */ /*provavel troca de valor*/
+static const uint8_t AUX_UARTTXD = 13;	  /* P10.4 / CB2_UCA3(TXD/SIMO) */ /*provavel troca de valor*/
 #define TWISDA_SET_MODE (PORT_SELECTION0)
 #define TWISCL_SET_MODE (PORT_SELECTION0)
 #define DEBUG_UARTRXD_SET_MODE (PORT_SELECTION0 | PORT_SELECTION1 | INPUT)
 #define DEBUG_UARTTXD_SET_MODE (PORT_SELECTION0 | PORT_SELECTION1 | OUTPUT)
-//#define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
-//#define AUX_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
+#define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
+#define AUX_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
 #define SPISCK_SET_MODE (PORT_SELECTION0)
 #define SPIMOSI_SET_MODE (PORT_SELECTION0)
 #define SPIMISO_SET_MODE (PORT_SELECTION0)
 #endif
 //
 #define DEBUG_UART_MODULE_OFFSET 0x40
-//#define AUX_UART_MODULE_OFFSET 0x0
-//#define SERIAL1_AVAILABLE 1
+#define AUX_UART_MODULE_OFFSET 0x0
+#define SERIAL1_AVAILABLE 1
 //
-//#if defined(__MSP430_HAS_USCI_A1__)
-//#define USE_USCI_A1
-//#endif
+#if defined(__MSP430_HAS_USCI_A1__)
+#define USE_USCI_A1
+#endif
 
 /* Pinos analogicos para o pepe */
 

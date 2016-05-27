@@ -16,7 +16,8 @@
 
 // {{{ Includes
 
-#include "Energia.h"
+#include "stdint.h"
+#include "cc2420_const.h"
 
 // }}}
 
@@ -41,7 +42,7 @@ void cc2420_init(int channel,int panaddr);
 void cc2420_set_channel(int channel);
 int cc2420_get_channel(void);
 void changepan(int panaddr);
-void example();
+int example(int channel, int panid);
 
 
 

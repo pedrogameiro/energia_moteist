@@ -44,7 +44,6 @@
 
 
 #include "cc2420_const.h"
-#include "stdint.h"
 
 
 typedef unsigned short rtimer_clock_t;

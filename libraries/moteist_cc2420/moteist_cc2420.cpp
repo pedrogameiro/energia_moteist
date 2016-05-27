@@ -1,13 +1,6 @@
 #include <msp430.h>
-#include "cc2420_const.h"
-#include "moteist-cc2420.h"
-
-#define mote1011
-//#define mote0413
-
-#ifndef BV
-#define BV(x) (1 << (x))
-#endif
+#include "stdint.h"
+#include "moteist_cc2420.h"
 
 #define LED1 0x7F    //P4.7 (active Low)
 #define LED2 0xBF    //P4.6 (active Low)
@@ -16,15 +9,8 @@
 #define FIFO 0x04// P1.2
 #define FIFOP 0x40// P1.6
 #define CCA 0x80// P1.7
-
-#ifdef mote0413
-	#define RESET 0x40// P9.6
-	//#define VREGEN 0x80// P9.7
-#endif
-#ifdef mote1011
-	#define RESET 0x80// P9.7
-	#define VREGEN 0x40// P9.6
-#endif
+#define RESET 0x80// P9.7
+#define VREGEN 0x40// P9.6
 
 #define CS 0x01 //P10.0 chip select High
 #define SIMO 0x02 //P10.1
@@ -87,23 +73,11 @@
 #define TXFIFO 0x3E // W Transmit FIFO Byte Register
 #define RXFIFO 0x3F // R/W Receiver FIFO Byte Register
 
-// CC2420 status bytes
-// BV(0) Reserved
-#define SB_RSSI_VALID       BV(1)
-#define SB_LOCK             BV(2)
-#define SB_TX_ACTIVE        BV(3)
-#define SB_ENC_BUSY         BV(4)
-#define SB_TX_UNDERFLOW     BV(5)
-#define SB_XOSC16M_STABLE   BV(6)
-// BV(7) Reserved
-
 //Global Variables
 char receive_buffer[128];
 char send_buffer[128];
 char statusByte;
-
-
-static int channel = 0;
+static int channel;
 
 //Functions Prototypes
 void toggle_leds(char mask);
@@ -111,17 +85,113 @@ void activate_switches(void);
 void software_delay(void);
 void CS_down(void);
 void CS_up(void);
+void send_command_CC2420(unsigned int n);
+void commandStrobe(char strobe);
+void transmit_test_packet(char numero);
+void read_test_packet(void);
 
-void cc2420_init(int param_channel, int panaddr) {
+void cc2420_set_pan(int panid);
+void cc2420_set_channel(int c);
+int cc2420_get_channel(void);
+int cc2420_send(const char *payload, unsigned short pkt_len);
+int init_board();
+
+
+int example(int _channel,int _panid) {
 
 	unsigned char cont = 0;
 	unsigned char p1in;
+	unsigned int i;
 
-	//stop watchdog clock
-	WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
+	init_board();
 
-	P5SEL |= 0x0C;                            // Port select XT2 P5.2 P5.3
-	P7SEL |= 0x03;                            // Port select XT1 P7.0 P7.1
+	commandStrobe(SXOSCON); 			// Start Oscilator
+
+	toggle_leds(LED2);
+
+	receive_buffer[0] = 0;
+	send_buffer[0] = 0;
+
+	while (receive_buffer[0] == 0) { //for debug
+		cont = cont + 1;  // in case cc2420 does not respond, this gets stuck!
+		commandStrobe(SNOP);
+	}
+
+	P4OUT &= LED1 & LED2 & LED3;                  // Set P4.5-7 for LED
+
+	commandStrobe(STXCAL); 				// Calibrate the oscillator
+	commandStrobe(0); // NOP
+
+	toggle_leds(LED2);
+	software_delay();
+	toggle_leds(LED2);
+
+	cc2420_set_pan(_panid);
+	cc2420_set_channel(_channel);
+
+	software_delay();
+	toggle_leds(LED2);
+
+	//wait until CC2420 is ready to transmit
+	while (statusByte != 0x46) {
+		if (statusByte == 0x42 || statusByte == 0x40) {
+			commandStrobe(STXCAL);
+		} else if (statusByte == 0x4C || statusByte == 0x48) {
+			commandStrobe(SRXON);
+		} else if (statusByte == 0x66 || statusByte == 0x62) {
+			commandStrobe(SFLUSHTX);
+		}
+		software_delay();
+	}
+	toggle_leds(LED2);
+
+	cont = 0;
+
+	//transmission-reception cycle
+	//when transmitting, both LED1 and LED3 toggle their state
+	//when a packet is received, LED2 toggles its state
+	while (1) {
+
+		// Interval between transmissions
+		for (i=0; i<6; i++){
+			software_delay();
+		}
+
+		toggle_leds(LED3);
+
+		commandStrobe(SNOP);
+
+		if (statusByte == 0x66) {  //check for TXFIFO underflow
+			commandStrobe(SFLUSHTX);
+		}
+
+		transmit_test_packet(cont);
+		cont++;
+
+		//test for received packet
+		p1in = P1IN;
+		if ((p1in & FIFOP) > 0) {
+			//read_test_packet();
+
+			commandStrobe(SFLUSHRX);
+			toggle_leds(LED2);
+		}
+	}
+
+	return 0;
+}
+
+//routine to toggle specific leds
+void toggle_leds(char mask) {
+	P4OUT ^= (~mask);
+}
+
+
+int init_board(){
+
+	//WDTCTL = WDTPW + WDTHOLD;                 // Stop WDT
+	P5SEL |= 0x0C;                            // Port select XT2
+	P7SEL |= 0x03;                            // Port select XT1
 
 	UCSCTL6 &= ~(XT1OFF + XT2OFF);            // Set XT1 & XT2 On
 	UCSCTL6 |= XCAP_3;                        // Internal load cap
@@ -130,8 +200,8 @@ void cc2420_init(int param_channel, int panaddr) {
 	do {
 		UCSCTL7 &= ~(XT2OFFG + XT1LFOFFG + XT1HFOFFG + DCOFFG);
 		// Clear XT2,XT1,DCO fault flags
-		SFRIFG1 &= ~OFIFG;                      // Clear fault flags
-	} while (SFRIFG1 & OFIFG);               // Test oscillator fault flag
+		SFRIFG1 &= ~OFIFG;                     	// Clear fault flags
+	} while (SFRIFG1 & OFIFG);          		// Test oscillator fault flag
 
 	UCSCTL6 &= ~XT2DRIVE0;                  // Decrease XT2 Drive according to
 											// expected frequency
@@ -153,87 +223,28 @@ void cc2420_init(int param_channel, int panaddr) {
 	activate_switches();
 
 	//configure for cc2420 comunication board on CBC2
-	P1DIR &= ~SFD & ~FIFO & ~FIFOP & ~CCA;    //Set as Inputs
-	P1REN |= SFD + FIFO + FIFOP + CCA;        // set pull resistor
-	P1OUT &= ~SFD & ~FIFO & ~FIFOP & ~CCA;    // set pull-Down
-	P9DIR |= RESET + VREGEN;             // set Reset and VREGEN pins as outputs
-	P10DIR |= CS;                       // Set as Output
-	P10SEL |= CLK + SIMO + SOMI;         // select SPI function instead of GPI/O
-	P10DIR &= ~SOMI;                    // set SOMI as input
-	P10OUT &= ~P10MASK;                 //Unsed pins go low
+	P1DIR &= ~SFD & ~FIFO & ~FIFOP & ~CCA;  	//Set as Inputs
+
+	P1REN |= SFD + FIFO + FIFOP + CCA; 		// set pull resistor
+	P1OUT &= ~SFD & ~FIFO & ~FIFOP & ~CCA;  	// set pull-Down
+	P9DIR |= RESET + VREGEN;			 // set Reset and VREGEN pins as outputs
+	P10DIR |= CS;						// Set as Output
+	P10SEL |= CLK + SIMO + SOMI;		// select SPI function instead of GPI/O
+	P10DIR &= ~SOMI;                   	// set SOMI as input
+	P10OUT &= ~P10MASK;  				//Unsed pins go low
 
 	//Inicialize zigbee CB
-	P9OUT |= VREGEN;          //Start the voltage regulator to have 1.8 for core
-	P9OUT &= ~RESET;                    //Reset (active Low)
+	P9OUT |= VREGEN;		//Start the voltage regulator to have 1.8 for core
+	P9OUT &= ~RESET;				    //Reset (active Low)
 	software_delay();
-	P9OUT |= RESET;                     //Release reset
+	P9OUT |= RESET;						//Release reset
 	CS_up();
-
-	commandStrobe (SXOSCON);             // Start Oscilator
-	do {
-		commandStrobe (SNOP);
-		toggle_leds (LED2);
-	} while (!(statusByte & SB_XOSC16M_STABLE)); // Wait for the Oscilator to startup
-
-	toggle_leds (LED2);
-
-	receive_buffer[0] = 0;
-	send_buffer[0] = 0;
-	while (receive_buffer[0] == 0) {	//for debug
-		cont = cont + 1;  	// in case cc2420 does not respond, this gets stuck!
-		commandStrobe (SNOP);
-	}
-
-	P4OUT &= LED1 & LED2 & LED3;                  // Set P4.5-7 for LED
-
-	cc2420_set_channel(param_channel);
-
-	commandStrobe (STXCAL);              // Calibrate the oscillator
-
-	commandStrobe(0); // NOP
-	toggle_leds(LED2);
-	software_delay();
-	toggle_leds(LED2);
-
-	changepan(panaddr); // 0x00 0x22
-
-	software_delay();
-	toggle_leds(LED2);
-
-}
-
-//routine to change the channel in which CC2420 operates
-void cc2420_set_channel(int param_channel) {
-	unsigned int freq, aux;
-	unsigned char byte_high, byte_low;
-	channel = param_channel;
-
-	freq = 357 + 5 * (param_channel - 11);
-
-	aux = freq & 0xFF00;
-
-	byte_high = aux >> 8;
-	byte_low = freq & 0x00FF;
-
-	send_buffer[0] = FSCTRL;
-	send_buffer[1] = byte_high;
-	send_buffer[2] = byte_low;
-	send_command_CC2420(3);
-}
-
-int cc2420_get_channel(void) {
-	return channel;
-}
-
-//routine to toggle specific leds
-void toggle_leds(char mask) {
-	P4OUT ^= (~mask);
 }
 
 //routine to activate the switches that supply power to the communication boards
 void activate_switches(void) {
 	P3SEL |= 0x80;                            // P3.7 - SDA - Assign I2C pins
-	P5SEL |= 0x10;                            // P5.4 - SCL
+	P5SEL |= 0x10;							  // P5.4 - SCL
 
 	UCB1CTL1 |= UCSWRST;                      // Enable SW reset
 
@@ -245,21 +256,22 @@ void activate_switches(void) {
 
 	UCB1CTL1 &= ~UCSWRST;                     // Clear SW reset*/
 
-	while (UCB1CTL1 & UCTXSTP)
-		;               // Ensure stop condition got sent
+	while (UCB1CTL1 & UCTXSTP);               // Ensure stop condition got sent
+
 	UCB1CTL1 |= UCTR + UCTXSTT;               // I2C start condition
-	UCB1TXBUF = 0xFF;                         // Send init data
-	while (UCB1CTL1 & UCTXSTT)
-		;                // Start condition sent?
-	UCB1CTL1 |= UCTXSTP;                      // I2C1 Stop Condition
+	UCB1TXBUF = 0xFF;  	                      // Send init data
+
+	while (UCB1CTL1 & UCTXSTT);                // Start condition sent?
+
+	UCB1CTL1 |= UCTXSTP;				      // I2C1 Stop Condition
 }
 
 //generic software delay routine
 void software_delay(void) {
 	volatile unsigned int i;
 
-	for (i = 50000; i != 0; i--) {
-	};
+	for (i = 50000; i != 0; i--);
+	// Empty block
 
 }
 
@@ -268,10 +280,14 @@ void CS_down(void) {
 	P10OUT &= NCS;
 }
 
+#define CC2420_SPI_ENABLE() CS_down(); /* ENABLE CSn (active low) */
+
 //routine to pull CC2420 chip select up
 void CS_up(void) {
 	P10OUT |= CS;
 }
+
+#define CC2420_SPI_DISABLE() CS_up(); /* ENABLE CSn (active low) */
 
 //routine to send a generic command to CC2420
 //the input is the number of bytes to send
@@ -283,11 +299,10 @@ void send_command_CC2420(unsigned int n) {
 	CS_down();
 
 	for (i = 0; i < n; i++) {
+
 		UCB3TXBUF = send_buffer[i];
 
-		while (!(UCB3IFG & UCTXIFG) || !(UCB3IFG & UCRXIFG)) {
-			// Block until
-		}
+		while (!(UCB3IFG & UCTXIFG) || !(UCB3IFG & UCRXIFG));
 
 		receive_buffer[i] = UCB3RXBUF;
 	}
@@ -307,106 +322,108 @@ void commandStrobe(char strobe) {
 	send_command_CC2420(1);
 }
 
-void changepan(int panaddr) {
+int cc2420_get_channel(void) {
 
-	// change PAN to 0x0022 - used for address recognition
+	return channel;
+}
+
+//routine to change the channel in which CC2420 operates
+void cc2420_set_channel(int c) {
+
+	uint16_t f;
+
+	/*
+	 * Subtract the base channel (11), multiply by 5, which is the
+	 * channel spacing. 357 is 2405-2048 and 0x4000 is LOCK_THR = 1.
+	 */
+	channel = c;
+
+	f = 5 * (c - 11) + 357 + 0x4000;
+
+	send_buffer[0] = CC2420_FSCTRL;
+	send_buffer[1] = f >> 8;
+	send_buffer[2] = f & 0xff;
+	send_buffer[3] = 0;
+	send_command_CC2420(4);
+
+	commandStrobe(CC2420_SRXON);
+}
+
+int cc2420_send(const char *payload, unsigned short pkt_len){
+
+	unsigned int i;
+	unsigned int reg_len = 1;
+	unsigned int preamble_len = 3;
+
+	send_buffer[0] = TXFIFO;  								//TXFIFO address
+	send_buffer[1] = reg_len+preamble_len+pkt_len;	//packet length
+	send_buffer[2] = 0x41;
+	send_buffer[3] = 0x88;
+
+	for (i=0; i<pkt_len; i++){
+		send_buffer[reg_len + preamble_len + i] = payload[i];
+	}
+
+	send_command_CC2420(reg_len + preamble_len + pkt_len);
+
+	commandStrobe(STXON);
+
+}
+
+
+//routine to build and transmit the test packet
+void transmit_test_packet(char seq) {
+
+	int pkt_len = 9;
+	char pkt[pkt_len];
+
+	pkt[0] = seq;
+	pkt[1] = 0x22;		//PAN ID low
+	pkt[2] = 0x00;  	//PAN ID high
+	pkt[3] = 0xFF;  	//dest addr low
+	pkt[4] = 0xFF;		//dest addr high
+
+	pkt[5] = 0x01;		//src addr low
+	pkt[6] = 0x00;		//src addr high
+
+	// -- payload -- //
+	pkt[7] = 0x3f;
+	pkt[8] = 0xf0;
+
+	cc2420_send(pkt,pkt_len);
+}
+
+
+void cc2420_set_pan(int panid){
+
 	send_buffer[0] = 0xE8;
 	send_buffer[1] = 0x80;
 
-	aux = panaddr & 0xFF00;
-	byte_high = aux >> 8;
-	byte_low = panaddr & 0x00FF;
+	send_buffer[2] = panid & 0xff;
+	send_buffer[3] = panid >> 8;
 
-	send_buffer[2] = byte_high;
-	send_buffer[3] = byte_low;
 	send_command_CC2420(4);
 }
 
 
-void preparetx() {
-	//wait until CC2420 is ready to transmit
-	do {
-		//
-		if ((statusByte == (SB_XOSC16M_STABLE | SB_LOCK))
-				|| (statusByte == (SB_XOSC16M_STABLE))) {
-			commandStrobe (STXCAL); // Enable and calibrate frequency synthesizer for TX;
-			// Go from RX / TX to a wait state where only the synthesizer is running.
-		} else
-		// if !SB_RSSI_VALID u-0
-		if ((statusByte == (SB_XOSC16M_STABLE | SB_LOCK | SB_TX_ACTIVE))
-				|| (statusByte == (SB_XOSC16M_STABLE | SB_TX_ACTIVE))) {
-			commandStrobe (SRXON); // Enable RX
-		} else
-		// if Underflow u-0
-		if ((statusByte
-				== (SB_XOSC16M_STABLE | SB_TX_UNDERFLOW | SB_RSSI_VALID
-						| SB_LOCK))
-				|| (statusByte
-						== (SB_XOSC16M_STABLE | SB_TX_UNDERFLOW | SB_RSSI_VALID))) {
-			commandStrobe (SFLUSHTX); // Flush the TX FIFO buffer
-		}
-
-		software_delay();
-		toggle_leds (LED2);
-	} while (statusByte != (SB_XOSC16M_STABLE | SB_RSSI_VALID | SB_LOCK));
-}
-
-int tx(byte[] data,int len) {
-
-	if (lenght <=0 || len >= 128) // The message can't be over 127 bytes.
-		return -1;
-
-	//wait until CC2420 is ready to transmit
-	preparetx();
-
-	commandStrobe (SNOP);
-
-	if (statusByte & SB_TX_UNDERFLOW) {  //check for TXFIFO underflow
-		// SB_XOSC16M_STABLE | SB_RSSI_VALID | SB_LOCK | SB_TX_UNDERFLOW
-		commandStrobe (SFLUSHTX);// Reset TX Buffer
-	}
-
-	send_buffer[0] = TXFIFO;  //TXFIFO address
+//routine to build and transmit the test packet
+void read_test_packet(void) {
 
 	int i;
-	for (i=1;i<=len;i++){
-		send_buffer[i]=data[i];
+
+	CS_down();
+
+	UCB3TXBUF = RXFIFO;
+	while (!(UCB3IFG & UCTXIFG));
+
+	for (i = 0; i < 127; i++) {
+
+		while(!(UCB3IFG & UCRXIFG));
+		receive_buffer[i] = UCB3RXBUF;
 	}
 
-	send_command_CC2420(len);
-	commandStrobe (STXON);
+	statusByte = receive_buffer[0];
 
-}
-
-void example(){
-
-	int n=0;
-	char data[128]
-	while(1){
-
-		data[1]=127;		//packet length
-	    data[2]=0x41;
-	    data[3]=0x88;
-	    data[4]=0x01;
-	    data[5]=0x22;	//PAN ID low
-	    data[6]=0x00;    //PAN ID high
-	    data[7]=0xFF;    //destination address low
-	    data[8]=0xFF;	//destination address high
-	    data[9]=0x02;	//source address low
-	    data[10]=0x00;	//source address high
-	    data[11]=0x3F;
-	    data[12]=0x06;
-	    data[13]=n++;
-	    data[14]=0x02;
-	    data[15]=0x00;
-	    data[16]=0x01;
-	    data[17]=0x3E;
-	    for(i=18;i<128;i++)
-	    	data[i]=i;
-
-		tx(data);
-	}
-
-
+	CS_up();
 
 }
