@@ -36,11 +36,12 @@
 #include <string.h>
 
 #include "cc2420.h"
+
+#include "../moteist_spi.h"
 #include "cc2420_const.h"
 
 #include "platform-conf.h"
 #include "radio-dev.h"
-#include "spi.h"
 #include "cc2420-arch.c"
 
 

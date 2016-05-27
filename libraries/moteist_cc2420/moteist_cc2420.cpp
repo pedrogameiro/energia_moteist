@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "stdint.h"
 #include "moteist_cc2420.h"
+#include "moteist_spi.h"
 
 #define LED1 0x7F    //P4.7 (active Low)
 #define LED2 0xBF    //P4.6 (active Low)
@@ -73,6 +74,9 @@
 #define TXFIFO 0x3E // W Transmit FIFO Byte Register
 #define RXFIFO 0x3F // R/W Receiver FIFO Byte Register
 
+#define CC2420_MAX_PACKET_LEN	127
+#define FOOTER_LEN	2
+
 //Global Variables
 char receive_buffer[128];
 char send_buffer[128];
@@ -88,7 +92,7 @@ void CS_up(void);
 void send_command_CC2420(unsigned int n);
 void commandStrobe(char strobe);
 void transmit_test_packet(char numero);
-void read_test_packet(void);
+int get_rx_data(void);
 
 void cc2420_set_pan(int panid);
 void cc2420_set_channel(int c);
@@ -102,6 +106,7 @@ int example(int _channel,int _panid) {
 	unsigned char cont = 0;
 	unsigned char p1in;
 	unsigned int i;
+	int read_bytes=0;
 
 	init_board();
 
@@ -154,7 +159,7 @@ int example(int _channel,int _panid) {
 
 		// Interval between transmissions
 		for (i=0; i<6; i++){
-			software_delay();
+			software_delay(); // 50,000 cycles
 		}
 
 		toggle_leds(LED3);
@@ -168,14 +173,8 @@ int example(int _channel,int _panid) {
 		transmit_test_packet(cont);
 		cont++;
 
-		//test for received packet
-		p1in = P1IN;
-		if ((p1in & FIFOP) > 0) {
-			//read_test_packet();
+		read_bytes = get_rx_data();
 
-			commandStrobe(SFLUSHRX);
-			toggle_leds(LED2);
-		}
 	}
 
 	return 0;
@@ -356,7 +355,7 @@ int cc2420_send(const char *payload, unsigned short pkt_len){
 	unsigned int preamble_len = 3;
 
 	send_buffer[0] = TXFIFO;  								//TXFIFO address
-	send_buffer[1] = reg_len+preamble_len+pkt_len;	//packet length
+	send_buffer[1] = reg_len+preamble_len+pkt_len;		    //packet length
 	send_buffer[2] = 0x41;
 	send_buffer[3] = 0x88;
 
@@ -407,23 +406,44 @@ void cc2420_set_pan(int panid){
 
 
 //routine to build and transmit the test packet
-void read_test_packet(void) {
+int get_rx_data() {
 
-	int i;
+	uint8_t i,j;
+	int len;
+
+	//test for received packet
+	if ((P1IN & FIFOP) < 0) {
+		return 0;
+	}
+	toggle_leds(LED2);
+
+	// For debug
+	for (j=0; j<128; j++){
+		receive_buffer[j]=0;
+	}
 
 	CS_down();
 
-	UCB3TXBUF = RXFIFO;
-	while (!(UCB3IFG & UCTXIFG));
+	SPI_WRITE(CC2420_RXFIFO | 0x40);
+	(void) SPI_RXBUF;
 
-	for (i = 0; i < 127; i++) {
-
-		while(!(UCB3IFG & UCRXIFG));
-		receive_buffer[i] = UCB3RXBUF;
+	SPI_READ(receive_buffer[0]);
+	len = receive_buffer[0];
+	if (len <= FOOTER_LEN || len >= CC2420_MAX_PACKET_LEN ){
+		CS_up();
+		commandStrobe(SFLUSHRX);
+		return -1;
 	}
 
-	statusByte = receive_buffer[0];
+	for(i = 0; i <= len; i++) {
+		SPI_READ(receive_buffer[i]);
+	}
 
 	CS_up();
 
+	commandStrobe(SFLUSHRX);
+
+	return len - FOOTER_LEN;
 }
+
+

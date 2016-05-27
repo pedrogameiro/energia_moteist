@@ -36,8 +36,15 @@
  *         Niclas Finne <nfi@sics.se>
  */
 
-#ifndef SPI_H_
-#define SPI_H_
+#ifndef MOTEIST_SPI_H_
+#define MOTEIST_SPI_H_
+
+// MoteIST specific
+#define SPI_WAITFOREORx() do { while (!(UCB3IFG & UCRXIFG)); } while (0)
+#define SPI_WAITFOREOTx() do { while (!(UCB3IFG & UCTXIFG)); } while (0)
+#define SPI_TXBUF UCB3TXBUF
+#define SPI_RXBUF UCB3RXBUF
+
 
 /* Define macros to use for checking SPI transmission status depending
    on if it is possible to wait for TX buffer ready. This is possible
@@ -52,9 +59,12 @@
 #define SPI_WAITFORTx_ENDED()
 #endif /* SPI_WAITFORTxREADY */
 
+#define SPI_TXBUF UCB3TXBUF
+#define SPI_RXBUF UCB3RXBUF
+
 extern unsigned char spi_busy;
 
-void spi_init(void);
+//void spi_init(void);
 
 /* Write one character to SPI */
 #define SPI_WRITE(data) \
@@ -89,4 +99,4 @@ void spi_init(void);
   } while(0)
 #endif
 
-#endif /* SPI_H_ */
+#endif /* MOTEIST_SPI_H_ */
