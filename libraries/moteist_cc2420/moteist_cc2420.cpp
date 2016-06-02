@@ -98,7 +98,7 @@ int cc2420_recv(void);
 void cc2420_set_pan(int panid);
 void cc2420_set_channel(int c);
 int cc2420_get_channel(void);
-int cc2420_send(const char *payload, unsigned short pkt_len);
+void cc2420_send(const char *payload, unsigned short pkt_len);
 void cc2420_init(void);
 
 
@@ -107,7 +107,7 @@ int example(int _channel,int _panid) {
 	unsigned char seq_num = 0;
 	unsigned char p1in;
 	unsigned int i;
-	int read_bytes=0;
+	int read_bytes;
 
 
 	commandStrobe(SXOSCON); 			// Start Oscilator
@@ -172,15 +172,7 @@ int example(int _channel,int _panid) {
 		seq_num++;
 
 		read_bytes = cc2420_recv();
-		// If a pkt was read && has enough bytes to be the example pkt.
-		if (read_bytes > 0 && read_bytes >= 11){
 
-			int is_example_pkt = receive_buffer[9] == 0x3f && receive_buffer[10] == 0xf0;
-
-			if ( is_example_pkt ){
-				toggle_leds(LED3);
-			}
-		}
 	}
 
 	return 0;
@@ -352,7 +344,7 @@ void cc2420_set_channel(int c) {
 	commandStrobe(CC2420_SRXON);
 }
 
-int cc2420_send(const char *payload, unsigned short pkt_len){
+void cc2420_send(const char *payload, unsigned short pkt_len){
 
 	unsigned int i;
 	unsigned int reg_len = 1;
@@ -430,7 +422,7 @@ int cc2420_recv() {
 	int len;
 
 	//test for received packet
-	if ((P1IN & FIFOP) < 0) {
+	if (!CC2420_FIFOP_IS_1) {
 		return 0;
 	}
 	//TODO uncomment me
@@ -457,7 +449,9 @@ int cc2420_recv() {
 
 	commandStrobe(SFLUSHRX);
 
-	return len - FOOTER_LEN;
+	toggle_leds(LED3);
+
+	return (len - FOOTER_LEN);
 }
 
 

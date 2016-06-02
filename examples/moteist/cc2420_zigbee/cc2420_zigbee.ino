@@ -1,28 +1,17 @@
-/*
-   zigbee
-   The basic Energia example.
-   Turns on an LED on for one second, then off for one second, repeatedly.
-   Change the LED define to blink other LEDs.
-
-   Hardware Required:
-
-   This example code is in the public domain.
-*/
 
 #include <moteist_cc2420.h>
 
 // the setup routine runs once when you press reset:
-void setup() {                
-  
+void setup() {
+	cc2420_init();
 }
 
 
 
 // the loop routine runs over and over again forever:
 void loop() {
-  
 
-    // Blocks inside  
-    example();
+    // Blocks inside
+    example(26,0x0022);
 
 }
