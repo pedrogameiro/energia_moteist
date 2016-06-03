@@ -75,8 +75,9 @@
 #define CC2420_FIFOP_PORT(type)   P1##type
 #define CC2420_FIFOP_PIN          6
 ///* - Input: FIFO from CC2420 - ATMEGA128 PORT1, PIN2 */
-//#define CC2420_FIFO_PORT(type)     P##type##1
-//#define CC2420_FIFO_PIN            2
+#define CC2420_FIFO_PORT(type)     P1##type
+#define CC2420_FIFO_PIN            2
+
 ///* - Input: CCA from CC2420 - ATMEGA128 PORT1, PIN7 */
 //#define CC2420_CCA_PORT(type)      P##type##1
 //#define CC2420_CCA_PIN             7
@@ -97,7 +98,7 @@
 //
 ///* Pin status. */
 #define CC2420_FIFOP_IS_1 (!!(CC2420_FIFOP_PORT(IN) & BV(CC2420_FIFOP_PIN)))
-//#define CC2420_FIFO_IS_1  (!!(CC2420_FIFO_PORT(IN) & BV(CC2420_FIFO_PIN)))
+#define CC2420_FIFO_IS_1  (!!(CC2420_FIFO_PORT(IN) & BV(CC2420_FIFO_PIN)))
 //#define CC2420_CCA_IS_1   (!!(CC2420_CCA_PORT(IN) & BV(CC2420_CCA_PIN)))
 //#define CC2420_SFD_IS_1   (!!(CC2420_SFD_PORT(IN) & BV(CC2420_SFD_PIN)))
 //

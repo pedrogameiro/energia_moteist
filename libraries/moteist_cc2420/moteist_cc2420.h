@@ -40,10 +40,10 @@ void cc2420_init();
 void cc2420_set_channel(int channel);
 int cc2420_get_channel(void);
 void cc2420_set_pan(int panid);
-int cc2420_recv(void);
+int cc2420_recv(void *buf, unsigned short bufsize);
 void cc2420_send(const char *payload, unsigned short pkt_len);
-void cc2420_init(void);
-int example(int channel, int panid);
+void cc2420_init(int _channel,int _panid);
+int example();
 
 
 
