@@ -3,7 +3,7 @@
 
 // the setup routine runs once when you press reset:
 void setup() {
-	cc2420_init();
+	cc2420_init(26,0x0022);
 }
 
 
@@ -12,6 +12,6 @@ void setup() {
 void loop() {
 
     // Blocks inside
-    example(26,0x0022);
+    example();
 
 }

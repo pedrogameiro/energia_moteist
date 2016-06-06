@@ -100,11 +100,36 @@ void cc2420_set_channel(int c);
 int cc2420_get_channel(void);
 void cc2420_send(const char *payload, unsigned short pkt_len);
 void cc2420_init(int _channel,int _panid);
+void cc2420_set_txpower(uint8_t power);
+int cc2420_get_txpower(void);
+static void strobe(enum cc2420_register regname);
 
 /* Are we currently in poll mode? */
 static uint8_t volatile poll_mode = 1;
 signed char cc2420_last_rssi;
 uint8_t cc2420_last_correlation;
+
+/* Conversion map between PA_LEVEL and output power in dBm
+   (from table 9 in CC2420 specification).
+*/
+struct output_config {
+  int8_t power;
+  uint8_t config;
+};
+
+static const struct output_config output_power[] = {
+  {  0, 31 }, /* 0xff */
+  { -1, 27 }, /* 0xfb */
+  { -3, 23 }, /* 0xf7 */
+  { -5, 19 }, /* 0xf3 */
+  { -7, 15 }, /* 0xef */
+  {-10, 11 }, /* 0xeb */
+  {-15,  7 }, /* 0xe7 */
+  {-25,  3 }, /* 0xe3 */
+};
+#define OUTPUT_NUM (sizeof(output_power) / sizeof(struct output_config))
+#define OUTPUT_POWER_MAX   0
+#define OUTPUT_POWER_MIN -25
 
 int example() {
 
@@ -113,6 +138,7 @@ int example() {
 	char rxbuf[128];
 
 	seq_num = 0;
+
 
 	//transmission-reception cycle
 	//when transmitting, LED2 toggles its state
@@ -124,10 +150,10 @@ int example() {
 			software_delay(); // 50,000 cycles
 		}
 
-		//transmit_test_packet(seq_num++);
+		transmit_test_packet(seq_num++);
 
 		cc2420_recv(&rxbuf,128);
-		commandStrobe(SFLUSHRX);
+
 
 	}
 
@@ -175,6 +201,8 @@ void cc2420_init(int _channel,int _panid){
 
 	activate_switches();
 
+
+
 	//configure for cc2420 comunication board on CBC2
 	P1DIR &= ~SFD & ~FIFO & ~FIFOP & ~CCA;  	//Set as Inputs
 
@@ -193,6 +221,7 @@ void cc2420_init(int _channel,int _panid){
 	P9OUT |= RESET;						//Release reset
 	CS_up();
 
+
 	commandStrobe(SXOSCON); 			// Start Oscilator
 
 	toggle_leds(LED2);
@@ -209,6 +238,7 @@ void cc2420_init(int _channel,int _panid){
 
 	commandStrobe(STXCAL); 						// Calibrate the oscillator
 	commandStrobe(0); // NOP
+
 
 	toggle_leds(LED2);
 	software_delay();
@@ -231,7 +261,11 @@ void cc2420_init(int _channel,int _panid){
 		}
 		software_delay();
 	}
+
+
+
 	toggle_leds(LED2);
+
 
 }
 
@@ -556,6 +590,7 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 	    }
 
 		toggle_leds(LED3);
+		commandStrobe(SFLUSHRX);
 
 	    return len - FOOTER_LEN;
 	  }
@@ -563,5 +598,48 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 	  flushrx();
 	  return 0;
 }
+/*---------------------------------------------------------------------------*/
+/* Reads a register */
+static uint16_t
+getreg(enum cc2420_register regname)
+{
+  uint16_t value;
 
+  CC2420_SPI_ENABLE();
+  SPI_WRITE(regname | 0x40);
+  value = (uint8_t)SPI_RXBUF;
+  SPI_TXBUF = 0;
+  SPI_WAITFOREORx();
+  value = SPI_RXBUF << 8;
+  SPI_TXBUF = 0;
+  SPI_WAITFOREORx();
+  value |= SPI_RXBUF;
+  CC2420_SPI_DISABLE();
+
+  return value;
+}
+/*---------------------------------------------------------------------------*/
+static void
+set_txpower(uint8_t power)
+{
+  uint16_t reg;
+
+  reg = getreg(CC2420_TXCTRL);
+  reg = (reg & 0xffe0) | (power & 0x1f);
+  setreg(CC2420_TXCTRL, reg);
+}
+/*---------------------------------------------------------------------------*/
+void
+cc2420_set_txpower(uint8_t power)
+{
+  set_txpower(power);
+}
+/*---------------------------------------------------------------------------*/
+int
+cc2420_get_txpower(void)
+{
+  int power;
+  power = (int)(getreg(CC2420_TXCTRL) & 0x001f);
+  return power;
+}
 
