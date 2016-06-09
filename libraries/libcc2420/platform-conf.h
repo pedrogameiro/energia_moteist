@@ -59,17 +59,15 @@
 #define SPI_WAITFOREOTx() do { while (!(UCB3IFG & UCTXIFG)); } while (0)
 #define SPI_WAITFOREORx() do { while (!(UCB3IFG & UCRXIFG)); } while (0)
 
-/*
- * SPI bus - CC2420 pin configuration.
- */
 
-//#define CC2420_CONF_SYMBOL_LOOP_COUNT 500
+
 
 /*
  * SPI bus - CC2420 pin configuration.
  */
 
-#define CSN             0x00 // Chip Select Low P10.0
+#define CS_PIN BV(0) // Chip Select Low P10.0
+
 
 ///* - Input: FIFOP from CC2420 - ATMEGA128 PORT1, PIN6 */
 #define CC2420_FIFOP_PORT(type)   P1##type
@@ -128,8 +126,29 @@
  * Enables/disables CC2420 access to the SPI bus (not the bus).
  * (Chip Select)
  */
-#define CC2420_SPI_ENABLE() (P10OUT &= ~BV(CSN)) /* ENABLE CSn (active low) */
-#define CC2420_SPI_DISABLE() (P10OUT |=  BV(CSN)) /* DISABLE CSn (active low) */
+#define CC2420_SPI_ENABLE() (P10OUT &= ~CS_PIN) /* ENABLE CSn (active low) */
+#define CC2420_SPI_DISABLE() (P10OUT |= CS_PIN) /* DISABLE CSn (active low) */
 
+
+/**
+ *
+ *
+ *
+ */
+
+
+#define LED1_PIN BV(7)    // P4.7 (active Low)
+#define LED2_PIN BV(6)    // P4.6 (active Low)
+#define LED3_PIN BV(5)    // P4.5 (active Low)
+#define SFD_PIN BV(1)     // P1.1
+#define CCA_PIN BV(7)     // P1.7
+#define RESET_PIN BV(7)   // P9.7
+#define VREGEN_PIN BV(6)  // P9.6
+
+#define SIMO_PIN BV(1)    //P10.1
+#define SOMI_PIN BV(2)    //P10.2
+#define CLK_PIN BV(3)     //P10.3
+
+#define P10MASK 0xF0  //P3.4,5,6,7 Not used for cc2420 Comunication Board
 
 #endif /* PLATFORM_CONF_H_ */

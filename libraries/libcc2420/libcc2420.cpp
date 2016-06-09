@@ -4,23 +4,6 @@
 #include "libcc2420_spi.h"
 #include "platform-conf.h"
 
-#define LED1 0x7F    //P4.7 (active Low)
-#define LED2 0xBF    //P4.6 (active Low)
-#define LED3 0xDF    //P4.5 (active Low)
-#define SFD 0x02// P1.1
-#define FIFO 0x04// P1.2
-#define FIFOP 0x40// P1.6
-#define CCA 0x80// P1.7
-#define RESET 0x80// P9.7
-#define VREGEN 0x40// P9.6
-
-#define CS 0x01 //P10.0 chip select High
-#define SIMO 0x02 //P10.1
-#define SOMI 0x04 //P10.2
-#define CLK 0x08 //P10.3
-#define NCS 0xFE //chip select Low
-#define P10MASK 0xF0 //P3.4,5,6,7 Not used for cc2420 Comunication Board
-
 
 //Global Variables
 char receive_buffer[128];
@@ -101,8 +84,8 @@ void cc2420_init(int _channel,int _panid){
 	UCSCTL4 |= SELA_0 + SELS_5;    				// Select SMCLK, ACLK source and DCO source*/
 
 	//configure LEDs and set them ON
-	P4DIR |= ~LED1 + ~LED2 + ~LED3;            	  // Set P4.5-7 to output direction
-	P4OUT &= LED1 & LED2 & LED3;                  // Set P4.5-7 for LED
+	P4DIR |= ~LED1_PIN + ~LED2_PIN + ~LED3_PIN;            	  // Set P4.5-7 to output direction
+	P4OUT &= LED1_PIN & LED2_PIN & LED3_PIN;                  // Set P4.5-7 for LED
 
 	// Configure Timers and SPI mode in msp430f5438
 	UCB3CTL1 |= UCSWRST;                      		// **Put state machine in reset**
@@ -116,27 +99,27 @@ void cc2420_init(int _channel,int _panid){
 	activate_switches();
 
 	//configure for cc2420 comunication board on CBC2
-	P1DIR &= ~SFD & ~FIFO & ~FIFOP & ~CCA;  	//Set as Inputs
+	P1DIR &= ~SFD_PIN & ~BV(CC2420_FIFO_PIN) & ~BV(CC2420_FIFOP_PIN) & ~CCA_PIN;  	//Set as Inputs
 
-	P1REN |= SFD + FIFO + FIFOP + CCA; 			// set pull resistor
-	P1OUT &= ~SFD & ~FIFO & ~FIFOP & ~CCA;  	// set pull-Down
-	P9DIR |= RESET + VREGEN;			 // set Reset and VREGEN pins as outputs
-	P10DIR |= CS;						// Set as Output
-	P10SEL |= CLK + SIMO + SOMI;		// select SPI function instead of GPI/O
-	P10DIR &= ~SOMI;                   	// set SOMI as input
+	P1REN |= SFD_PIN + BV(CC2420_FIFO_PIN) + BV(CC2420_FIFOP_PIN) + CCA_PIN; 			// set pull resistor
+	P1OUT &= ~SFD_PIN & ~BV(CC2420_FIFO_PIN) & ~BV(CC2420_FIFOP_PIN) & ~CCA_PIN;  	// set pull-Down
+	P9DIR |= RESET_PIN + VREGEN_PIN;			 // set Reset and VREGEN pins as outputs
+	P10DIR |= CS_PIN;						// Set as Output
+	P10SEL |= CLK_PIN + SIMO_PIN + SOMI_PIN;		// select SPI function instead of GPI/O
+	P10DIR &= ~SOMI_PIN;                   	// set SOMI as input
 	P10OUT &= ~P10MASK;  				//Unsed pins go low
 
 	//Inicialize zigbee CB
-	P9OUT |= VREGEN;					//Start the voltage regulator to have 1.8 for core
-	P9OUT &= ~RESET;				    //Reset (active Low)
+	P9OUT |= VREGEN_PIN;					//Start the voltage regulator to have 1.8 for core
+	P9OUT &= ~RESET_PIN;				    //Reset (active Low)
 	software_delay();
-	P9OUT |= RESET;						//Release reset
+	P9OUT |= RESET_PIN;						//Release reset
 	CC2420_SPI_DISABLE();
 
 
 	commandStrobe(CC2420_SXOSCON); 			// Start Oscilator
 
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 	receive_buffer[0] = 0;
 	send_buffer[0] = 0;
@@ -146,21 +129,21 @@ void cc2420_init(int _channel,int _panid){
 		commandStrobe(CC2420_SNOP);
 	}
 
-	P4OUT &= LED1 & LED2 & LED3;                // Set P4.5-7 for LED
+	P4OUT &= LED1_PIN & LED2_PIN & LED3_PIN;                // Set P4.5-7 for LED
 
 	commandStrobe(CC2420_STXCAL); 						// Calibrate the oscillator
 	commandStrobe(0); // NOP
 
 
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 	software_delay();
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 	cc2420_set_pan(_panid);
 	cc2420_set_channel(_channel);
 
 	software_delay();
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 	//wait until CC2420 is ready to transmit
 	while (statusByte != 0x46) {
@@ -174,7 +157,7 @@ void cc2420_init(int _channel,int _panid){
 		software_delay();
 	}
 
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 }
 
@@ -296,7 +279,7 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 	send_command_CC2420(reg_len + preamble_len + pkt_len);
 
 	commandStrobe(CC2420_STXON);
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 }
 
@@ -430,7 +413,7 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 	      }
 	    }
 
-		toggle_leds(LED3);
+		toggle_leds(LED3_PIN);
 		commandStrobe(CC2420_SFLUSHRX);
 
 	    return len - FOOTER_LEN;
