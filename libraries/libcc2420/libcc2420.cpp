@@ -1,7 +1,7 @@
 #include <msp430.h>
 #include "stdint.h"
-#include "moteist_cc2420.h"
-#include "moteist_spi.h"
+#include "libcc2420.h"
+#include "libcc2420_spi.h"
 #include "platform-conf.h"
 
 #define LED1 0x7F    //P4.7 (active Low)
@@ -103,6 +103,7 @@ void cc2420_init(int _channel,int _panid);
 void cc2420_set_txpower(uint8_t power);
 int cc2420_get_txpower(void);
 static void strobe(enum cc2420_register regname);
+static uint16_t getreg(enum cc2420_register regname);
 
 /* Are we currently in poll mode? */
 static uint8_t volatile poll_mode = 1;
@@ -115,56 +116,28 @@ uint8_t cc2420_last_correlation;
 struct output_config {
   int8_t power;
   uint8_t config;
+  uint16_t reg;
 };
 
 static const struct output_config output_power[] = {
-  {  0, 31 }, /* 0xff */
-  { -1, 27 }, /* 0xfb */
-  { -3, 23 }, /* 0xf7 */
-  { -5, 19 }, /* 0xf3 */
-  { -7, 15 }, /* 0xef */
-  {-10, 11 }, /* 0xeb */
-  {-15,  7 }, /* 0xe7 */
-  {-25,  3 }, /* 0xe3 */
+	  {  0, 31, 0xA0FF }, /* 0xff */
+	  { -1, 27, 0xA0FC }, /* 0xfb */
+	  { -3, 23, 0xA0F9 }, /* 0xf7 */
+	  { -5, 19, 0xA0F6 }, /* 0xf3 */
+	  { -7, 15, 0xA0F3 }, /* 0xef */
+	  {-10, 11, 0xA0F0 }, /* 0xeb */
+	  {-15,  7, 0xA0ED }, /* 0xe7 */
+	  {-25,  3, 0xA0EA }, /* 0xe3 */
 };
 #define OUTPUT_NUM (sizeof(output_power) / sizeof(struct output_config))
 #define OUTPUT_POWER_MAX   0
 #define OUTPUT_POWER_MIN -25
 
-int example() {
-
-	unsigned char seq_num = 0;
-	unsigned int i;
-	char rxbuf[128];
-
-	seq_num = 0;
-
-
-	//transmission-reception cycle
-	//when transmitting, LED2 toggles its state
-	//when a packet is received, LED3 toggles its state
-	while (1) {
-
-		// Interval between transmissions
-		for (i=0; i<6; i++){
-			software_delay(); // 50,000 cycles
-		}
-
-		transmit_test_packet(seq_num++);
-
-		cc2420_recv(&rxbuf,128);
-
-
-	}
-
-	return 0;
-}
 
 //routine to toggle specific leds
 void toggle_leds(char mask) {
 	P4OUT ^= (~mask);
 }
-
 
 void cc2420_init(int _channel,int _panid){
 
@@ -200,8 +173,6 @@ void cc2420_init(int _channel,int _panid){
 	UCB3CTL1 &= ~UCSWRST;                  	  // **Initialize USCI state machine**
 
 	activate_switches();
-
-
 
 	//configure for cc2420 comunication board on CBC2
 	P1DIR &= ~SFD & ~FIFO & ~FIFOP & ~CCA;  	//Set as Inputs
@@ -262,10 +233,7 @@ void cc2420_init(int _channel,int _panid){
 		software_delay();
 	}
 
-
-
 	toggle_leds(LED2);
-
 
 }
 
@@ -389,7 +357,6 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 	send_buffer[0] = TXFIFO;  								//TXFIFO address
 	send_buffer[1] = reg_len+preamble_len+pkt_len;		    //packet length
 
-	// TODO Figure this out.
 	send_buffer[2] = 0x41;
 	send_buffer[3] = 0x88;
 
@@ -408,23 +375,7 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 //routine to build and transmit the test packet
 void transmit_test_packet(char seq) {
 
-	int pkt_len = 9;
-	char pkt[pkt_len];
 
-	pkt[0] = seq;
-	pkt[1] = 0x22;		//PAN ID low
-	pkt[2] = 0x00;  	//PAN ID high
-	pkt[3] = 0xFF;  	//dest addr low
-	pkt[4] = 0xFF;		//dest addr high
-
-	pkt[5] = 0x01;		//src addr low
-	pkt[6] = 0x00;		//src addr high
-
-	// -- payload -- //
-	pkt[7] = 0x3f;
-	pkt[8] = 0xf0;
-
-	cc2420_send(pkt,pkt_len);
 }
 
 void setreg(enum cc2420_register regname, uint16_t value)
@@ -439,44 +390,8 @@ void setreg(enum cc2420_register regname, uint16_t value)
 }
 
 /*---------------------------------------------------------------------------*/
-/* Enable or disable radio interrupts (both FIFOP and SFD timer capture) */
-/*
-static void
-set_poll_mode(uint8_t enable)
-{
-  poll_mode = enable;
-  if(enable) {
-    // Disable FIFOP interrupt
-    CC2420_CLEAR_FIFOP_INT();
-    CC2420_DISABLE_FIFOP_INT();
-  } else {
-    // Initialize and enable FIFOP interrupt
-    CC2420_FIFOP_INT_INIT();
-    CC2420_ENABLE_FIFOP_INT();
-    CC2420_CLEAR_FIFOP_INT();
-  }
-}
-*/
-
-/*---------------------------------------------------------------------------
-void
-cc2420_set_pan_addr(unsigned pan,
-                    unsigned addr,
-                    const uint8_t *ieee_addr)
-{
-
-  write_ram((uint8_t *) &pan, CC2420RAM_PANID, 2, WRITE_RAM_IN_ORDER);
-  write_ram((uint8_t *) &addr, CC2420RAM_SHORTADDR, 2, WRITE_RAM_IN_ORDER);
-
-  if(ieee_addr != NULL) {
-    write_ram(ieee_addr, CC2420RAM_IEEEADDR, 8, WRITE_RAM_REVERSE);
-  }
-}*/
-
-/*---------------------------------------------------------------------------*/
 /* Returns the current status */
-static uint8_t
-get_status(void)
+static uint8_t get_status(void)
 {
   uint8_t status;
 
@@ -499,8 +414,7 @@ void cc2420_set_pan(int panid){
 	send_command_CC2420(4);
 }
 
-static void
-getrxdata(uint8_t *buffer, int count)
+static void getrxdata(uint8_t *buffer, int count)
 {
   uint8_t i;
 
@@ -515,16 +429,14 @@ getrxdata(uint8_t *buffer, int count)
 
 /*---------------------------------------------------------------------------*/
 /* Sends a strobe */
-static void
-strobe(enum cc2420_register regname)
+static void strobe(enum cc2420_register regname)
 {
   CC2420_SPI_ENABLE();
   SPI_WRITE(regname);
   CC2420_SPI_DISABLE();
 }
 
-static void
-flushrx(void)
+static void flushrx(void)
 {
   uint8_t dummy;
 
@@ -600,8 +512,7 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 }
 /*---------------------------------------------------------------------------*/
 /* Reads a register */
-static uint16_t
-getreg(enum cc2420_register regname)
+static uint16_t getreg(enum cc2420_register regname)
 {
   uint16_t value;
 
@@ -619,24 +530,29 @@ getreg(enum cc2420_register regname)
   return value;
 }
 /*---------------------------------------------------------------------------*/
-static void
-set_txpower(uint8_t power)
+static void set_txpower(uint8_t level)
 {
-  uint16_t reg;
 
-  reg = getreg(CC2420_TXCTRL);
-  reg = (reg & 0xffe0) | (power & 0x1f);
-  setreg(CC2420_TXCTRL, reg);
+	uint16_t power = output_power[level].reg;
+	uint16_t reg;
+
+	reg = getreg(CC2420_TXCTRL);
+	reg = (reg & 0xffe0) | (power & 0x1f);
+
+	send_buffer[0] = CC2420_TXCTRL;
+	send_buffer[1] = reg >> 8;
+	send_buffer[2] = reg & 0xff;
+	send_buffer[3] = 0;
+	send_command_CC2420(4);
+
 }
 /*---------------------------------------------------------------------------*/
-void
-cc2420_set_txpower(uint8_t power)
+void cc2420_set_txpower(uint8_t level)
 {
-  set_txpower(power);
+  set_txpower(level);
 }
 /*---------------------------------------------------------------------------*/
-int
-cc2420_get_txpower(void)
+int cc2420_get_txpower(void)
 {
   int power;
   power = (int)(getreg(CC2420_TXCTRL) & 0x001f);
