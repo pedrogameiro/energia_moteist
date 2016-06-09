@@ -99,10 +99,10 @@ void cc2420_init(int _channel,int _panid){
 	activate_switches();
 
 	//configure for cc2420 comunication board on CBC2
-	P1DIR &= ~SFD_PIN & ~BV(CC2420_FIFO_PIN) & ~BV(CC2420_FIFOP_PIN) & ~CCA_PIN;  	//Set as Inputs
+	P1DIR &= ~SFD_PIN & ~CC2420_FIFO_PIN & ~CC2420_FIFOP_PIN & ~CCA_PIN;  	//Set as Inputs
 
-	P1REN |= SFD_PIN + BV(CC2420_FIFO_PIN) + BV(CC2420_FIFOP_PIN) + CCA_PIN; 			// set pull resistor
-	P1OUT &= ~SFD_PIN & ~BV(CC2420_FIFO_PIN) & ~BV(CC2420_FIFOP_PIN) & ~CCA_PIN;  	// set pull-Down
+	P1REN |= SFD_PIN + CC2420_FIFO_PIN + CC2420_FIFOP_PIN + CCA_PIN; 			// set pull resistor
+	P1OUT &= ~SFD_PIN & ~CC2420_FIFO_PIN & ~CC2420_FIFOP_PIN & ~CCA_PIN;  	// set pull-Down
 	P9DIR |= RESET_PIN + VREGEN_PIN;			 // set Reset and VREGEN pins as outputs
 	P10DIR |= CS_PIN;						// Set as Output
 	P10SEL |= CLK_PIN + SIMO_PIN + SOMI_PIN;		// select SPI function instead of GPI/O
