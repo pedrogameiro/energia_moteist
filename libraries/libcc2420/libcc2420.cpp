@@ -21,62 +21,6 @@
 #define NCS 0xFE //chip select Low
 #define P10MASK 0xF0 //P3.4,5,6,7 Not used for cc2420 Comunication Board
 
-//CC2420 Command Strobes & Registers
-#define SNOP 0x00 //No Operation (has no other effect than reading out status-bits)
-#define SXOSCON 0x01 //Turn on the crystal oscillator (set XOSC16M_PD = 0 and BIAS_PD = 0)
-#define STXCAL 0x02 //Enable and calibrate frequency synthesizer for TX; Go from RX / TX to a wait state where only the synthesizer is running.
-#define SRXON 0x03 //Enable RX
-#define STXON 0x04 //Enable TX after calibration (if not already performed) Start TX in-line encryption if SPI_SEC_MODE ? 0
-#define STXONCCA 0x05 //If CCA indicates a clear channel: Enable calibration, then TX. Start in-line encryption if SPI_SEC_MODE ? 0 else do nothing
-#define SRFOFF 0x06 //Disable RX/TX and frequency synthesizer
-#define SXOSCOFF 0x07 //Turn off the crystal oscillator and RF
-#define SFLUSHRX 0x08 //Flush the RX FIFO buffer and reset the demodulator. Always read at least one byte from the RXFIFO before issuing the SFLUSHRX command strobe
-#define SFLUSHTX 0x09 //Flush the TX FIFO buffer
-#define SACK 0x0A //Send acknowledge frame, with pending field cleared.
-#define SACKPEND 0x0B // Send acknowledge frame, with pending field set.
-#define SRXDEC 0x0C //Start RXFIFO in-line decryption / authentication (as set by SPI_SEC_MODE)
-#define STXENC 0x0D //Start TXFIFO in-line encryption / authentication (as set by SPI_SEC_MODE), without starting TX.
-#define SAES 0x0E //AES Stand alone encryption strobe. SPI_SEC_MODE is not required to be 0, but the encryption module must be idle. If not, the strobe is ignored.
-//0x0F  Not used
-#define MAIN 0x10 // R/W Main Control Register
-#define MDMCTRL0 0x11 // R/W Modem Control Register 0
-#define MDMCTRL1 0x12 //R/W Modem Control Register 1
-#define RSSI 0x13 // R/W RSSI and CCA Status and Control register
-#define SYNCWORD 0x14 // R/W Synchronisation word control register
-#define TXCTRL 0x15 // R/W Transmit Control Register
-#define RXCTRL0 0x16 // R/W Receive Control Register 0
-#define RXCTRL1 0x17 // R/W Receive Control Register 1
-#define FSCTRL 0x18 // R/W Frequency Synthesizer Control and Status Register
-#define SECCTRL0 0x19 //R/W Security Control Register 0
-#define SECCTRL1 0x1A // R/W Security Control Register 1
-#define BATTMON 0x1B // R/W Battery Monitor Control and Status Register
-#define IOCFG0 0x1C // R/W Input / Output Control Register 0
-#define IOCFG1 0x1D // R/W Input / Output Control Register 1
-#define MANFIDL 0x1E  // R/W Manufacturer ID, Low 16 bits
-#define MANFIDH 0x1F // R/W Manufacturer ID, High 16 bits
-#define FSMTC 0x20 // R/W Finite State Machine Time Constants
-#define MANAND 0x21 // R/W Manual signal AND override register
-#define MANOR 0x22 // R/W Manual signal OR override register
-#define AGCCTRL 0x23 // R/W AGC Control Register
-#define AGCTST0 0x24 // R/W AGC Test Register 0
-#define AGCTST1 0x25 // R/W AGC Test Register 1
-#define GCTST2 0x26 // R/W AGC Test Register 2
-#define FSTST0 0x27 // R/W Frequency Synthesizer Test Register 0
-#define FSTST1 0x28 // R/W Frequency Synthesizer Test Register 1
-#define FSTST2 0x29 // R/W Frequency Synthesizer Test Register 2
-#define FSTST3 0x2A // R/W Frequency Synthesizer Test Register 3
-#define RXBPFTST 0x2B // R/W Receiver Bandpass Filter Test Register
-#define FSMSTATE 0x2C // R Finite State Machine State Status Register
-#define ADCTST 0x2D //R/W ADC Test Register
-#define DACTST 0x2E // R/W DAC Test Register
-#define TOPTST 0x2F // R/W Top Level Test Register
-#define RESERVED 0x30 // R/W Reserved for future use control / status register
-//0x31-0x3D Not Used
-#define TXFIFO 0x3E // W Transmit FIFO Byte Register
-#define RXFIFO 0x3F // R/W Receiver FIFO Byte Register
-
-#define CC2420_MAX_PACKET_LEN	127
-#define FOOTER_LEN	2
 
 //Global Variables
 char receive_buffer[128];
@@ -93,7 +37,6 @@ void CS_up(void);
 void send_command_CC2420(unsigned int n);
 void commandStrobe(char strobe);
 void transmit_test_packet(char numero);
-
 int cc2420_recv(void *buf, unsigned short bufsize);
 void cc2420_set_pan(int panid);
 void cc2420_set_channel(int c);
@@ -193,7 +136,7 @@ void cc2420_init(int _channel,int _panid){
 	CS_up();
 
 
-	commandStrobe(SXOSCON); 			// Start Oscilator
+	commandStrobe(CC2420_SXOSCON); 			// Start Oscilator
 
 	toggle_leds(LED2);
 
@@ -202,12 +145,12 @@ void cc2420_init(int _channel,int _panid){
 
 	while (receive_buffer[0] == 0) { //for debug
 		// in case cc2420 does not respond, this gets stuck!
-		commandStrobe(SNOP);
+		commandStrobe(CC2420_SNOP);
 	}
 
 	P4OUT &= LED1 & LED2 & LED3;                // Set P4.5-7 for LED
 
-	commandStrobe(STXCAL); 						// Calibrate the oscillator
+	commandStrobe(CC2420_STXCAL); 						// Calibrate the oscillator
 	commandStrobe(0); // NOP
 
 
@@ -224,11 +167,11 @@ void cc2420_init(int _channel,int _panid){
 	//wait until CC2420 is ready to transmit
 	while (statusByte != 0x46) {
 		if (statusByte == 0x42 || statusByte == 0x40) {
-			commandStrobe(STXCAL);
+			commandStrobe(CC2420_STXCAL);
 		} else if (statusByte == 0x4C || statusByte == 0x48) {
-			commandStrobe(SRXON);
+			commandStrobe(CC2420_SRXON);
 		} else if (statusByte == 0x66 || statusByte == 0x62) {
-			commandStrobe(SFLUSHTX);
+			commandStrobe(CC2420_SFLUSHTX);
 		}
 		software_delay();
 	}
@@ -349,12 +292,12 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 	unsigned int reg_len = 1;
 	unsigned int preamble_len = 3;
 
-	commandStrobe(SNOP);
+	commandStrobe(CC2420_SNOP);
 	if (statusByte == 0x66) {  //check for TXFIFO underflow
-		commandStrobe(SFLUSHTX);
+		commandStrobe(CC2420_SFLUSHTX);
 	}
 
-	send_buffer[0] = TXFIFO;  								//TXFIFO address
+	send_buffer[0] = CC2420_TXFIFO;  								//TXFIFO address
 	send_buffer[1] = reg_len+preamble_len+pkt_len;		    //packet length
 
 	send_buffer[2] = 0x41;
@@ -366,7 +309,7 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 
 	send_command_CC2420(reg_len + preamble_len + pkt_len);
 
-	commandStrobe(STXON);
+	commandStrobe(CC2420_STXON);
 	toggle_leds(LED2);
 
 }
@@ -502,7 +445,7 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 	    }
 
 		toggle_leds(LED3);
-		commandStrobe(SFLUSHRX);
+		commandStrobe(CC2420_SFLUSHRX);
 
 	    return len - FOOTER_LEN;
 	  }

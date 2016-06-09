@@ -21,10 +21,6 @@
 
 // }}}
 
-#define CC2420_MAX_PACKET_LEN      127
-#define CC2420_TXPOWER_MAX  31
-#define CC2420_TXPOWER_MIN   0
-
 typedef unsigned short rtimer_clock_t;
 
 extern const struct radio_driver cc2420_driver;
