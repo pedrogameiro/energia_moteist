@@ -3,13 +3,6 @@
 
 #include <libcc2420.h>
 
-// the setup routine runs once when you press reset:
-void setup() {
-
-	// Init the chip.
-	// Channel = 26; Panaddr = 0x0022
-	cc2420_init(26,0x0022);
-}
 
 void transmit_test_packet(int seq){
 
@@ -31,6 +24,14 @@ void transmit_test_packet(int seq){
 
 	cc2420_send(pkt, pkt_len);
 
+}
+
+// the setup routine runs once when you press reset:
+void setup() {
+
+	// Init the chip.
+	// Channel = 26; Panaddr = 0x0022
+	cc2420_init(26,0x0022);
 }
 
 

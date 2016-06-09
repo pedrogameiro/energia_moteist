@@ -32,8 +32,6 @@ static int channel;
 void toggle_leds(char mask);
 void activate_switches(void);
 void software_delay(void);
-void CS_down(void);
-void CS_up(void);
 void send_command_CC2420(unsigned int n);
 void commandStrobe(char strobe);
 void transmit_test_packet(char numero);
@@ -133,7 +131,7 @@ void cc2420_init(int _channel,int _panid){
 	P9OUT &= ~RESET;				    //Reset (active Low)
 	software_delay();
 	P9OUT |= RESET;						//Release reset
-	CS_up();
+	CC2420_SPI_DISABLE();
 
 
 	commandStrobe(CC2420_SXOSCON); 			// Start Oscilator
@@ -214,18 +212,6 @@ void software_delay(void) {
 
 }
 
-//routine to lower CC2420 chip select
-void CS_down(void) {
-	P10OUT &= NCS;
-}
-
-
-//routine to pull CC2420 chip select up
-void CS_up(void) {
-	P10OUT |= CS;
-}
-
-
 //routine to send a generic command to CC2420
 //the input is the number of bytes to send
 //the command is read from send_buffer array
@@ -233,7 +219,7 @@ void CS_up(void) {
 void send_command_CC2420(unsigned int n) {
 	volatile unsigned int i;
 
-	CS_down();
+	CC2420_SPI_ENABLE();
 
 	for (i = 0; i < n; i++) {
 
@@ -246,7 +232,7 @@ void send_command_CC2420(unsigned int n) {
 
 	statusByte = receive_buffer[0];
 
-	CS_up();
+	CC2420_SPI_DISABLE();
 }
 
 //routine to send a command strobe to CC2420

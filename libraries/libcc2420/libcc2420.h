@@ -41,7 +41,6 @@ void cc2420_send(const char *payload, unsigned short pkt_len);
 void cc2420_init(int _channel,int _panid);
 void cc2420_set_txpower(uint8_t power);
 int cc2420_get_txpower(void);
-void transmit_test_packet(char seq);
 
 
 #endif // radio_h
