@@ -84,8 +84,8 @@ void cc2420_init(int _channel,int _panid){
 	UCSCTL4 |= SELA_0 + SELS_5;    				// Select SMCLK, ACLK source and DCO source*/
 
 	//configure LEDs and set them ON
-	P4DIR |= ~LED1_PIN + ~LED2_PIN + ~LED3_PIN;            	  // Set P4.5-7 to output direction
-	P4OUT &= LED1_PIN & LED2_PIN & LED3_PIN;                  // Set P4.5-7 for LED
+	P4DIR |= ~LED1 + ~LED2 + ~LED3;            	  // Set P4.5-7 to output direction
+	P4OUT &= LED1 & LED2 & LED3;                  // Set P4.5-7 for LED
 
 	// Configure Timers and SPI mode in msp430f5438
 	UCB3CTL1 |= UCSWRST;                      		// **Put state machine in reset**
@@ -119,7 +119,7 @@ void cc2420_init(int _channel,int _panid){
 
 	commandStrobe(CC2420_SXOSCON); 			// Start Oscilator
 
-	toggle_leds(LED2_PIN);
+	toggle_leds(LED2);
 
 	receive_buffer[0] = 0;
 	send_buffer[0] = 0;
@@ -129,21 +129,21 @@ void cc2420_init(int _channel,int _panid){
 		commandStrobe(CC2420_SNOP);
 	}
 
-	P4OUT &= LED1_PIN & LED2_PIN & LED3_PIN;                // Set P4.5-7 for LED
+	P4OUT &= LED1 & LED2 & LED3;                // Set P4.5-7 for LED
 
 	commandStrobe(CC2420_STXCAL); 						// Calibrate the oscillator
 	commandStrobe(0); // NOP
 
 
-	toggle_leds(LED2_PIN);
+	toggle_leds(LED2);
 	software_delay();
-	toggle_leds(LED2_PIN);
+	toggle_leds(LED2);
 
 	cc2420_set_pan(_panid);
 	cc2420_set_channel(_channel);
 
 	software_delay();
-	toggle_leds(LED2_PIN);
+	toggle_leds(LED2);
 
 	//wait until CC2420 is ready to transmit
 	while (statusByte != 0x46) {
@@ -157,7 +157,7 @@ void cc2420_init(int _channel,int _panid){
 		software_delay();
 	}
 
-	toggle_leds(LED2_PIN);
+	toggle_leds(LED2);
 
 }
 
@@ -279,7 +279,7 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 	send_command_CC2420(reg_len + preamble_len + pkt_len);
 
 	commandStrobe(CC2420_STXON);
-	toggle_leds(LED2_PIN);
+	toggle_leds(LED2);
 
 }
 
@@ -413,7 +413,7 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 	      }
 	    }
 
-		toggle_leds(LED3_PIN);
+		toggle_leds(LED3);
 		commandStrobe(CC2420_SFLUSHRX);
 
 	    return len - FOOTER_LEN;

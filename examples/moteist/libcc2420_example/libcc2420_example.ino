@@ -26,6 +26,7 @@ void transmit_test_packet(int seq){
 
 }
 
+
 // the setup routine runs once when you press reset:
 void setup() {
 
@@ -44,13 +45,13 @@ void loop() {
 	/*
 	+-------+-----+
 	| level | dbm |
-	| 0     | 0   |
+	| 0     |  0  |
 	| 1     | -1  |
 	| 2     | -3  |
 	| 3     | -5  |
 	| 4     | -7  |
 	| 5     | -10 |
-	| 15    | -25 |
+	| 6     | -25 |
 	+-------+-----+ */
 	cc2420_set_txpower(0);
 

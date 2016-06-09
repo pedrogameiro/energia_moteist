@@ -136,10 +136,10 @@
  *
  */
 
+#define LED1 ~BV(7)    // P4.7 (active Low)
+#define LED2 ~BV(6)    // P4.6 (active Low)
+#define LED3 ~BV(5)    // P4.5 (active Low)
 
-#define LED1_PIN BV(7)    // P4.7 (active Low)
-#define LED2_PIN BV(6)    // P4.6 (active Low)
-#define LED3_PIN BV(5)    // P4.5 (active Low)
 #define SFD_PIN BV(1)     // P1.1
 #define CCA_PIN BV(7)     // P1.7
 #define RESET_PIN BV(7)   // P9.7
