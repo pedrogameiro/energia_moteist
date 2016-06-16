@@ -60,7 +60,7 @@ static const struct output_config output_power[] = {
 
 //routine to toggle specific leds
 void toggle_leds(char mask) {
-	P4OUT ^= (~mask);
+	LED_PORT(OUT) ^= (~mask);
 }
 
 void cc2420_init(int _channel,int _panid){
@@ -84,8 +84,8 @@ void cc2420_init(int _channel,int _panid){
 	UCSCTL4 |= SELA_0 + SELS_5;    				// Select SMCLK, ACLK source and DCO source*/
 
 	//configure LEDs and set them ON
-	P4DIR |= ~LED1 + ~LED2 + ~LED3;            	  // Set P4.5-7 to output direction
-	P4OUT &= LED1 & LED2 & LED3;                  // Set P4.5-7 for LED
+	LED_PORT(DIR) |= ~LED1_PIN + ~LED2_PIN + ~LED3_PIN;            	  // Set P4.5-7 to output direction
+	LED_PORT(OUT) &= LED1_PIN & LED2_PIN & LED3_PIN;                  // Set P4.5-7 for LED
 
 	// Configure Timers and SPI mode in msp430f5438
 	UCB3CTL1 |= UCSWRST;                      		// **Put state machine in reset**
@@ -98,28 +98,55 @@ void cc2420_init(int _channel,int _panid){
 
 	activate_switches();
 
-	//configure for cc2420 comunication board on CBC2
-	P1DIR &= ~SFD_PIN & ~CC2420_FIFO_PIN & ~CC2420_FIFOP_PIN & ~CCA_PIN;  	//Set as Inputs
+	//
+	/* configure for cc2420 comunication board on CBC2 */
+	//
 
-	P1REN |= SFD_PIN + CC2420_FIFO_PIN + CC2420_FIFOP_PIN + CCA_PIN; 			// set pull resistor
-	P1OUT &= ~SFD_PIN & ~CC2420_FIFO_PIN & ~CC2420_FIFOP_PIN & ~CCA_PIN;  	// set pull-Down
-	P9DIR |= RESET_PIN + VREGEN_PIN;			 // set Reset and VREGEN pins as outputs
-	P10DIR |= CS_PIN;						// Set as Output
-	P10SEL |= CLK_PIN + SIMO_PIN + SOMI_PIN;		// select SPI function instead of GPI/O
-	P10DIR &= ~SOMI_PIN;                   	// set SOMI as input
-	P10OUT &= ~P10MASK;  				//Unsed pins go low
+	//Set as Inputs
+	CC2420_SFD_PORT(DIR) &= ~CC2420_SFD_PIN;
+	CC2420_FIFO_PORT(DIR) &= ~CC2420_FIFO_PIN;
+	CC2420_FIFOP_PORT(DIR) &= ~CC2420_FIFOP_PIN;
+	CC2420_CCA_PORT(DIR) &= ~CC2420_CCA_PIN;
+
+	// set pull resistor
+	CC2420_SFD_PORT(REN) |= CC2420_SFD_PIN;
+	CC2420_FIFO_PORT(REN) |= CC2420_FIFO_PIN;
+	CC2420_FIFOP_PORT(REN) |= CC2420_FIFOP_PIN;
+	CC2420_CCA_PORT(REN) |= CC2420_CCA_PIN;
+
+	// set pull-Down
+	CC2420_SFD_PORT(OUT) &= ~CC2420_SFD_PIN;
+	CC2420_FIFO_PORT(OUT) &= ~CC2420_FIFO_PIN;
+	CC2420_FIFOP_PORT(OUT) &= ~CC2420_FIFOP_PIN;
+	CC2420_CCA_PORT(OUT) &= ~CC2420_CCA_PIN;
+
+	// set Reset and VREGEN pins as outputs
+	CC2420_RESET_PORT(DIR) |= CC2420_RESET_PIN;
+	CC2420_VREGEN_PORT(DIR) |= CC2420_VREGEN_PIN;
+
+	// Set as Output
+	CC2420_CS_PORT(DIR) |= CC2420_CS_PIN;
+
+	// select SPI function instead of GPI/O
+	CC2420_CLK_PORT(SEL) |= CC2420_CLK_PIN;
+	CC2420_SIMO_PORT(SEL) |= CC2420_SIMO_PIN;
+	CC2420_SOMI_PORT(SEL) |= CC2420_SOMI_PIN;
+
+	CC2420_SOMI_PORT(DIR) &= ~CC2420_SOMI_PIN;          // set SOMI as input
+	P10OUT &= ~P10_UNUSED_MASK;  						//Unsed pins go low
 
 	//Inicialize zigbee CB
-	P9OUT |= VREGEN_PIN;					//Start the voltage regulator to have 1.8 for core
-	P9OUT &= ~RESET_PIN;				    //Reset (active Low)
+	CC2420_VREGEN_PORT(OUT) |= CC2420_VREGEN_PIN;					//Start the voltage regulator to have 1.8 for core
+
+	CC2420_RESET_PORT(OUT) &= ~CC2420_RESET_PIN;				    //Reset (active Low)
 	software_delay();
-	P9OUT |= RESET_PIN;						//Release reset
+	CC2420_RESET_PORT(OUT) |= CC2420_RESET_PIN;						//Release reset
+
 	CC2420_SPI_DISABLE();
 
-
-	commandStrobe(CC2420_SXOSCON); 			// Start Oscilator
-
-	toggle_leds(LED2);
+	// Start Oscilator
+	commandStrobe(CC2420_SXOSCON);
+	toggle_leds(LED2_PIN);
 
 	receive_buffer[0] = 0;
 	send_buffer[0] = 0;
@@ -129,21 +156,21 @@ void cc2420_init(int _channel,int _panid){
 		commandStrobe(CC2420_SNOP);
 	}
 
-	P4OUT &= LED1 & LED2 & LED3;                // Set P4.5-7 for LED
+	LED_PORT(OUT) &= LED1_PIN & LED2_PIN & LED3_PIN;                // Set P4.5-7 for LED
 
 	commandStrobe(CC2420_STXCAL); 						// Calibrate the oscillator
 	commandStrobe(0); // NOP
 
 
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 	software_delay();
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 	cc2420_set_pan(_panid);
 	cc2420_set_channel(_channel);
 
 	software_delay();
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 	//wait until CC2420 is ready to transmit
 	while (statusByte != 0x46) {
@@ -157,7 +184,7 @@ void cc2420_init(int _channel,int _panid){
 		software_delay();
 	}
 
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 }
 
@@ -279,7 +306,7 @@ void cc2420_send(const char *payload, unsigned short pkt_len){
 	send_command_CC2420(reg_len + preamble_len + pkt_len);
 
 	commandStrobe(CC2420_STXON);
-	toggle_leds(LED2);
+	toggle_leds(LED2_PIN);
 
 }
 
@@ -413,7 +440,7 @@ int cc2420_recv(void *buf, unsigned short bufsize) {
 	      }
 	    }
 
-		toggle_leds(LED3);
+		toggle_leds(LED3_PIN);
 		commandStrobe(CC2420_SFLUSHRX);
 
 	    return len - FOOTER_LEN;
@@ -449,7 +476,7 @@ static void set_txpower(uint8_t level)
 	uint16_t reg;
 
 	reg = getreg(CC2420_TXCTRL);
-	reg = (reg & 0xffe0) | (power & 0x1f);
+	reg = (reg & 0xffe0) | (power & 0x1f); // Only replace the first 5 bits.
 
 	send_buffer[0] = CC2420_TXCTRL;
 	send_buffer[1] = reg >> 8;

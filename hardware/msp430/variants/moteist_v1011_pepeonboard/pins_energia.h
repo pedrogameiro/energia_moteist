@@ -41,6 +41,8 @@
 #define BV(x) (1 << (x))
 #endif
 
+#define MOTEIST1011
+
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__)
 ////constantes para o protocolo SPI		Porto / PEPE Label
 //static const uint8_t SS      = 16;  /*  P3.0  / CB1_SCLKO/CS1  */

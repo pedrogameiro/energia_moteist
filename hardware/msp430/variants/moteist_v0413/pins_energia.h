@@ -45,6 +45,9 @@
 // }}}
 
 // {{{ Constants
+
+#define MOTEIST0413
+
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__)
 // Constants for SPI		        /*  Port / MoteIST Label   */
 static const uint8_t SS      = 16;  /*  P3.0  / CB1_SCLKO/CS1  */

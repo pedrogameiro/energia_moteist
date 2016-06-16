@@ -45,6 +45,9 @@
 // }}}
 
 // {{{ Constants
+
+#define MOTEIST1011
+
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__)
 // Constants for SPI		        /*  Port / MoteIST Label   */
 static const uint8_t SCK     = 19;  /*  P3.3  / CB1_CSO/SCLK1  */
