@@ -96,7 +96,7 @@
 #define CC2420_RESET_PIN BV(6)   // P9.6
 
 #define CC2420_VREGEN_PORT(type)   P9##type // CBC2_GPIO1
-#define CC2420_VREGEN_PIN BV(7)  // P9.6	// CBC2_GPIO1
+#define CC2420_VREGEN_PIN BV(7)  // P9.7	// CBC2_GPIO1
 #endif
 
 ///* - Output: SPI Chip Select (CS_N) */
