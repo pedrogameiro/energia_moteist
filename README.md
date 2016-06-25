@@ -14,8 +14,8 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 [Energia official guide](http://energia.nu/Guide_Environment.html) (Third-Party Hardware section)
 
 ```shell
-cd <ENERGIA_SKETCH_FOLDER> # Check your energia preferences for the location
-git clone https://github.com/pedrogameiro/energia_moteist
+cd <ENERGIA_SKETCH_DIR> # Check your energia preferences for the location
+git clone https://github.com/pedrogameiro/energia_moteist .
 ```
 
 ## Hardware
