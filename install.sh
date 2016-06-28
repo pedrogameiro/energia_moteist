@@ -5,6 +5,8 @@
 # This script will install the MoteIST board in the TI Energia. This is done by
 # the use of the Energia sketchbook directory.
 #
+# ** Please set variables bellow before executing this script. **
+#
 # More info:
 # http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST
 # https://github.com/pedrogameiro/energia_moteist
