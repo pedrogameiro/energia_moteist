@@ -78,7 +78,7 @@ void loop()
     // wait for 1 second (1000 milliseconds)
     delay(1000);
     
-    // if overflow, we reached 0xff, reseting to 0x00
+    // if overflow, we reached 0xff. Reseting to 0x00
     if(num==15)
         num=0;
 }
