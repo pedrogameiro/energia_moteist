@@ -1,11 +1,10 @@
 /*
    Blink
    The basic Energia example.
-   Turns on an LED on for one second, then off for one second, repeatedly.
-   Change the LED define to blink other LEDs.
 
+   Turns on the three leds of MoteIST for one second,
+   then off for one second, repeatedly.
 
-   This example code is in the public domain.
 */
 
 int leds[3] = { LED1, LED2, LED3 };
@@ -23,13 +22,17 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
 
+    // loop through the three leds.
     for (i=0; i<ledsnum; i++){
         
-        if (digitalRead(leds[i]) == HIGH)
-            digitalWrite(leds[i],LOW);
-        else 
-            digitalWrite(leds[i],HIGH);  
+        // toogle the led state. aka Blinky blink! =)
+        if (digitalRead(leds[i]) == HIGH) // read the led state
+            digitalWrite(leds[i],LOW);    // write low state
+        else if (digitalRead(leds[i]) == LOW)
+            digitalWrite(leds[i],HIGH); 
     }
     
-    delay(2000);
+    // wait for 1 second (1000 milliseconds), forcing 
+    // a blink frequency of approximately 2Hz.
+    delay(1000);
 }

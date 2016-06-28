@@ -1,4 +1,14 @@
 /*
+
+    libcc2420_example
+    A simple send-receive example loop
+
+    In channel 26, with pan address 0x0022, broadcasts
+    the value 0x3ff0 and checks for a received packet.
+
+    If two boards are programmed with this example, they
+    will transmit and receive from one another.
+
 */
 
 #include <libcc2420.h>
@@ -22,7 +32,7 @@ void transmit_test_packet(int seq){
 	pkt[7] = 0x3f;
 	pkt[8] = 0xf0;
 
-	cc2420_send(pkt, pkt_len);
+	cc2420_send(pkt, pkt_len); // send the actual packet
 
 }
 
@@ -40,7 +50,7 @@ void setup() {
 void loop() {
 
 	unsigned char seq_num = 0;
-	char rxbuf[128];
+	char rxbuf[128]; // receive buffer
 
 	/*
 	+-------+-----+
@@ -53,16 +63,20 @@ void loop() {
 	| 5     | -10 |
 	| 6     | -25 |
 	+-------+-----+ */
-	cc2420_set_txpower(0);
+	cc2420_set_txpower(0); // max tx power.
 
 	//transmission-reception cycle
 	//when transmitting, LED2 toggles its state
 	//when a packet is received, LED3 toggles its state
 	while (1) {
 
+        // wait for a second (1000 milliseconds)
 		delay(1000);
 
+        // transmit the test packet
 		transmit_test_packet(seq_num++);
+        // check for a received packet in cc2420 the internal buffer.
+        // this function does *not* block.
 		cc2420_recv(&rxbuf,128);
 
 	}
