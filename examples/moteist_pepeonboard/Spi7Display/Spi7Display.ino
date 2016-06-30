@@ -67,6 +67,8 @@ void loop()
     // print debug info
     Serial.print("Changing display to "+num);
 
+    // Send the two digits according to the display
+    // SPI protocol.
     digitalWrite(SS,LOW);         // Select SPI slave
     SPI.transfer(decode[num]);    // Second digit of display
     SPI.transfer(decode[num++]);  // First digit of display

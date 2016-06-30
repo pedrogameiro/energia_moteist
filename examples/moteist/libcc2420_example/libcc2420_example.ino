@@ -36,6 +36,21 @@ void transmit_test_packet(int seq){
 
 }
 
+// Toggles leds value
+void toogled(int led){
+
+    int ledstate;
+
+    // read led value
+    ledstate = digitalRead(led);
+
+    // toogle value
+    if (ledstate == LOW)
+        digitalWrite(led,HIGH);
+    else
+        digitalWrite(led,LOW);
+}
+
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -43,6 +58,12 @@ void setup() {
 	// Init the chip.
 	// Channel = 26; Panaddr = 0x0022
 	cc2420_init(26,0x0022);
+
+    // init the led2 as output for debuging.
+    pinMode (LED2, OUTPUT);
+
+    // init the led3 as output for debuging.
+    pinMode (LED3, OUTPUT);
 }
 
 
@@ -51,6 +72,7 @@ void loop() {
 
 	unsigned char seq_num = 0;
 	char rxbuf[128]; // receive buffer
+        int bytes_count;
 
 	/*
 	+-------+-----+
@@ -60,7 +82,7 @@ void loop() {
 	| 2     | -3  |
 	| 3     | -5  |
 	| 4     | -7  |
-	| 5     | -10 |
+  	| 5     | -10 |
 	| 6     | -25 |
 	+-------+-----+ */
 	cc2420_set_txpower(0); // max tx power.
@@ -71,13 +93,20 @@ void loop() {
 	while (1) {
 
         // wait for a second (1000 milliseconds)
-		delay(1000);
+        delay(1000);
 
         // transmit the test packet
-		transmit_test_packet(seq_num++);
+        transmit_test_packet(seq_num++);
+        toogled(LED2);
+
         // check for a received packet in cc2420 the internal buffer.
         // this function does *not* block.
-		cc2420_recv(&rxbuf,128);
+	bytes_count = cc2420_recv(&rxbuf,128);
+
+        // if received bytes > 0, then a message
+        // was received. Blink led3.
+        if (bytes_count > 0)
+            toogled(LED3);
 
 	}
 
