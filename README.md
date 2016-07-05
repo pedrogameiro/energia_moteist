@@ -11,7 +11,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 
 ### Basic Installation
 
-[Instalation and utilization manual](https://github.com/pedrogameiro/energia_moteist/blob/docs/moteist-energia-manualv2.pdf)
+[User manual](https://github.com/pedrogameiro/energia_moteist/blob/docs/moteist-energia-manualv2.pdf)
 
 [Energia official guide](http://energia.nu/Guide_Environment.html) (Third-Party Hardware section)
 
