@@ -19,7 +19,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 First install [Energia](http://energia.nu/), then clone the repo into the Energia sketch directory: 
 ```shell
 cd <ENERGIA_SKETCH_DIR> # Check your energia preferences for the location
-git clone https://github.com/pedrogameiro/energia_moteist .
+git clone https://github.com/pedrogameiro/energia_moteist $PWD
 ```
 
 ## Hardware
