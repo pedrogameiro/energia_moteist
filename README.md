@@ -7,7 +7,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 ### Prerequisites
 
 * Linux, OSX or Windows.
-* The latest [TI energia](http://www.energia.nu/).
+* The [TI energia](http://www.energia.nu/) version 17.
 
 ### Basic Installation
 
