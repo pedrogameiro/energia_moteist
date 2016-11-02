@@ -27,3 +27,6 @@ git clone https://github.com/pedrogameiro/energia_moteist $PWD
 <p align="center">
   <img src="http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST?action=download&upname=fotos5.jpg" alt="moteist++s5 1011" >
 </p>
+
+## Contacts
+[Pedro Gameiro](mailto:pedro.a.gameiro@tecnico.ulisboa.pt) 
