@@ -17,7 +17,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 [Energia official guide](http://energia.nu/Guide_Environment.html) (Third-Party Hardware section)
 
 #### tl;dr
-First install [Energia](http://energia.nu/), then clone the repo into the Energia sketch directory: 
+First install [Energia v17](http://energia.nu/), then clone the repo into the Energia sketch directory: 
 ```shell
 cd <ENERGIA_SKETCH_DIR> # Check your energia preferences for the location
 git clone https://github.com/pedrogameiro/energia_moteist $PWD
