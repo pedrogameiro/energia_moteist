@@ -17,6 +17,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 [Energia official guide](http://energia.nu/Guide_Environment.html) (Third-Party Hardware section)
 
 #### tl;dr
+
 First install [Energia v17](http://energia.nu/), then clone the repo into the Energia sketch directory: 
 ```shell
 cd <ENERGIA_SKETCH_DIR> # Check your energia preferences for the location
@@ -27,6 +28,7 @@ Then proceed to install MRM has described in the next section.
 #### MRM
 
 The MRM instructions and files can be found in the [GEMS](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST) project website.
+
 ** **PLEASE ONLY USE MRM VERSION 1** **
 
 Due to a software incompatibility the version 3 of MRM does not currently work.
