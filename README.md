@@ -8,7 +8,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 
 * Linux, OSX or Windows.
 * The [TI energia](http://www.energia.nu/) version 17.
-* MRMv1 (If you don't have a FET programmer).
+* MRM v1 (If you don't have a FET programmer).
 
 ### Installation
 
@@ -27,7 +27,7 @@ Then proceed to install MRM has described in the next section.
 #### MRM
 The MRM instructions and files can be found in the [GEMS](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST) project website.
 
-**PLEASE ONLY USE MRM VERSION 1**
+** **PLEASE ONLY USE MRM VERSION 1** **
 Due to a software incompatibility the version 3 of MRM does not currently work.
 
 ## Hardware
