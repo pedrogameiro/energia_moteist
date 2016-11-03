@@ -29,4 +29,4 @@ git clone https://github.com/pedrogameiro/energia_moteist $PWD
 </p>
 
 ## Contacts
-[Pedro Gameiro](mailto:pedro.a.gameiro@tecnico.ulisboa.pt) 
+[pedro.a.gameiro@tecnico.ulisboa.pt](mailto:pedro.a.gameiro@tecnico.ulisboa.pt) 
