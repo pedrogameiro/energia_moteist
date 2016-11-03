@@ -25,9 +25,10 @@ git clone https://github.com/pedrogameiro/energia_moteist $PWD
 Then proceed to install MRM has described in the next section.
 
 #### MRM
-The MRM instructions and files can be found in the [GEMS](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST) project website.
 
+The MRM instructions and files can be found in the [GEMS](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.php/Projects/MoteIST) project website.
 ** **PLEASE ONLY USE MRM VERSION 1** **
+
 Due to a software incompatibility the version 3 of MRM does not currently work.
 
 ## Hardware
