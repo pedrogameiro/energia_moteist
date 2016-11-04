@@ -31,7 +31,7 @@ The MRM instructions and files can be found in the [GEMS](http://leme.tagus.ist.
 
 ** **PLEASE ONLY USE MRM VERSION 1** **
 
-Due to a software incompatibility the version 3 of MRM does not currently work.
+Due to a software incompatibility MRMv3 does not currently work.
 
 ## Hardware
 
