@@ -35,8 +35,8 @@ VERSION=v18
 # Download 
 cd "$SKETCHBOOK_DIR"
 wget -O - https://github.com/pedrogameiro/energia_moteist/archive/"$VERSION".tar.gz | tar xzf -
-mv -f energia_moteist-"$VERSION"/{*,.??*} "$PWD"
-rmdir energia_moteist-"$VERSION"
+mv -f energia_moteist-*/{*,.??*} "$PWD"
+rmdir energia_moteist-*
 
 cp -v mrm_memory.x "$ENERGIA_INSTALL_DIR"/"$MEMORY_X"
 cp -v lib/* "$ENERGIA_INSTALL_DIR"/lib/
