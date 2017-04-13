@@ -32,12 +32,14 @@ MEMORY_X_DIR="hardware/tools/msp430/msp430/lib/ldscripts/msp430f5438a"
 MEMORY_X="$MEMORY_X_DIR/memory.x"
 VERSION=v18
 
-# Download 
+# Download and prepare sketchbook
+mkdir -p "$SKETCHBOOK_DIR"
 cd "$SKETCHBOOK_DIR"
 wget -O - https://github.com/pedrogameiro/energia_moteist/archive/"$VERSION".tar.gz | tar xzf -
 mv -f energia_moteist-*/{*,.??*} "$PWD"
 rmdir energia_moteist-*
 
+# Install necessary files in Energia directory
 cp -v mrm_memory.x "$ENERGIA_INSTALL_DIR"/"$MEMORY_X"
 cp -v lib/* "$ENERGIA_INSTALL_DIR"/lib/
 
