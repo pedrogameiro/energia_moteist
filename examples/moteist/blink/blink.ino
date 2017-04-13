@@ -7,7 +7,7 @@
 
 */
 
-int leds[3] = { LED1, LED2, LED3 };
+int leds[3] = {  LED2 };
 int ledsnum = sizeof(leds) / sizeof(leds[0]);
 int i;
 

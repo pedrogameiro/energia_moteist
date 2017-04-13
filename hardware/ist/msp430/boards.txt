@@ -23,6 +23,7 @@ lpmsp430f5438a_pepe.upload.maximum_ram_size=1024
 
 ##############################################################
 lpmsp430f5438a_v0413.name= MoteIST v0413 w/ msp430f5438
+lpmsp430f5438a_v0413.upload.tool=mspdebug
 lpmsp430f5438a_v0413.upload.protocol=tilib
 lpmsp430f5438a_v0413.upload.maximum_size=130048
 lpmsp430f5438a_v0413.build.mcu=msp430f5438a
@@ -31,4 +32,3 @@ lpmsp430f5438a_v0413.build.core=msp430
 lpmsp430f5438a_v0413.build.variant=moteist_v0413
 lpmsp430f5438a_v0413.upload.maximum_ram_size=1024
 #lpmsp430f5438a_v0413.build.f_cpu=25000000L
-
