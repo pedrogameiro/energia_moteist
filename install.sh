@@ -30,9 +30,14 @@ read SKETCHBOOK_DIR
 # this file is copied into the TI Energia install directory.
 MEMORY_X_DIR="hardware/tools/msp430/msp430/lib/ldscripts/msp430f5438a"
 MEMORY_X="$MEMORY_X_DIR/memory.x"
+VERSION=v18
 
+# Download 
 cd "$SKETCHBOOK_DIR"
-git clone https://github.com/pedrogameiro/energia_moteist "$PWD"
+wget -O - https://github.com/pedrogameiro/energia_moteist/archive/"$VERSION".tar.gz | tar xzf -
+mv -f energia_moteist-"$VERSION"/{*,.??*} "$PWD"
+rmdir energia_moteist-"$VERSION"
+
 cp -v mrm_memory.x "$ENERGIA_INSTALL_DIR"/"$MEMORY_X"
 cp -v lib/* "$ENERGIA_INSTALL_DIR"/lib/
 
