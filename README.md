@@ -7,7 +7,7 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 ### Prerequisites
 
 * Linux, OSX or Windows.
-* The [TI energia](http://www.energia.nu/) version 17.
+* The [TI energia](http://www.energia.nu/) version 18.
 * MRM v1 (If you don't have a FET programmer).
 
 ### Installation
@@ -18,10 +18,11 @@ To learn more, visit [GEMS IST](http://leme.tagus.ist.utl.pt/gems/PmWiki/index.p
 
 #### tl;dr
 
-First install [Energia v17](http://energia.nu/), then clone the repo into the Energia sketch directory: 
+First install [Energia v18](http://energia.nu/), then clone the repo into the Energia sketch directory: 
 ```shell
-cd <ENERGIA_SKETCH_DIR> # Check your energia preferences for the location
-git clone https://github.com/pedrogameiro/energia_moteist $PWD
+wget https://github.com/pedrogameiro/energia_moteist/blob/v18/install.sh
+chmod +x install.sh
+./install.sh
 ```
 Then proceed to install MRM has described in the next section.
 
